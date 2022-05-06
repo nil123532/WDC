@@ -15,6 +15,10 @@ main {
     padding : 2.5em;
 }
 
+.user-type {
+    border: 2px solid black;
+}
+
 .user-type-image {
     border-radius: 50%;
     width : 6.5em;
