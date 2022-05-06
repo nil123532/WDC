@@ -1,0 +1,45 @@
+header {
+    background-color : #B7B7B7;
+    padding : 1.5em 1.4em;
+}
+
+footer {
+    background-color : #B7B7B7;
+    padding : 1.5em 1.4em;
+}
+
+main {
+    background-color : grey;
+    text-align: center;
+    position : relative;
+    padding : 2.5em;
+}
+
+.user-type-image {
+    border-radius: 50%;
+    width : 6.5em;
+    border: 2px solid black;
+}
+
+.user-type-text {
+    font-size : 1.7em;
+}
+
+.welcome-text {
+    font-size : 2em;
+}
+
+.logo {
+    font-size : 2em;
+    font-weight : bold;
+}
+
+.about {
+    font-size : 1.2em;
+}
+
+.terms {
+    font-size : 1.2em;
+    position: absolute;
+    right : 1.2em;
+}
