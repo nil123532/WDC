@@ -107,3 +107,265 @@ nav {
     position: absolute;
     right : 1.2em;
 }
+.login-box{
+        background-color : #B7B7B7;
+        border-radius : 2em;
+        border : 2px solid #000000;
+        height : 40em;
+        width : 28em;
+        margin : 1em;
+}
+
+.login-width {
+    width : 30em;
+}
+.sign-in-text
+{
+    text-align:center;
+    border-top-left-radius : 1em;
+    border-right: 2px solid #000000;
+    border-bottom: 2px solid #000000;
+    width:15em;
+    padding-top:1em;
+    padding-bottom:0.5em;
+    font-weight:bold;
+    font-size:1.5em;
+}
+.user-login {
+    background-color : grey;
+    padding : 2em 3em 6.1em;
+}
+.sign-up-text
+{
+    text-align:center;
+    width:15em;
+    padding-top:1em;
+    padding-bottom:0.5em;
+    font-weight:bold;
+    font-size:1.5em;
+}
+.sign-in-up
+{
+    border-top-left-radius:1.8em;
+    border-top-right-radius:1.8em;
+    display:flex;
+    flex-direction:row;
+    margin-bottom:3em;
+}
+.login-form
+{
+    padding-left:2em;
+    width:25em;
+}
+.inputs
+{
+    display:flex;
+    border-radius:2em;
+    flex-direction:row;
+    background-color:#C4C4C4;
+    height:2em;
+    margin-bottom:0.8em;
+}
+.login-img
+{
+    border-radius: 50%;
+    width : 2em;
+    border: 2px solid black;
+    margin-right:1em;
+}
+input
+{
+    background-color:#C4C4C4;
+    border-width:0px;
+}
+.input-inside-text
+{
+    padding-top:0.1em;
+}
+::placeholder
+{
+    text-shadow: 0.4px 0.4px #000000;
+}
+.login-pass
+{
+    border-radius: 50%;
+    width : 2em;
+    height: 2em;
+    border: 2px solid black;
+    margin-right:1em;
+}
+.below-sign-in
+{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    margin-bottom:2em;
+}
+.below-sign
+{
+    font-size:0.5em;
+}
+input.remember-me
+{
+    height:10px;
+}
+.login
+{
+    background-color:#000000;
+    border-radius:0.5em;
+    font-size:2em;
+    font-weight:bold;
+    margin-bottom:2em;
+    margin-top:1.1em;
+    height:1.5em;
+}
+pre
+{
+    padding-top:0.1em;
+}
+h9{
+    overflow: hidden;
+    text-align: center;
+}
+
+h9:before,h9:after{
+    background-color: #000;
+    content: "";
+    display: inline-block;
+    height: 1px;
+    position: relative;
+    vertical-align: middle;
+    width: 13em;
+}
+
+h9:before{
+    right: 0.5em;
+    margin-left: -50%;
+}
+
+h9:after{
+    left: 0.5em;
+    margin-right: -50%;
+}
+
+.third-party-first-row
+{
+    margin-top:2.5em;
+    padding-left:2em;
+    width:25em;
+    display:flex;
+    flex-direction:row;
+}
+.third-party-second-row
+{
+    margin-top:2.1em;
+    padding-left:2em;
+    width:25em;
+    display:flex;
+    flex-direction:row;
+}
+.google
+{
+    width:12em;
+    text-align:left;
+    border-radius:0.4em;
+    background-color:#EE0808;
+    margin-right:4em;
+
+}
+.facebook
+{
+    width:12em;
+    text-align:left;
+    border-radius:0.4em;
+    background-color:#054DD6;
+}
+.github
+{
+    width:12em;
+    text-align:left;
+    border-radius:0.4em;
+    background-color:#4E5052;
+}
+.linkedin
+{
+    width:12em;
+    text-align:left;
+    border-radius:0.4em;
+    background-color:#2EE1F7;
+    margin-right:4em;
+}
+button
+{
+    border-width:0px;
+    background-color:#000000;
+    opacity:0.6;
+    color:white;
+    height:0.8em;
+}
+.google-img
+{
+    border-radius: 50%;
+    width : 2em;
+    margin-right:0.5em;
+}
+.fbk-img
+{
+    border-radius: 50%;
+    width : 2.2em;
+    height:2em;
+    margin-right:0.5em;
+}
+.linkedin-img
+{
+    border-radius: 50%;
+    width : 2.2em;
+    height:2em;
+    margin-right:0.5em;
+}
+.git-img
+{
+    border-radius: 50%;
+    width : 2.2em;
+    height:2em;
+    margin-right:0.5em;
+}
+
+.sign-in-text-up
+{
+    text-align:center;
+    width:15em;
+    padding-top:1em;
+    padding-bottom:0.5em;
+    font-weight:bold;
+    font-size:1.5em;
+}
+.sign-up-text-up
+{
+    text-align:center;
+    border-top-right-radius : 1em;
+    border-left: 2px solid #000000;
+    border-bottom: 2px solid #000000;
+    width:15em;
+    padding-top:1em;
+    padding-bottom:0.5em;
+    font-weight:bold;
+    font-size:1.5em;
+}
+.sign-up
+{
+    background-color:#000000;
+    border-radius:0.5em;
+    font-size:2em;
+    font-weight:bold;
+    height:1.5em;
+    margin-bottom:0.4em;
+}
+.sign-up-box{
+    background-color : #B7B7B7;
+    border-radius : 2em;
+    border : 2px solid #000000;
+    height : 45em;
+    width : 28em;
+    margin : 1em;
+}
