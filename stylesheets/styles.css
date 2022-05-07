@@ -12,11 +12,28 @@ main {
     background-color : grey;
     text-align: center;
     position : relative;
-    padding : 2.5em;
+    padding : 2em 3em 6.7em;
 }
 
-.user-type {
-    border: 2px solid black;
+.user-types {
+    width : 20em;
+}
+
+.user-type-selection {
+    background-color : #B7B7B7;
+    border-radius : 2em;
+    height : 19em;
+    width : 7.5em;
+    padding : 2.5em 0;
+    margin : 1em;
+}
+
+.user-choice {
+    border : 2px solid #33F8FF;
+}
+
+.system-manager-choice {
+    border : 2px solid #3433FF
 }
 
 .user-type-image {
@@ -31,6 +48,7 @@ main {
 
 .welcome-text {
     font-size : 2em;
+    margin-bottom : 2em;
 }
 
 .logo {
