@@ -1,3 +1,7 @@
+#app {
+    height : 100vh;
+}
+
 header {
     background-color : #B7B7B7;
     padding : 1.5em 1.4em;
@@ -9,11 +13,18 @@ footer {
 }
 
 nav {
-    background-color : grey;
+    background-color : #5D5D5D;
     color : white;
-    padding : 2em 0;
-    text-decoration : none;
+    height : 100vh;
+    padding : 1.5em 0;
     text-align : center;
+}
+
+.navbar-item {
+    width : 100%;
+    margin-bottom : 2em;
+    color : white;
+    text-decoration : none;
 }
 
 .main-page {
@@ -24,7 +35,7 @@ nav {
     background-color : grey;
     text-align: center;
     position : relative;
-    padding : 2em 3em 6.7em;
+    padding : 2em 3em 6em;
 }
 
 .user-types {
