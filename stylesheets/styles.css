@@ -11,8 +11,9 @@ footer {
 nav {
     background-color : grey;
     color : white;
-    padding : auto;
+    padding : 2em 0;
     text-decoration : none;
+    text-align : center;
 }
 
 .main-page {
