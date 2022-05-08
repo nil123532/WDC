@@ -30,6 +30,12 @@ input[type="checkbox"] {
     color : #C4C4C4;
 }
 
+.home-events {
+    background-color : #C4C4C4;
+    border : 1px solid black;
+    padding-left : 1em;
+}
+
 .authenticated-invite-submit {
     padding-left : auto;
 }

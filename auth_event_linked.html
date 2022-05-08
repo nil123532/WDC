@@ -20,7 +20,7 @@
             <div class="row">
                 <nav class="col-lg-2 col-sm-3 col-xs-3">
                     <h1 class="logo navbar-logo">MeetUps</h1>
-                    <div v-for="(page, i) in pages" v-bind:class="{ 'navbar-selected' : i===1 }" v-on:click="changePage"  class="navbar-item"><a class="navbar-hyperlink" v-bind:class="{ 'navbar-selected' : i===1 }" href="#">{{ page.name }}</a></div>
+                    <div v-for="(page, i) in pages" v-bind:class="{ 'navbar-selected' : i===1 }" v-on:click="changePage"  class="navbar-item"><a class="navbar-hyperlink" v-bind:class="{ 'navbar-selected' : i===1 }" v-bind:href="page.link">{{ page.name }}</a></div>
                 </nav>
                 <main class="col-lg-10 col-sm-9 col-xs-9 main-page">
                     <div class="row event-linked-details">

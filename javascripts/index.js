@@ -2,7 +2,7 @@ var vueinst = new Vue({
     el : "#app",
     data : {
         currentPage : -1,
-        pages : [{name : "Home", link : "#"}, {name : "Events", link : "#"}, {name : "Settings", link : "#"}],
+        pages : [{name : "Home", link : "/home.html"}, {name : "Events", link : "/events.html"}, {name : "Settings", link : "/settings.html"}],
         events : [{
             name : "Pizza party",
             desc : "At dominos",
