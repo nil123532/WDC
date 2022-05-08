@@ -20,6 +20,12 @@ nav {
     text-align : center;
 }
 
+.about-terms {
+    background-color : grey;
+    height : 37em;
+    padding : 3em 1em 5em;
+}
+
 .avatar {
     vertical-align: middle;
     border : 2px solid black;
