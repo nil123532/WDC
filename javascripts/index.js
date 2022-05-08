@@ -5,8 +5,9 @@ var vueinst = new Vue({
         pages : [{name : "Home", link : "#"}, {name : "Events", link : "#"}, {name : "Settings", link : "#"}]
     },
     methods : {
-        changePage : i => {
-            this.currentPage = i;
+        changePage : (i) => {
+            this.currentPage = 2;
+            console.log(this.currentPage);
         }
     },
 });
