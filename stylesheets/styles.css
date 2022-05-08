@@ -212,13 +212,18 @@ pre {
 
 .upload-image-prompt {
     font-size : 0.7em;
-    margin-right : 10em;
+    margin-right : 7em;
+}
+
+.upload-image-instructions {
+    width : 16em;
 }
 
 .upload-image-button {
     padding : 0.1em 0.3em;
     font-size : 0.7em;
     border : 1px solid black;
+    margin-left : auto;
 }
 
 .user-type-page {
