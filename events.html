@@ -19,10 +19,24 @@
             <div class="row">
                 <nav class="col-lg-2 col-sm-3 col-xs-3">
                     <h1 class="logo navbar-logo">MeetUps</h1>
-                    <div v-for="(page, i) in pages" v-on:click="changePage"  class="navbar-item"><a class="navbar-hyperlink" v-bind:class="{ 'navbar-selected' : (currentPage === i) }" href="#">{{ page.name }}</a></div>
+                    <div v-for="(page, i) in pages" v-bind:class="{ 'navbar-selected' : i===1 }" v-on:click="changePage"  class="navbar-item"><a class="navbar-hyperlink" v-bind:class="{ 'navbar-selected' : i===1 }" href="#">{{ page.name }}</a></div>
                 </nav>
                 <main class="col-lg-10 col-sm-9 col-xs-9 main-page">
-
+                    <h1 class="create-new-event">Create New Event</h1>
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-12 col-xs-12">
+                            <p>Event Photo</p>
+                            <img class="create-event-img" src="https://www.w3schools.com/w3css/img_lights.jpg" /><br />
+                            <span class="upload-image-prompt">Upload image...</span>
+                            <button class="upload-image-button">Choose</button>
+                        </div>
+                        <div class="event-form col-lg-4 col-sm-12 col-xs-12">
+                            <div class="inputs">
+                                <div><img src="/images/name.png" alt="Name" class="login-img"></div>
+                                <div class="input-inside-text"><input type="text" id="FirstName" name="First Name" placeholder="First Name"></div>
+                            </div>
+                        </div>
+                    </div>
                 </main>
             </div>
         </div>

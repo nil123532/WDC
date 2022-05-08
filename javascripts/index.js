@@ -7,7 +7,6 @@ var vueinst = new Vue({
     methods : {
         changePage : (i) => {
             this.currentPage = 2;
-            console.log(this.currentPage);
         }
     },
 });

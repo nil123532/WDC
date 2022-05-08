@@ -49,6 +49,27 @@ nav {
 
 .main-page {
     background-color : #B7B7B7;
+    padding : 2em 3em;
+}
+
+.create-new-event {
+    margin-bottom : 1.5em;
+}
+
+.create-event-img {
+    width : 12em;
+    height : 10em;
+}
+
+.upload-image-prompt {
+    font-size : 0.7em;
+    margin-right : 4em;
+}
+
+.upload-image-button {
+    padding : 0.1em 0.3em;
+    font-size : 0.7em;
+    border : 1px solid black;
 }
 
 .user-type-page {
@@ -295,7 +316,7 @@ h9:after{
     background-color:#2EE1F7;
     margin-right:4em;
 }
-button
+.signin-button, .signup-button
 {
     border-width:0px;
     background-color:#000000;
