@@ -605,3 +605,18 @@ h9:after{
     width : 28em;
     margin : 1em;
 }
+.settings-page-outside{
+    background-color: rgb(183, 183, 183);
+    height: 100%;
+    width: 40em;
+    padding: 5em;
+
+}
+
+.profile-picture-settings img{
+    width: 10em;
+    height: 10em;
+    border-radius: 50%;
+    background-color: white;
+    margin: 2em;
+}
