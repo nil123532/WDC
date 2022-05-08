@@ -104,11 +104,12 @@ nav {
 
 .event-form {
     margin-bottom : 3em;
+    width : 25em;
 }
 
 .upload-image {
-    margin-right : 3em;
     margin-bottom : 2em;
+    margin-right : 11em;
 }
 
 .upload-image-prompt {
@@ -133,6 +134,7 @@ textarea {
     background-color:#C4C4C4;
     border-width:0px;
     border-radius : 10px;
+    max-width: 100%;
 }
 
 .user-types {
