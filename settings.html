@@ -17,7 +17,7 @@
     <div id="app">
         <div class="container-fluid">
             <div class="row">
-                <nav class="col-lg-2 col-sm-3 col-xs-3">
+                <nav class="col-lg-2 col-sm-3 col-xs-3" style="height:auto">
                     <h1 class="logo navbar-logo">MeetUps</h1>
                     <div v-for="(page, i) in pages" v-bind:class="{ 'navbar-selected' : i===2 }" v-on:click="changePage"  class="navbar-item"><a class="navbar-hyperlink" v-bind:class="{ 'navbar-selected' : i===2 }" href="#">{{ page.name }}</a></div>
                 </nav>
