@@ -21,9 +21,57 @@ nav {
 }
 
 .about-terms {
-    background-color : grey;
-    height : 37em;
+    background-color : #A1A1A1;
+    min-height : 80vh;
     padding : 3em 1em 5em;
+}
+
+input[type="checkbox"] {
+    color : #C4C4C4;
+}
+
+.event-linked-image {
+    width : 16em;
+    height : 10em;
+    margin-right : 4em;
+    margin-bottom : 3em;
+}
+
+.event-linked-name {
+    margin-top : 0
+}
+
+.event-linked-desc {
+    margin-bottom : 4em;
+}
+
+.anon-event-footer {
+    text-align : center;
+    margin : auto auto 3em;
+    width : 100%;
+}
+
+.anon-event-login, .anon-event-submit {
+    border-radius : 1em;
+    border-width : 0px;
+    height : 2.5em;
+    width : 10em;
+    text-align : center;
+    background-color : #C4C4C4;
+    padding : 0;
+}
+
+.pick-availability {
+    margin-bottom : 10em;
+}
+
+.anon-event-login {
+    margin-left : auto;
+    margin-right : 2em;
+}
+
+.anon-event-submit {
+    margin-right : auto;
 }
 
 .avatar {
