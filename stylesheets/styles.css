@@ -22,12 +22,16 @@ nav {
 
 .about-terms {
     background-color : #A1A1A1;
-    min-height : 80vh;
+    min-height : 78vh;
     padding : 3em 1em 5em;
 }
 
 input[type="checkbox"] {
     color : #C4C4C4;
+}
+
+.authenticated-invite-submit {
+    padding-left : auto;
 }
 
 .event-linked-image {
@@ -45,9 +49,10 @@ input[type="checkbox"] {
     margin-bottom : 4em;
 }
 
-.anon-event-footer {
+.event-invite-footer {
     text-align : center;
-    margin : auto auto 3em;
+    margin : auto;
+    padding-top : 20vh;
     width : 100%;
 }
 
@@ -195,6 +200,7 @@ pre {
 .main-page {
     background-color : #A1A1A1;
     padding : 2em 3em;
+    min-height : 100vh;
 }
 
 .create-new-event {
