@@ -15,7 +15,6 @@ footer {
 nav {
     background-color : #5D5D5D;
     color : white;
-    height : 100vh;
     width : 100%;
     padding : 1.5em 0;
     text-align : center;
@@ -48,7 +47,7 @@ nav {
 }
 
 .main-page {
-    background-color : #B7B7B7;
+    background-color : #A1A1A1;
     padding : 2em 3em;
 }
 
@@ -57,13 +56,63 @@ nav {
 }
 
 .create-event-img {
-    width : 12em;
+    width : 16em;
     height : 10em;
+}
+
+.create-event-images {
+    width : 1em;
+    height : 1em;
+    margin : auto 0.5em auto 0.5em;
+}
+
+.back-arrow {
+    width : 2em;
+    height : 2em;
+    margin : auto 0;
+}
+
+.date-selection {
+    margin-bottom : 8em;
+}
+
+.create-event-button {
+    border-width: 0px;
+    border-radius : 10px;
+    background-color : #C4C4C4;
+    width : 12em;
+    height : 3em;
+    padding : auto;
+    color : black;
+}
+
+.paintbrush-img {
+    width : 1em;
+    height : 1em;
+    margin : 0.6em 0.5em 0;
+}
+
+.date-input {
+    margin-right : 3em;
+}
+
+.date-input-box {
+    border-radius : 10px;
+    background-color:#C4C4C4;
+    height:6em;
+}
+
+.event-form {
+    margin-bottom : 3em;
+}
+
+.upload-image {
+    margin-bottom : 2em;
 }
 
 .upload-image-prompt {
     font-size : 0.7em;
-    margin-right : 4em;
+    margin-right : 10em;
 }
 
 .upload-image-button {
@@ -77,6 +126,12 @@ nav {
     text-align: center;
     position : relative;
     padding : 2em 3em 6.1em;
+}
+
+textarea {
+    background-color:#C4C4C4;
+    border-width:0px;
+    border-radius : 10px;
 }
 
 .user-types {
@@ -181,10 +236,16 @@ nav {
 .inputs
 {
     display:flex;
-    border-radius:2em;
     flex-direction:row;
+    border-radius:2em;
     background-color:#C4C4C4;
     height:2em;
+    margin-bottom:0.8em;
+}
+.inputs-textarea{
+    border-radius:10px;
+    background-color:#C4C4C4;
+    height:6.5em;
     margin-bottom:0.8em;
 }
 .login-img
