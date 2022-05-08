@@ -20,6 +20,98 @@ nav {
     text-align : center;
 }
 
+.avatar {
+    vertical-align: middle;
+    border : 2px solid black;
+    width: 5em;
+    height: 5em;
+    border-radius: 50%;
+    margin : 4em auto 2em;
+}
+
+.profile-picture-header {
+    text-align : center;
+    width : 100%;
+}
+
+.user-details-header {
+    text-align : center;
+    width : 100%;
+    margin-bottom : 2em;
+}
+
+.event-item {
+    background-color : #C4C4C4;
+    padding : 1.5em;
+    border : 2px solid black;
+    margin-top : 1.5em;
+}
+
+.events-left-arrow {
+    margin-right : auto;
+    margin-left : 0;
+    display : inline-block;
+}
+
+.events-right-arrow {
+    margin-right : 0;
+    margin-left : auto;
+    display : inline-block;
+}
+
+.pagination {
+    margin-top : 1em;
+}
+
+.event-item-name {
+    margin-right : 3em;
+}
+
+.event-item-time {
+    margin-left : 8em;
+}
+
+.event-item-description {
+    margin-top : 1.5em;
+}
+
+.people-icon {
+    margin-right : 0.5em;
+}
+
+.event-item-people {
+    margin-top : 4.6em;
+}
+
+.event-item-image {
+    width : 11em;
+    height : 5em;
+}
+
+.user-details {
+    margin : 0 auto;
+    width : 20em;
+}
+
+pre {
+    display : inline;
+}
+
+.events-button {
+    border-radius : 1em;
+    border-width : 0px;
+    height : 2.5em;
+    width : 12em;
+    text-align : center;
+    background-color : #C4C4C4;
+    padding : 0;
+    margin-left : auto;
+}
+
+.plus-icon {
+    margin : auto 0;
+}
+
 .row>* {
     padding : 0;
 }
