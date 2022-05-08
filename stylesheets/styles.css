@@ -460,6 +460,7 @@ input.remember-me
 .login
 {
     background-color:#000000;
+    opacity:0.6;
     border-radius:0.5em;
     font-size:2em;
     font-weight:bold;
@@ -548,8 +549,9 @@ h9:after{
     border-width:0px;
     background-color:#000000;
     opacity:0.6;
-    color:white;
-    height:0.8em;
+    height:1.5em;
+    width:100%;
+    border-radius:0.5em;
 }
 .google-img
 {
@@ -603,6 +605,7 @@ h9:after{
 .sign-up
 {
     background-color:#000000;
+    opacity:0.6;
     border-radius:0.5em;
     font-size:2em;
     font-weight:bold;
@@ -632,3 +635,20 @@ h9:after{
     background-color: white;
     margin: 2em;
 }
+
+.a-color
+{
+    color:#000000;
+    text-decoration:none;
+    width:
+    height:1em;
+}
+.a-color-button
+{
+    color:#FFFFFF;
+    opacity:0.4;
+    text-decoration:none;
+    height:1.5em;
+    width:2em;
+}
+
