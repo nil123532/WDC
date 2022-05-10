@@ -18,23 +18,24 @@
         <header>
             <h1 class="logo">MeetUps</h1>
         </header>
+
         <main class="user-type-page">
-            <div class="welcome-text">Welcome to MeetUps</div>
-            <div class="container user-types">
-                <div class="row">
-                    <div class="user-type-selection col-lg-6 col-xs-12 user-choice">
-                        <a href="/user-sign-in.html" class="a-color">
-                            <div><img src="/images/user.png" alt="user" class="user-type-image" /></div>
-                            <div class="user-type-text" >User</div>
-                        </a>
-                    </div>
-                    <div class="user-type-selection col-lg-6 col-xs-12 system-manager-choice">
-                        <a href="/admin-sign-in.html" class="a-color">
-                            <div><img src="/images/system_manager.png" alt="system_manager" class="user-type-image" /></div>
-                            <div class="user-type-text" >System Manager</div>
-                        </a>
-                    </div>
+            <div class="top">
+                <div><img style="width:2em" src="/images/arrow.png" alt="left arrow"></div>
+                <h1 class="edit-users">Edit Users</h1>
+                <input type="text" placeholder="    search..." class="search">
+            </div>
+            <div class="list-of-users">
+                <div class="name-div">Name</div>
+                <div v-for="name in users" class="users">
+                    <div class="one-user">{{ name }}</div>
+                    <button class="col-2 edit-user"><i class="fa-solid fa-plus plus-icon"></i><pre>Edit Users</pre></button>
                 </div>
+            </div>
+            <div class="pagination" style="margin-bottom:4.4em;">
+                <i class="fa-solid fa-arrow-left events-left-arrow"><img style="width:1em" src="/images/arrow.png" alt="left arrow"></i>
+                <span>Page 2</span>
+                <i class="fa-solid fa-arrow-right events-right-arrow"><img style="width:1em;transform: rotate(180deg);" src="/images/arrow.png" alt="right arrow"></i>
             </div>
         </main>
         <footer>

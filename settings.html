@@ -22,47 +22,30 @@
                     <div v-for="(page, i) in pages" v-bind:class="{ 'navbar-selected' : i===2 }" v-on:click="changePage"  class="navbar-item"><a class="navbar-hyperlink" v-bind:class="{ 'navbar-selected' : i===2 }" v-bind:href="page.link">{{ page.name }}</a></div>
                 </nav>
                 <main class="col-lg-10 col-sm-9 col-xs-9 main-page">
-                    <div class="settings-page-outside">
                         <p style="font-size:3em; color:black">Settings</p>
-                        <div class="profile-picture-settings">
-                            <img src="/images/user.png">
-                        </div>
-                        <div class="inputs">
+                        <div class="inputs" style="width:35%">
                             <div><img src="/images/name.png" alt="Name" class="login-img"></div>
                             <div class="input-inside-text"><input type="text" id="FirstName" name="First Name" placeholder="First Name"></div>
                         </div>
-                        <div class="inputs">
+                        <div class="inputs" style="width:35%">
                             <div><img src="/images/L.jpg" alt="Last" class="login-pass"></div>
                             <div class="input-inside-text"><input type="text" id="LastName" name="Last Name" placeholder="Last Name"></div>
                         </div>
-                        <div class="inputs">
-                            <div><img src="/images/phone.png" alt="Phone Number" class="login-img"></div>
-                            <div class="input-inside-text"><input type="text" id="Phone Number" name="Phone Number" placeholder="Phone Number"></div>
-                        </div>
-                        <div class="inputs">
-                            <div><img src="/images/gender.png" alt="Gender" class="login-img"></div>
-                            <div class="input-inside-text">
-                                <select type="text" id="Genders" name="Genders" placeholder="Gender" style="background-color:rgb(183, 183, 183)">
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                    <option value="Other">Other</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="inputs">
+                        <div class="inputs" style="width:35%">
                             <div><img src="/images/user.png" alt="Default Profile Photo" class="login-img"></div>
                             <div class="input-inside-text"><input type="text" id="email-username" name="ID" placeholder="Email or Username"></div>
                         </div>
-                        <div class="inputs">
+                        <div class="inputs" style="width:35%">
                             <div><img src="/images/password.png" alt="password" class="login-pass"></div>
                             <div class="input-inside-text"><input type="text" id="password" name="Password" placeholder="New Password"></div>
                         </div>
-                        <div class="inputs">
+                        <div class="inputs" style="width:35%">
                             <div><img src="/images/password.png" alt="password" class="login-pass"></div>
                             <div class="input-inside-text"><input type="text" id="password" name="Password" placeholder="Confirm New Password"></div>
                         </div>
+                        <button class="link-calendar"><a>Link Calendar</a></button>
                         <p style="font-size:1.5em; color:black; padding-bottom:0.6em; padding-top:2em">Email Notifications</p>
-                        <form>
+                        <form style="margin-bottom:5em">
                             <input type="checkbox" id="emailnoti1" name="emailnoti1" value="emailFinal">
                             <label for="emailnoti1">Notify me when events are finalized</label><br/>
                             <input type="checkbox" id="emailnoti2" name="emailnoti2" value="emailCancel">
@@ -71,9 +54,11 @@
                             <label for="emailnoti3">Notify me a day before events</label><br/>
                             <input type="checkbox" id="emailnoti4" name="emailnoti4" value="emailUser">
                             <label for="emailnoti4">Notify me when users respond to events</label><br/>
-
                         </form>
-                    </div>
+                        <div class="save-settings">
+                            <button class="link-calendar"><a>Save Changes</a></button>
+                            <button class="link-calendar"><a>Logout</a></button>
+                        </div>
                 </main>
             </div>
         </div>
