@@ -22,19 +22,11 @@
                     <div v-for="(page, i) in pages" v-bind:class="{ 'navbar-selected' : i===1 }" v-on:click="changePage"  class="navbar-item"><a class="navbar-hyperlink" v-bind:class="{ 'navbar-selected' : i===1 }" v-bind:href="page.link">{{ page.name }}</a></div>
                 </nav>
                 <main class="col-lg-10 col-sm-9 col-xs-9 main-page">
-                    <h1 class="create-new-event row">Event name</h1>
-                    <p class="row">Event Photo</p>
                     <div class="row">
-                        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 upload-image">
-                            <img class="img-fluid" src="https://www.w3schools.com/w3css/img_lights.jpg" />
-                        </div>
-                        <div class="creator-event-details col-lg-8 col-md-12 col-sm-12 col-xs-12">
-                            <p>Event Description, Lorem Ipsum dolor sit amet</p>
-                            <div class="creator-event-duration-guest">
-                                <p>Duration: Event duration</p>
-                                <p>Number of guests responded: 3</p>
-                            </div>
-                        </div>
+                        <h1>Event name</h1>
+                        <p>Duration: XD</p>
+                        <p>Number of guests responded: 3</p>
+                        <p class="event-linked-desc">Event Description, Lorem Ipsum dolor sit amet</p>
                     </div>
                     <div class="row date-selection">
                         <div class="event-form col-lg-4 col-sm-12 col-xs-12 date-input">
@@ -42,20 +34,13 @@
                                 <img src="/images/calendar.png" alt="calendar-img" class="create-event-images">
                                 <div class="input-inside-text"><input type="text" name="EventDate" placeholder="Date" /></div>
                             </div>
-                                <div class="date-input-box">
-                            </div><br />
-                            <div class="inputs">
-                                <img src="/images/calendar.png" alt="calendar-img" class="create-event-images">
-                                <div class="input-inside-text"><input type="text" name="EventTime" placeholder="Time" /></div>
-                            </div>
-                                <div class="date-input-box">
-                            </div>
+                            <div class="date-input-box"></div>
                         </div>
-                        <div class="col-lg-6 col-sm-12 col-xs-12 date-input">
-                            
+                        <div class="col-lg-6 col-sm-12 col-xs-12">
+                            <h2>Possible times</h2>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between creator-event-footer">
                         <img src="/images/arrow.png" alt="back-arrow" class="back-arrow"/>
                         <div>
                             <button class="create-event-button">Cancel Event</button>
