@@ -538,57 +538,28 @@ h9:after{
 {
     margin-top:2.5em;
     padding-left:2em;
-    width:25em;
+    width:100%;
     display:flex;
-    flex-direction:row;
-}
-.third-party-second-row
-{
-    margin-top:2.1em;
-    padding-left:2em;
-    width:25em;
-    display:flex;
-    flex-direction:row;
+    justify-content:center;
 }
 .google
 {
-    width:12em;
+    width:10em;
     text-align:left;
     border-radius:0.4em;
     background-color:#EE0808;
-    margin-right:4em;
+    margin-right:3.1em;
+    margin-left:1em;
 
-}
-.facebook
-{
-    width:12em;
-    text-align:left;
-    border-radius:0.4em;
-    background-color:#054DD6;
-}
-.github
-{
-    width:12em;
-    text-align:left;
-    border-radius:0.4em;
-    background-color:#4E5052;
-}
-.linkedin
-{
-    width:12em;
-    text-align:left;
-    border-radius:0.4em;
-    background-color:#2EE1F7;
-    margin-right:4em;
 }
 .signin-button, .signup-button
 {
     border-width:0px;
     background-color:#000000;
-    opacity:0.6;
-    height:1.5em;
-    width:100%;
-    border-radius:0.5em;
+    color:white;
+    height:3em;
+    width:72.5%;
+    border-radius:1em;
 }
 .google-img
 {
@@ -689,3 +660,112 @@ h9:after{
     width:2em;
 }
 
+.header
+{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    margin-bottom:2.1em;
+}
+.event-name-date-create-time
+{
+    width:12em;
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+}
+.admin-buttons
+{
+    border-width: 0px;
+    border-radius : 2em;
+    background-color : #C4C4C4;
+    width : 12em;
+    height : 3em;
+    padding : auto;
+    color : black;
+    margin-bottom:1.5em;
+}
+.user-type-page {
+    background-color : grey;
+    position : relative;
+    padding : 2em 3em 6.1em;
+}
+.top{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    margin-bottom:2em;
+}
+.search
+{
+     border-radius:2em;
+     width:15em;
+     height:2em;
+     margin-left:42em;
+     margin-top:0.2em;
+     background-color:#E1E1E1;
+}
+.list-of-users
+{
+    width:75%;
+    margin-left:8em;
+
+    display:flex;
+    flex-direction:column;
+    border: 1px solid black;
+}
+.name-div
+{
+    background-color:#5D5D5D;
+    color:white;
+    text-align:left;
+    padding-left:1em;
+    padding-top:0.2em;
+    padding-bottom:0.5em;
+    border: 1px solid black;
+}
+.edit-user
+{
+    border-width: 0px;
+    border-radius : 2em;
+    background-color : #A1A1A1;
+    padding-bottom:0.2em;
+    width : 12em;
+    height : 2em;
+    padding : auto;
+    color : black;
+    margin-left:1.5em;
+    margin-top:0.5em;
+    margin-bottom:0.5em;
+    margin-right:0.4em;
+}
+.users
+{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    background-color:#C4C4C4;
+    border: 1px solid black;
+    position:relative;
+}
+.one-user
+{
+    padding-left:1em;
+    margin-top:0.8em;
+    margin-bottom:0.5em;
+
+}
+.save-settings
+{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+}
+.link-calendar
+{
+    background-color:black;
+    color:white;
+    width:25%;
+    height:3em;
+    border-radius:2em;
+}
