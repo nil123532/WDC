@@ -22,28 +22,17 @@
                     <div v-for="(page, i) in pages" v-bind:class="{ 'navbar-selected' : i===1 }" v-on:click="changePage"  class="navbar-item"><a class="navbar-hyperlink" v-bind:class="{ 'navbar-selected' : i===1 }" v-bind:href="page.link">{{ page.name }}</a></div>
                 </nav>
                 <main class="col-lg-10 col-sm-9 col-xs-9 main-page">
-                    <h1 class="create-new-event">Create New Event</h1>
+                    <h1 class="create-new-event row">Event name</h1>
+                    <p class="row">Event Photo</p>
                     <div class="row">
-                        <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12 upload-image">
-                            <p>Event Photo</p>
-                            <img class="create-event-img" src="https://www.w3schools.com/w3css/img_lights.jpg" /><br />
-                            <div class="upload-image-instructions">
-                                <span class="upload-image-prompt">Upload image...</span>
-                                <button class="upload-image-button">Choose</button>
-                            </div>
+                        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 upload-image">
+                            <img class="img-fluid" src="https://www.w3schools.com/w3css/img_lights.jpg" />
                         </div>
-                        <div class="event-form-first event-form col-lg-10 col-md-12 col-sm-12 col-xs-12">
-                            <div class="inputs">
-                                <img src="/images/e.png" alt="event-name-img" class="create-event-images">
-                                <div class="input-inside-text"><input type="text" name="EventName" placeholder="Event Name" /></div>
-                            </div>
-                            <div class="inputs inputs-textarea">
-                                <img src="/images/paintbrush.png" alt="paintbrush-img" class="paintbrush-img">
-                                <div class="input-inside-text"><textarea rows="4" cols="47" name="EventDescription" placeholder="Event Description..." ></textarea></div>
-                            </div>
-                            <div class="inputs">
-                                <img src="/images/calendar.png" alt="calendar-img" class="create-event-images">
-                                <div class="input-inside-text"><input type="text" name="EventDuration" placeholder="Event Duration" /></div>
+                        <div class="creator-event-details col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                            <p>Event Description, Lorem Ipsum dolor sit amet</p>
+                            <div class="creator-event-duration-guest">
+                                <p>Duration: Event duration</p>
+                                <p>Number of guests responded: 3</p>
                             </div>
                         </div>
                     </div>
@@ -53,22 +42,26 @@
                                 <img src="/images/calendar.png" alt="calendar-img" class="create-event-images">
                                 <div class="input-inside-text"><input type="text" name="EventDate" placeholder="Date" /></div>
                             </div>
-                            <div class="date-input-box">
-                            </div>
-                        </div>
-                        <div class="event-form col-lg-4 col-sm-12 col-xs-12">
+                                <div class="date-input-box">
+                            </div><br />
                             <div class="inputs">
                                 <img src="/images/calendar.png" alt="calendar-img" class="create-event-images">
                                 <div class="input-inside-text"><input type="text" name="EventTime" placeholder="Time" /></div>
                             </div>
-                            <div class="date-input-box">
+                                <div class="date-input-box">
                             </div>
                         </div>
+                        <div class="col-lg-6 col-sm-12 col-xs-12 date-input">
+                            
+                        </div>
                     </div>
-                    <div class="row">
-                        <img src="/images/arrow.png" alt="back-arrow" class="back-arrow col-1"/>
-                        <div class="col-6 col-xl-9"></div>
-                        <div class="col-2"><button class="create-event-button">Create Event</button></div>
+                    <div class="d-flex justify-content-between">
+                        <img src="/images/arrow.png" alt="back-arrow" class="back-arrow"/>
+                        <div>
+                            <button class="create-event-button">Cancel Event</button>
+                            <button class="create-event-button">Get Event Link</button>
+                            <button class="create-event-button">Create Event</button>
+                        </div>
                     </div>
                 </main>
             </div>

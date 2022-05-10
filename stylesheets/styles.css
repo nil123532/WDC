@@ -26,6 +26,31 @@ nav {
     padding : 3em 1em 5em;
 }
 
+.creator-event-details {
+    display : flex;
+    flex-direction : column;
+    justify-content : space-between;
+    margin-bottom : 1em;
+}
+
+.creator-event-duration-guest {
+    display : flex;
+    justify-content : space-between;
+}
+
+.creator-event-image {
+    margin-right : 5em;
+    margin-bottom : 2em;
+}
+
+.viewer-event-header {
+    display : flex;
+}
+
+.viewer-event-barrier {
+    margin : 0 0.5em;
+}
+
 input[type="checkbox"] {
     color : #C4C4C4;
 }
@@ -230,6 +255,10 @@ pre {
     margin : auto 0;
 }
 
+.back-arrow-x {
+    margin-right : auto;
+}
+
 .date-selection {
     margin-bottom : 5.9em;
 }
@@ -267,16 +296,16 @@ pre {
 
 .upload-image {
     margin-bottom : 2em;
-    margin-right : 11em;
+    margin-right : 3em;
 }
 
 .upload-image-prompt {
     font-size : 0.7em;
-    margin-right : 7em;
+    margin-right : auto;
 }
 
 .upload-image-instructions {
-    width : 16em;
+    margin-top : 0.5em;
 }
 
 .upload-image-button {
