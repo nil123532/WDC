@@ -25,7 +25,8 @@ var vueinst = new Vue({
             count : 100,
             img : "https://www.w3schools.com/w3css/img_lights.jpg"
         },],
-        dummyAvailability : ["December 9th 2022, 9 a.m", "December 13th 2022, 2:30 p.m. - 3:00 p.m.", "December 13th 2022, 2:30 p.m."]
+        dummyDates : ["December 9th 2022", "December 13th 2022", "December 13th 2022"],
+        times : ["00:00","01:00","02:00"]
     },
     methods : {
         changePage : (i) => {

@@ -19,18 +19,16 @@
             <h1 class="logo">MeetUps</h1>
         </header>
         <main class="main-page">
-            <div class="row event-linked-details">
-                <img class="event-linked-image col-5" src="https://www.w3schools.com/w3css/img_lights.jpg" />
-                <div class="col-7">
-                    <h2 class="event-linked-name">You've been invited to Pizza party</h2>
-                    <p class="event-linked-desc">Event Description, Lorem Ipsum dolor sit amet</p>
-                    <p class="event-linked-duration">Duration: XD</p>
-                </div>
+            <div class="row">
+                <h2 class="event-linked-name">You've been invited to Pizza party</h2>
+                <p class="event-linked-duration">Duration: XD</p>
+                <p class="event-linked-desc">Event Description, Lorem Ipsum dolor sit amet</p>
             </div>
             <div class="row pick-availability">
                 <h2>Please pick the suitable times for your attendence from below:</h2>
                 <form action="#">
-                    <div v-for="timestamp in dummyAvailability">
+                    <div v-for="date in dummyDates">
+                        <p>{{ date }}</p>
                         <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
                         <label for="vehicle1">{{"  " + timestamp}}</label><br>
                     </div>
