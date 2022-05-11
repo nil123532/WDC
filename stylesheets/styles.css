@@ -701,7 +701,6 @@ h9:after{
 {
     color:#000000;
     text-decoration:none;
-    width:
     height:1em;
 }
 .a-color-button
@@ -738,7 +737,7 @@ h9:after{
     color : black;
     margin-bottom:1.5em;
 }
-.user-type-page {
+.authentication-page {
     background-color : grey;
     position : relative;
     padding : 2em 3em 6.1em;
