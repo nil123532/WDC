@@ -424,7 +424,7 @@ textarea {
     border : 2px solid #000000;
     height : 40em;
     width : 28em;
-    margin : 1em;
+    margin : auto;
 }
 
 .login-width {
@@ -466,8 +466,8 @@ textarea {
 }
 .login-form
 {
-    padding-left:2em;
-    width:25em;
+    padding : 0 2em;
+    width:100%;
 }
 .inputs
 {
@@ -560,7 +560,7 @@ h9:before,h9:after{
     height: 1px;
     position: relative;
     vertical-align: middle;
-    width: 13em;
+    width: 45%;
 }
 
 h9:before{
@@ -589,7 +589,10 @@ h9:after{
     background-color:#EE0808;
     margin-right:3.1em;
     margin-left:1em;
-
+    padding-left : 0.4em;
+}
+.google-icon {
+    margin-right : 0.5em;
 }
 .signin-button, .signup-button
 {
@@ -729,6 +732,9 @@ h9:after{
     position : relative;
     padding : 2em 3em 6.1em;
     text-align : center;
+    display : flex;
+    justify-content : center;
+    align-items : center;
 }
 .top{
     display:flex;
