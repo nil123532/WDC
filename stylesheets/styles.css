@@ -445,6 +445,12 @@ textarea {
     height:2em;
     margin-bottom:0.8em;
 }
+
+.inputs-left
+{
+    margin-left:2em;
+}
+
 .inputs-textarea{
     border-radius:10px;
     background-color:#C4C4C4;
