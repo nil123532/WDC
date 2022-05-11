@@ -43,8 +43,17 @@ nav {
     margin-bottom : 2em;
 }
 
+.event_box_link {
+    text-decoration : none;
+    color : black;
+}
+
 .creator-event-footer {
-    margin-top : auto;
+    margin-top : 10em;
+}
+
+.creator-event-buttons {
+    margin-left : 11em;
 }
 
 .viewer-event-header {
@@ -73,7 +82,7 @@ nav {
 .event-attendee-footer {
     display : flex;
     justify-content : space-between;
-    margin-top : 30vh;
+    margin-top : 20em;
 }
 
 .remove-event-button {
@@ -311,6 +320,8 @@ pre {
     height : 3em;
     padding : auto;
     color : black;
+    margin-right : 1em;
+    margin-bottom : 1em;
 }
 
 .paintbrush-img {
