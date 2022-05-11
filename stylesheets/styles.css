@@ -257,6 +257,39 @@ pre {
     margin : auto 0.5em auto 0.5em;
 }
 
+.date-picker-header {
+    display: inline-block;
+    text-align: center;
+    padding-top: 10px;
+    height: 40px;
+    width: 45px;
+    margin: 3px;
+}
+
+.date-picker-row {
+    clear: both;
+    padding: 5px 0px;
+    border-radius : 50px;
+}
+
+.date-picker-date {
+    display: inline-block;
+    text-align: center;
+    padding-top: 10px;
+    height: 45px;
+    width: 45px;
+    margin: 0px 3px;
+    border-radius : 50px;
+    background-color: #C4C4C4;
+}
+
+.date-picker-date-empty {
+    display: inline-block;
+    padding: 5px;
+    border-radius : 50px;
+    background-color: #C4C4C4;
+}
+
 .back-arrow {
     width : 2em;
     height : 2em;
@@ -287,7 +320,7 @@ pre {
     margin : 0.6em 0.5em 0;
 }
 
-.date-input {
+.col-seperator {
     margin-right : 4em;
 }
 
