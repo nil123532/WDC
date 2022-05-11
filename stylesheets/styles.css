@@ -55,6 +55,38 @@ nav {
     margin : 0 0.5em;
 }
 
+.event-attendee-details {
+    display : flex;
+    justify-content : space-between;
+}
+
+.event-attendee-status {
+    margin-bottom : 3em;
+}
+
+@media (max-width: 800px) {
+    .event-attendee-details {
+        flex-direction: column;
+    }
+}
+
+.event-attendee-footer {
+    display : flex;
+    justify-content : space-between;
+    margin-top : 30vh;
+}
+
+.remove-event-button {
+    border-width: 0px;
+    border-radius : 10px;
+    background-color : #5D5D5D;
+    width : 12em;
+    height : 3em;
+    padding : auto;
+    color : black;
+    margin-top : auto;
+}
+
 input[type="checkbox"] {
     color : #C4C4C4;
     margin-right : 0.4em;
