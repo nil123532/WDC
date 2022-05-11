@@ -544,6 +544,26 @@ input.remember-me
 {
     height:10px;
 }
+.admin-edit-user-toprow {
+    display : flex;
+    justify-items : center;
+    align-items : center;
+    margin-bottom : 2em;
+}
+.admin-edit-user-toprow-first {
+    margin-right : auto;
+    display : flex;
+    justify-items : center;
+    align-items : center;
+}
+.admin-edit-user-back {
+    margin-right : 1em;
+}
+.edit-users{
+    margin-right : auto;
+    text-align : left;
+    display : inline-block;
+}
 .login
 {
     background-color:#000000;
@@ -760,8 +780,8 @@ h9:after{
 }
 .list-of-users
 {
-    width:75%;
-    margin-left:8em;
+    /* width:75%; */
+    /* margin-left:8em; */
     display:flex;
     flex-direction:column;
     border: 1px solid black;
