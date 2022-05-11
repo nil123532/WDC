@@ -23,27 +23,24 @@
                     <div v-for="(page, i) in pages" v-bind:class="{ 'navbar-selected' : i===1 }" v-on:click="changePage"  class="navbar-item"><a class="navbar-hyperlink" v-bind:class="{ 'navbar-selected' : i===1 }" v-bind:href="page.link">{{ page.name }}</a></div>
                 </nav>
                 <main class="col-lg-10 col-sm-9 col-xs-9 main-page">
-                    <div class="row profile-picture-header">
-                        <img src="/images/user.png" alt="Avatar" class="avatar">
-                    </div>
-                    <div class="row user-details-header">
-                        <span class="user-details">Julia Robbins | BasketBall, Football, Table Tennis</span>
-                    </div>
-                    <div class="row">
-                        <h2 class="col-2">Events</h2>
-                        <button class="col-2 events-button"><i class="fa-solid fa-plus plus-icon"></i><pre>  Create an event</pre></button>
+                    <div class="header">
+                        <h1>All Events:</h1>
+                        <button class="col-2 events-button"><i class="fa-solid fa-plus plus-icon"></i><pre>  <a href="event_creator_view.html" style="color:black;text-decoration:none">Create an event</a></pre></button>
                     </div>
                     <div v-for="event in events" class="row event-item">
-                        <div class="col-9">
-                                <span class="event-item-name">{{ event.name }}</span>
-                                <span>
-                                    <span class="event-item-date">Date : {{ event.date }}</span><br />
-                                    <span class="event-item-time">Time : {{ event.time }}</span>
-                                </span>
-                            <p class="event-item-description">{{ event.desc }}</p>
+                        <div class="col-9" style="background-">
+                            <div class="event-name-date-create-time">
+                                <span class="">{{ event.name }}</span>
+                                <span class="">Date : {{ event.date }}</span>
+                            </div>
+                            <div class="event-name-date-create-time">
+                                <span style="font-size:0.5em;color:blue">{{event.created}}</span>
+                                <span>Time : {{ event.time }}</span>
+                            </div>
+                            <p>{{ event.desc }}</p>
                             <div class="event-item-people"><i class="fa-solid fa-people-group people-icon"></i>{{ event.count }}</div>
                         </div>
-                        <img class="event-item-img col-3" v-bind:src="event.img" />
+                        <div class="col-3"><p style="font-weight:bold">{{event.address}}</p></div>
                     </div>
                     <div class="pagination">
                         <i class="fa-solid fa-arrow-left events-left-arrow"></i>
