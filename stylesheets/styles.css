@@ -746,11 +746,8 @@ h9:after{
     justify-content : center;
     align-items : center;
 }
-.top{
-    display:flex;
-    flex-direction:row;
-    justify-content:space-between;
-    margin-bottom:2em;
+.arrow{
+    text-align:left;
 }
 .search
 {
@@ -765,10 +762,10 @@ h9:after{
 {
     width:75%;
     margin-left:8em;
-
     display:flex;
     flex-direction:column;
     border: 1px solid black;
+    margin-bottom:16em;
 }
 .name-div
 {
@@ -790,10 +787,8 @@ h9:after{
     height : 2em;
     padding : auto;
     color : black;
-    margin-left:1.5em;
     margin-top:0.5em;
     margin-bottom:0.5em;
-    margin-right:0.4em;
 }
 .users
 {
@@ -824,4 +819,16 @@ h9:after{
     width:25%;
     height:3em;
     border-radius:2em;
+}
+.top
+{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-around;
+}
+.top-left
+{
+    display:flex;
+    flex-direction:row;
+    justify-content:left;
 }

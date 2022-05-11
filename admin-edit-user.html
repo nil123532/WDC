@@ -20,28 +20,29 @@
         </header>
 
         <main class="user-type-page">
-            <div class="top">
+            <div class="arrow">
                 <div><img style="width:2em" src="/images/arrow.png" alt="left arrow"></div>
-                <h1 class="edit-users">Edit Users</h1>
-                <input type="text" placeholder="    search..." class="search">
+            </div>
+            <div class="top">
+                <h1 style="margin:0em 3em 0.5em 0em">Edit Users</h1>
+                <div style="margin:2em 0em 0.5em 0em">
+                    <input type="checkbox" id="Admin_Only" name="Admin_Only" value="Admin_Only">
+                    <label for="emailnoti1">Show Administrators Only</label>
+                </div>
             </div>
             <div class="list-of-users">
                 <div class="name-div">Name</div>
                 <div v-for="name in users" class="users">
                     <div class="one-user">{{ name }}</div>
-                    <button class="col-2 edit-user"><i class="fa-solid fa-plus plus-icon"></i><pre>Edit Users</pre></button>
+                    <button class="col-2 edit-user"><i class="fa-solid fa-plus plus-icon"></i><pre>Edit</pre></button>
                 </div>
             </div>
-            <div class="pagination" style="margin-bottom:4.4em;">
+            <div class="pagination" style="margin-bottom:0">
                 <i class="fa-solid fa-arrow-left events-left-arrow"><img style="width:1em" src="/images/arrow.png" alt="left arrow"></i>
                 <span>Page 2</span>
                 <i class="fa-solid fa-arrow-right events-right-arrow"><img style="width:1em;transform: rotate(180deg);" src="/images/arrow.png" alt="right arrow"></i>
             </div>
         </main>
-        <footer>
-            <span class="about"><a class="a-color" href="/about.html">About</a></span>
-            <span class="terms"><a class="a-color" href="/terms.html">Terms and conditions</a></span>
-        </footer>
     </div>
 </body>
 </html>
