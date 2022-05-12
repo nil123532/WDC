@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/stylesheets/styles.css">
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script src="https://kit.fontawesome.com/f7293efbb8.js" crossorigin="anonymous"></script>
     <script src="/javascripts/index.js" defer></script>
 </head>
 <body>
@@ -19,37 +20,35 @@
             <h1 class="logo">MeetUps</h1>
         </header>
 
-        <main class="user-type-page">
-            <div class="top">
+        <main class="main-page">
+            <div class="top-left">
                 <div><img style="width:2em" src="/images/arrow.png" alt="left arrow"></div>
-                <h1 class="edit-users">Edit Events</h1>
-                <input type="text" placeholder="    search..." class="search">
+                <h1 class="edit-users" style="margin-left:0.8em">Edit Events</h1>
+
             </div>
-            <div v-for="event in adminevents" class="row event-item">
-                <div class="col-9" style="background-">
-                    <div class="event-name-date-create-time">
-                        <span class="">{{ event.name }}</span>
-                        <span class="">Date : {{ event.date }}</span>
+            <a v-for="event in events" class="event_box_link" href="/event_attendee_view.html">
+                <div class="row event-item">
+                    <div class="col-9" style="background-">
+                        <div class="event-name-date-create-time">
+                            <span class="">{{ event.name }}</span>
+                            <span class="">Date : {{ event.date }}</span>
+                        </div>
+                        <div class="event-name-date-create-time">
+                            <span style="font-size:0.5em;color:blue;width:15em">{{event.created}}</span>
+                            <span>Time : {{ event.time }}</span>
+                        </div>
+                        <p>{{ event.desc }}</p>
+                        <div class="event-item-people"><i class="fa-solid fa-people-group people-icon"></i>{{ event.count }}</div>
                     </div>
-                    <div class="event-name-date-create-time">
-                        <span style="font-size:0.5em;color:blue">{{event.created}}</span>
-                        <span>Time : {{ event.time }}</span>
-                    </div>
-                    <p>{{ event.desc }}</p>
-                    <div class="event-item-people"><i class="fa-solid fa-people-group people-icon"></i>{{ event.count }}</div>
+                    <div class="col-3"><p style="font-weight:bold">{{event.address}}</p></div>
                 </div>
-                <div class="col-3"><p style="font-weight:bold">{{event.address}}</p></div>
-            </div>
-            <div class="pagination" style="margin-bottom:4.4em;">
-                <i class="fa-solid fa-arrow-left events-left-arrow"><img style="width:1em" src="/images/arrow.png" alt="left arrow"></i>
+            </a>
+            <div class="pagination">
+                <i class="fa-solid fa-arrow-left events-left-arrow"></i>
                 <span>Page 2</span>
-                <i class="fa-solid fa-arrow-right events-right-arrow"><img style="width:1em;transform: rotate(180deg);" src="/images/arrow.png" alt="right arrow"></i>
+                <i class="fa-solid fa-arrow-right events-right-arrow"></i>
             </div>
         </main>
-        <footer>
-            <span class="about"><a class="a-color" href="/about.html">About</a></span>
-            <span class="terms"><a class="a-color" href="/terms.html">Terms and conditions</a></span>
-        </footer>
     </div>
 </body>
 </html>

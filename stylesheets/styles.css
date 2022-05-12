@@ -43,8 +43,17 @@ nav {
     margin-bottom : 2em;
 }
 
+.event_box_link {
+    text-decoration : none;
+    color : black;
+}
+
 .creator-event-footer {
-    margin-top : auto;
+    margin-top : 10em;
+}
+
+.creator-event-buttons {
+    margin-left : 11em;
 }
 
 .viewer-event-header {
@@ -53,6 +62,38 @@ nav {
 
 .viewer-event-barrier {
     margin : 0 0.5em;
+}
+
+.event-attendee-details {
+    display : flex;
+    justify-content : space-between;
+}
+
+.event-attendee-status {
+    margin-bottom : 3em;
+}
+
+@media (max-width: 800px) {
+    .event-attendee-details {
+        flex-direction: column;
+    }
+}
+
+.event-attendee-footer {
+    display : flex;
+    justify-content : space-between;
+    margin-top : 20em;
+}
+
+.remove-event-button {
+    border-width: 0px;
+    border-radius : 10px;
+    background-color : #5D5D5D;
+    width : 12em;
+    height : 3em;
+    padding : auto;
+    color : black;
+    margin-top : auto;
 }
 
 input[type="checkbox"] {
@@ -314,6 +355,8 @@ pre {
     height : 3em;
     padding : auto;
     color : black;
+    margin-right : 1em;
+    margin-bottom : 1em;
 }
 
 .paintbrush-img {
@@ -422,16 +465,17 @@ textarea {
     right : 1.2em;
 }
 .login-box{
-        background-color : #B7B7B7;
-        border-radius : 2em;
-        border : 2px solid #000000;
-        height : 40em;
-        width : 28em;
-        margin : 1em;
+    background-color : #B7B7B7;
+    border-radius : 2em;
+    border : 2px solid #000000;
+    height : 40em;
+    width : 28em;
+    margin : auto;
 }
 
 .login-width {
-    width : 30em;
+    /* width : 30em; */
+    margin : auto;
 }
 .sign-in-text
 {
@@ -468,8 +512,8 @@ textarea {
 }
 .login-form
 {
-    padding-left:2em;
-    width:25em;
+    padding : 0 2em;
+    width:100%;
 }
 .inputs
 {
@@ -535,6 +579,26 @@ input.remember-me
 {
     height:10px;
 }
+.admin-edit-user-toprow {
+    display : flex;
+    justify-items : center;
+    align-items : center;
+    margin-bottom : 2em;
+}
+.admin-edit-user-toprow-first {
+    margin-right : auto;
+    display : flex;
+    justify-items : center;
+    align-items : center;
+}
+.admin-edit-user-back {
+    margin-right : 1em;
+}
+.edit-users{
+    margin-right : auto;
+    text-align : left;
+    display : inline-block;
+}
 .login
 {
     background-color:#000000;
@@ -562,7 +626,7 @@ h9:before,h9:after{
     height: 1px;
     position: relative;
     vertical-align: middle;
-    width: 13em;
+    width: 45%;
 }
 
 h9:before{
@@ -591,7 +655,10 @@ h9:after{
     background-color:#EE0808;
     margin-right:3.1em;
     margin-left:1em;
-
+    padding-left : 0.4em;
+}
+.google-icon {
+    margin-right : 0.5em;
 }
 .signin-button, .signup-button
 {
@@ -689,7 +756,6 @@ h9:after{
 {
     color:#000000;
     text-decoration:none;
-    width:
     height:1em;
 }
 .a-color-button
@@ -726,16 +792,17 @@ h9:after{
     color : black;
     margin-bottom:1.5em;
 }
-.user-type-page {
+.authentication-page {
     background-color : grey;
     position : relative;
     padding : 2em 3em 6.1em;
+    text-align : center;
+    display : flex;
+    justify-content : center;
+    align-items : center;
 }
-.top{
-    display:flex;
-    flex-direction:row;
-    justify-content:space-between;
-    margin-bottom:2em;
+.arrow{
+    text-align:left;
 }
 .search
 {
@@ -748,12 +815,12 @@ h9:after{
 }
 .list-of-users
 {
-    width:75%;
-    margin-left:8em;
-
+    /* width:75%; */
+    /* margin-left:8em; */
     display:flex;
     flex-direction:column;
     border: 1px solid black;
+    margin-bottom:16em;
 }
 .name-div
 {
@@ -775,10 +842,8 @@ h9:after{
     height : 2em;
     padding : auto;
     color : black;
-    margin-left:1.5em;
     margin-top:0.5em;
     margin-bottom:0.5em;
-    margin-right:0.4em;
 }
 .users
 {
@@ -809,4 +874,16 @@ h9:after{
     width:25%;
     height:3em;
     border-radius:2em;
+}
+.top
+{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-around;
+}
+.top-left
+{
+    display:flex;
+    flex-direction:row;
+    justify-content:left;
 }

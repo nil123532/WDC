@@ -22,11 +22,26 @@
                     <div v-for="(page, i) in pages" v-bind:class="{ 'navbar-selected' : i===1 }" v-on:click="changePage"  class="navbar-item"><a class="navbar-hyperlink" v-bind:class="{ 'navbar-selected' : i===1 }" v-bind:href="page.link">{{ page.name }}</a></div>
                 </nav>
                 <main class="col-lg-10 col-sm-9 col-xs-9 main-page">
-                    <div class="viewer-event-header">
-                        <h1 class="viewer-event-name">Domino Night</h1>
-                        <h1 class="viewer-event-barrier">|</h1>
-                        <h1>Created by</h1>
-                        <img src="/images/user.png">
+                    <h1 class="viewer-event-name">Domino Night | Created by John</h1>
+                    <h4>Domino Night with Friends</h4>
+                    <p>Duration: 2</p>
+                    <br />
+                    <div class="event-attendee-details">
+                        <div class="event-attendee-status">
+                            <h4>Status: Confirmed</h4>
+                            <h4>Date: 12/05/2022<br />Time: 8pm</h4>
+                        </div>
+                        <div>
+                            <h4>My availability :</h4>
+                            <div v-for="choice in possibleTimes">
+                                <input type="radio" id="html" name="fav_language" value="HTML">
+                                <label for="html">{{choice}}</label><br>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event-attendee-footer">
+                        <img src="/images/arrow.png" alt="back-arrow" class="back-arrow"/>
+                        <button class="remove-event-button">Remove Event</button>
                     </div>
                 </main>
             </div>

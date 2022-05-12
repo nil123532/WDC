@@ -12,6 +12,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
     <script src="/javascripts/index.js" defer></script>
+    <script src="https://kit.fontawesome.com/f7293efbb8.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <div id="app">
@@ -20,28 +21,29 @@
         </header>
 
         <main class="user-type-page">
-            <div class="top">
-                <div><img style="width:2em" src="/images/arrow.png" alt="left arrow"></div>
-                <h1 class="edit-users">Edit Users</h1>
-                <input type="text" placeholder="    search..." class="search">
+            <div class="admin-edit-user-toprow">
+                <div class="admin-edit-user-toprow-first">
+                    <i class="fa-solid fa-arrow-left admin-edit-user-back"></i>
+                    <h1 class="edit-users">Edit Users</h1>
+                </div>
+                <div>
+                    <input type="checkbox" id="Admin_Only" name="Admin_Only" value="Admin_Only">
+                    <label for="emailnoti1">Show Administrators Only</label>
+                </div>
             </div>
             <div class="list-of-users">
                 <div class="name-div">Name</div>
                 <div v-for="name in users" class="users">
                     <div class="one-user">{{ name }}</div>
-                    <button class="col-2 edit-user"><i class="fa-solid fa-plus plus-icon"></i><pre>Edit Users</pre></button>
+                    <button class="col-2 edit-user"><i class="fa-solid fa-plus plus-icon"></i><pre>Edit</pre></button>
                 </div>
             </div>
-            <div class="pagination" style="margin-bottom:4.4em;">
-                <i class="fa-solid fa-arrow-left events-left-arrow"><img style="width:1em" src="/images/arrow.png" alt="left arrow"></i>
+            <div class="pagination" style="margin-bottom:0">
+                <i class="fa-solid fa-arrow-left events-left-arrow"></i>
                 <span>Page 2</span>
-                <i class="fa-solid fa-arrow-right events-right-arrow"><img style="width:1em;transform: rotate(180deg);" src="/images/arrow.png" alt="right arrow"></i>
+                <i class="fa-solid fa-arrow-right events-right-arrow"></i>
             </div>
         </main>
-        <footer>
-            <span class="about"><a class="a-color" href="/about.html">About</a></span>
-            <span class="terms"><a class="a-color" href="/terms.html">Terms and conditions</a></span>
-        </footer>
     </div>
 </body>
 </html>
