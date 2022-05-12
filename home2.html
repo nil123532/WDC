@@ -24,11 +24,11 @@
                 </nav>
                 <main class="col-lg-10 col-sm-9 col-xs-9 main-page">
                     <div class="header">
-                        <h1>Upcoming Events:</h1>
-                        <button class="col-2 events-button"><i class="fa-solid fa-plus plus-icon"></i><pre>  Create an event</pre></button>
+                        <h2>Upcoming Events:</h2>
+                        <button onclick="location.href='/create_event.html'" class="col-2 events-button"><i class="fa-solid fa-plus plus-icon"></i>  Create an event</button>
                     </div>
                     <div v-for="event in events" class="row event-item" v-if="event.confirmed===true">
-                        <div class="col-9" style="background-">
+                        <div class="col-9">
                             <div class="event-name-date-create-time">
                                 <span class="">{{ event.name }}</span>
                                 <span class="">Date : {{ event.date }}</span>

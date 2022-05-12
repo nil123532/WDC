@@ -28,14 +28,14 @@
                 </div>
                 <div>
                     <input type="checkbox" id="Admin_Only" name="Admin_Only" value="Admin_Only">
-                    <label for="emailnoti1">Show Administrators Only</label>
+                    <label for="Admin_Only">Show Administrators Only</label>
                 </div>
             </div>
             <div class="list-of-users">
                 <div class="name-div">Name</div>
                 <div v-for="name in users" class="users">
                     <div class="one-user">{{ name }}</div>
-                    <button class="col-2 edit-user"><i class="fa-solid fa-plus plus-icon"></i><pre>Edit</pre></button>
+                    <button class="col-2 edit-user">Edit</button>
                 </div>
             </div>
             <div class="pagination" style="margin-bottom:0">
