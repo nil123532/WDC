@@ -91,7 +91,7 @@ nav {
     background-color : #5D5D5D;
     width : 12em;
     height : 3em;
-    padding : auto;
+
     color : black;
     margin-top : auto;
 }
@@ -108,7 +108,6 @@ input[type="checkbox"] {
 }
 
 .authenticated-invite-submit {
-    padding-left : auto;
 }
 
 .event-linked-desc {
@@ -353,7 +352,6 @@ pre {
     background-color : #C4C4C4;
     width : 12em;
     height : 3em;
-    padding : auto;
     color : black;
     margin-right : 1em;
     margin-bottom : 1em;
@@ -614,12 +612,12 @@ pre
 {
     padding-top:0.1em;
 }
-h9{
+.line{
     overflow: hidden;
     text-align: center;
 }
 
-h9:before,h9:after{
+.line:before,.line:after{
     background-color: #000;
     content: "";
     display: inline-block;
@@ -629,12 +627,12 @@ h9:before,h9:after{
     width: 45%;
 }
 
-h9:before{
+.line:before{
     right: 0.5em;
     margin-left: -50%;
 }
 
-h9:after{
+.line:after{
     left: 0.5em;
     margin-right: -50%;
 }
@@ -788,7 +786,7 @@ h9:after{
     background-color : #C4C4C4;
     width : 12em;
     height : 3em;
-    padding : auto;
+    padding-top:0.2em;
     color : black;
     margin-bottom:1.5em;
 }
@@ -840,7 +838,6 @@ h9:after{
     padding-bottom:0.2em;
     width : 12em;
     height : 2em;
-    padding : auto;
     color : black;
     margin-top:0.5em;
     margin-bottom:0.5em;
