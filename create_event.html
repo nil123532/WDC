@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/stylesheets/styles.css">
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
-    <script src="/javascripts/index.js" defer></script>
+    <script src="/javascripts/create_event.js" defer></script>
 </head>
 <body>
     <div id="app">
@@ -59,10 +59,9 @@
                                 </div>
                             </div>
                     </div>
-                    <div id="datepicker" class="row date-selection">
+                    <div class="row date-selection">
                         <div class="event-form col-lg-4 col-sm-12 col-xs-12 date-input">
-                                <div>June 2019 <span style="float:right">&larr; &rarr;</span></div> <!-- kind of hacky but i'll fix it later-->
-                                
+                                <div v-on:click="loadDatePicker">{{ printMonthandYear }} <span v-on:click="nextmonth" style="float:right">&rarr;</span> <span v-on:click="previousmonth" style="float:right">&larr;</span></div> <!-- kind of hacky but i'll fix it later-->
                                 <div class="date-picker-row"></div>
                                 <div class="date-picker-header">Sun</div>
                                 <div class="date-picker-header">Mon</div>
@@ -71,42 +70,7 @@
                                 <div class="date-picker-header">Thu</div>
                                 <div class="date-picker-header">Fri</div>
                                 <div class="date-picker-header">Sat</div>
-                                <div class="date-picker-row"></div>
-                                <div class="date-picker-date">1</div>
-                                <div class="date-picker-date">2</div>
-                                <div class="date-picker-date">3</div>
-                                <div class="date-picker-date">4</div>
-                                <div class="date-picker-date">5</div>
-                                <div class="date-picker-date">6</div>
-                                <div class="date-picker-date">7</div>
-                                <div class="date-picker-row"></div>
-                                <div class="date-picker-date">8</div>
-                                <div class="date-picker-date">9</div>
-                                <div class="date-picker-date">10</div>
-                                <div class="date-picker-date">11</div>
-                                <div class="date-picker-date">12</div>
-                                <div class="date-picker-date">13</div>
-                                <div class="date-picker-date">14</div>
-                                <div class="date-picker-row"></div>
-                                <div class="date-picker-date">15</div>
-                                <div class="date-picker-date">16</div>
-                                <div class="date-picker-date">17</div>
-                                <div class="date-picker-date">18</div>
-                                <div class="date-picker-date">19</div>
-                                <div class="date-picker-date">20</div>
-                                <div class="date-picker-date">21</div>
-                                <div class="date-picker-row"></div>
-                                <div class="date-picker-date">22</div>
-                                <div class="date-picker-date">23</div>
-                                <div class="date-picker-date">24</div>
-                                <div class="date-picker-date">25</div>
-                                <div class="date-picker-date">26</div>
-                                <div class="date-picker-date">27</div>
-                                <div class="date-picker-date">28</div>
-                                <div class="date-picker-row"></div>
-                                <div class="date-picker-date">29</div>
-                                <div class="date-picker-date">30</div>
-                                <div class="date-picker-date">31</div>         
+                                <div id="datepicker"></div>
                         </div>
                     </div>
                     <div class="row">

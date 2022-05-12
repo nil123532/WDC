@@ -275,19 +275,21 @@ pre {
 .date-picker-date {
     display: inline-block;
     text-align: center;
-    padding-top: 10px;
+    padding: 10px;
     height: 45px;
     width: 45px;
-    margin: 0px 3px;
+    margin: 0px 5px;
     border-radius : 50px;
     background-color: #C4C4C4;
 }
 
 .date-picker-date-empty {
     display: inline-block;
-    padding: 5px;
-    border-radius : 50px;
-    background-color: #C4C4C4;
+    text-align: center;
+    padding: 0px 10px;
+    height: 20px;
+    width: 45px;
+    margin: 0px 5px;
 }
 
 .back-arrow {
