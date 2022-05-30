@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/stylesheets/styles.css">
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
-    <script src="/javascripts/index.js" defer></script>
+    <script src="/javascripts/vue.js" defer></script>
     <script src="https://kit.fontawesome.com/f7293efbb8.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -30,17 +30,17 @@
                         <div class="login-form">
                             <div class="inputs">
                                 <div><img src="/images/user.png" alt="Default Profile Photo" class="login-img"></div>
-                                <div class="input-inside-text"><input type="text" id="email-username" name="ID" placeholder="Email or Username"></div>
+                                <div class="input-inside-text"><input type="text" id="email-username" name="ID" placeholder="Email or Username" v-model:"email"></div>
                             </div>
                             <div class="inputs">
                                 <div><img src="/images/password.png" alt="password" class="login-pass"></div>
-                                <div class="input-inside-text"><input type="text" id="password" name="Password" placeholder="Password"></div>
+                                <div class="input-inside-text"><input type="text" id="password" name="Password" placeholder="Password" v-model:"password"></div>
                             </div>
                             <div class="below-sign-in">
                                 <div class="below-sign"><input type="checkbox" class="remember-me" id="remeberme" name="Remember me">Remember me</div>
                                 <div class="below-sign">Forgot Password?</div>
                             </div>
-                        <button onclick="location.href='/home.html'" class="signin-button">Sign In</button>
+                        <button onclick="location.href='/home.html'" class="signin-button" v-on:click="user_signin()">Sign In</button>
                         </div>
                         <p class="line">or</p>
                         <div class="third-party-first-row">
