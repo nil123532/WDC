@@ -8,6 +8,8 @@ header {
 }
 
 footer {
+    position: fixed;
+    bottom: 0;
     background-color : #B7B7B7;
     padding : 1.5em 1.4em;
 }
@@ -22,7 +24,7 @@ nav {
 
 .about-terms {
     background-color : #A1A1A1;
-    min-height : 78vh;
+    min-height : 100vh;
     padding : 3em 1em 5em;
 }
 
