@@ -61,7 +61,7 @@
                     </div>
                     <div class="row date-selection">
                         <div class="event-form col-lg-4 col-sm-12 col-xs-12 date-input">
-                                <div>{{ printMonthandYear }} <span v-on:click="nextmonth" style="float:right">&rarr;</span> <span v-on:click="previousmonth" style="float:right">&larr;</span></div> <!-- kind of hacky but i'll fix it later-->
+                                <div v-on:click="loadDatePicker">{{ printMonthandYear }} <span v-on:click="nextmonth" style="float:right">&rarr;</span> <span v-on:click="previousmonth" style="float:right">&larr;</span></div> <!-- kind of hacky but i'll fix it later-->
                                 <div class="date-picker-row"></div>
                                 <div class="date-picker-header">Sun</div>
                                 <div class="date-picker-header">Mon</div>

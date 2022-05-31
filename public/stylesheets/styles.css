@@ -8,8 +8,6 @@ header {
 }
 
 footer {
-    position: fixed;
-    bottom: 0;
     background-color : #B7B7B7;
     padding : 1.5em 1.4em;
 }
@@ -24,7 +22,7 @@ nav {
 
 .about-terms {
     background-color : #A1A1A1;
-    min-height : 100vh;
+    min-height : 78vh;
     padding : 3em 1em 5em;
 }
 
@@ -109,8 +107,7 @@ input[type="checkbox"] {
     padding-left : 1em;
 }
 
-.authenticated-invite-submit {
-}
+
 
 .event-linked-desc {
     margin-bottom : 6em;
@@ -656,6 +653,7 @@ pre
     margin-right:3.1em;
     margin-left:1em;
     padding-left : 0.4em;
+    border:3px;
 }
 .google-icon {
     margin-right : 0.5em;

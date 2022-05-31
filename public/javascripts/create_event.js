@@ -69,7 +69,4 @@ var vuedate = new Vue({
             this.currentPage = 2;
         }
     },
-    mounted : function() {
-        this.loadDatePicker();
-    }
 });
