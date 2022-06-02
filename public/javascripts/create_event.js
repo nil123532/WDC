@@ -3,54 +3,26 @@ var vuedate = new Vue({
     data : {
         currentPage : -1,
         pages : [{name : "Home", link : "/home.html"}, {name : "Events", link : "/events.html"}, {name : "Settings", link : "/settings.html"}],
-        dateObj: new Date(),
-        currentMonth: new Date().getMonth(),
-        currentYear: new Date().getFullYear(),
-        currentDate: new Date().getDate(),
-        currentDay: new Date().getDay(),
+        days : ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],
+        months: ["January","February","March","April","May","June","July","August","September","October","November","December"],
+        currentMonth: "",
+        currentYear: "",
+        currentDate: "",
+        currentDay: "",
         firstDay: "",
-        lastDate: ""
+        lastDate: "",
+        totalDateOffset: "",
+        selectedDates: []
     },
     computed: {
         printMonthandYear() {
-            const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
             this.firstDay = new Date(this.currentYear, this.currentMonth).getDay();
             this.lastDate = new Date(this.currentYear, this.currentMonth+1, 0).getDate();
-            return months[this.currentMonth] + " " + this.currentYear;
+            this.totalDateOffset = this.firstDay + this.lastDate;
+            return this.months[this.currentMonth] + " " + this.currentYear;
         }
     },
     methods : {
-        loadDatePicker: function() {
-            let base = document.getElementById("datepicker");
-            while (base.firstChild) {
-                base.removeChild(base.lastChild);
-            }
-            let row = document.createElement("div");
-            row.classList.add("date-picker-row");
-            let empty = document.createElement("div");
-            empty.classList.add("date-picker-date-empty");
-            let dateitem = document.createElement("div");
-            dateitem.classList.add("date-picker-date");
-            let day = 0;
-            let date = 1;
-            base.appendChild(row.cloneNode());
-            while(day < this.firstDay) {
-                base.appendChild(empty.cloneNode());
-                day++;
-            }
-            while(date <= this.lastDate) {
-                if (day == 7) {
-                    day = 0;
-                    base.appendChild(row.cloneNode());
-                }
-                let newdateitem = dateitem.cloneNode();
-                newdateitem.innerText = date;
-                base.appendChild(newdateitem);
-                date++;
-                day++;
-            }
-
-        },
         nextmonth: function() {
             this.currentMonth += 1;
             if (this.currentMonth == 12){
@@ -65,8 +37,45 @@ var vuedate = new Vue({
                 this.currentYear -= 1;
             }
         },
+        dateAdded: function(x) {
+            let newdate = this.currentYear + "-" + this.currentMonth + "-" + x;
+            var index = this.selectedDates.indexOf(newdate);
+            if (index !== -1) {
+                return index+1;
+            }
+            return false;
+        },
+        addDate: function(date) {
+            let newdate = this.currentYear + "-" + this.currentMonth + "-" + date;
+            let index = this.dateAdded(date);
+            if (index) {
+                this.selectedDates.splice(index-1, 1);
+            }
+            else {
+                this.selectedDates.push(newdate);
+            }
+            
+        },
+        submit: function() {
+            var xhttp = new XMLHttpRequest();
+            // xhttp.onreadystatechange = function() {
+            //     if (this.readyState == 4 && this.status == 200) {
+            //         // INSERT RESPONSE? REDIRECT?
+            //     }
+            // };
+            xhttp.open("POST", "????", true); // INSERT ROUTE HERE
+            xhttp.setRequestHeader("Content-type", "application/json");
+            xhttp.send(JSON.stringify({ dates: this.selectedDates }));
+        },
         changePage : (i) => {
             this.currentPage = 2;
         }
     },
+    beforeMount : function(){
+        let dateObj = new Date();
+        this.currentMonth = dateObj.getMonth();
+        this.currentYear = dateObj.getFullYear();
+        this.currentDate = dateObj.getDate();
+        this.currentDay = dateObj.getDay();
+    }
 });

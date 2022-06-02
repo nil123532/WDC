@@ -39,44 +39,38 @@
                             </div>
                         </div>
                         <div class="event-form col-lg-4 col-sm-12 col-xs-12">
-                                <div class="inputs">
-                                    <div class="input-inside-text  inputs-left"><input type="text" name="AddressName" placeholder="Street name" /></div>
-                                </div>
-                                <div class="inputs">
-                                    <div class="input-inside-text  inputs-left"><input type="text" name="AddressNumber" placeholder="Street number" /></div>
-                                </div>
-                                <div class="inputs">
-                                    <div class="input-inside-text  inputs-left"><input type="text" name="AddressState" placeholder="State" /></div>
-                                </div>
-                                <div class="inputs">
-                                    <div class="input-inside-text  inputs-left"><input type="text" name="AddressCity" placeholder="City" /></div>
-                                </div>
-                                <div class="inputs">
-                                    <div class="input-inside-text  inputs-left"><input type="text" name="AddressPostcode" placeholder="Postcode" /></div>
-                                </div>
-                                <div class="inputs">
-                                    <div class="input-inside-text  inputs-left"><input type="text" name="AddressCountry" placeholder="Country" /></div>
-                                </div>
+                            <div class="inputs">
+                                <div class="input-inside-text  inputs-left"><input type="text" name="AddressName" placeholder="Street name" /></div>
                             </div>
+                            <div class="inputs">
+                                <div class="input-inside-text  inputs-left"><input type="text" name="AddressNumber" placeholder="Street number" /></div>
+                            </div>
+                            <div class="inputs">
+                                <div class="input-inside-text  inputs-left"><input type="text" name="AddressState" placeholder="State" /></div>
+                            </div>
+                            <div class="inputs">
+                                <div class="input-inside-text  inputs-left"><input type="text" name="AddressCity" placeholder="City" /></div>
+                            </div>
+                            <div class="inputs">
+                                <div class="input-inside-text  inputs-left"><input type="text" name="AddressPostcode" placeholder="Postcode" /></div>
+                            </div>
+                            <div class="inputs">
+                                <div class="input-inside-text  inputs-left"><input type="text" name="AddressCountry" placeholder="Country" /></div>
+                            </div>
+                        </div>
                     </div>
                     <div class="row date-selection">
                         <div class="event-form col-lg-4 col-sm-12 col-xs-12 date-input">
-                                <div v-on:click="loadDatePicker">{{ printMonthandYear }} <span v-on:click="nextmonth" style="float:right">&rarr;</span> <span v-on:click="previousmonth" style="float:right">&larr;</span></div> <!-- kind of hacky but i'll fix it later-->
-                                <div class="date-picker-row"></div>
-                                <div class="date-picker-header">Sun</div>
-                                <div class="date-picker-header">Mon</div>
-                                <div class="date-picker-header">Tue</div>
-                                <div class="date-picker-header">Wed</div>
-                                <div class="date-picker-header">Thu</div>
-                                <div class="date-picker-header">Fri</div>
-                                <div class="date-picker-header">Sat</div>
-                                <div id="datepicker"></div>
+                                <div>{{ printMonthandYear }} <span v-on:click="nextmonth" style="float:right">&rarr;</span> <span v-on:click="previousmonth" style="float:right">&larr;</span></div> <!-- kind of hacky but i'll fix it later-->
+                                <div v-for="day in days" class="date-picker-header">{{ day }}</div>
+                                <div v-for="x in firstDay" class="date-picker-date-empty"></div>
+                                <button v-for="x in lastDate" v-on:click="addDate(x)" v-bind:class="{ 'date-picker-date-selected': dateAdded(x), 'date-picker-date': !dateAdded(x) }">{{x}}</button>
                         </div>
                     </div>
                     <div class="row">
                         <img src="/images/arrow.png" alt="back-arrow" class="back-arrow col-1"/>
                         <div class="col-6 col-xl-9"></div>
-                        <div class="col-2"><button class="create-event-button">Create Event</button></div>
+                        <div class="col-2"><button v-on:click="submit" class="create-event-button">Create Event</button></div>
                     </div>
                 </main>
             </div>
