@@ -18,12 +18,14 @@ router.post('/create_event', function(req, res, next){
       res.sendStatus(500);
       return;
     }
-    var query = "INSERT INTO Event (69, ?, ?, ?, ?, ?, ?, , ?, ?, ?);";
+    var query = "INSERT INTO Event (creator_id, address_street_name, address_street_number, address_state, address_city, address_postcode, address_country, duration, description, name) VALUES (8, ?, ?, ?, ?, ?, ?, 1, ?, ?);";
     let rb = req.body;
-    connection.query(query, [rb.streetName, rb.streetNumber, rb.state, rb.city, rb.postcode, rb.country, rb.duration, rb.description, rb.name], function(err2, rows, fields){
+    // let finalised_time = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    connection.query(query, [rb.streetName, rb.streetNumber, rb.state, rb.city, rb.postcode, rb.country, rb.description, rb.name], function(err2, rows, fields){
       connection.release();
       if (err2){
         console.log("SQL Error");
+        console.log(query);
         res.sendStatus(500);
         return;
       }
