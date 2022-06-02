@@ -4,11 +4,30 @@ const argon2 = require('argon2');
 const {OAuth2Client} = require('google-auth-library');
 const client = new OAuth2Client('710141737855-re05dhe02ji6trjmum35ben9k7lk1gec.apps.googleusercontent.com');
 
-
-
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
+});
+
+// Create an event
+router.post('/:userid/create_event', function(req, res, next){
+  console.log("Creating event");
+  req.pool.getConnection(function(err, connection){
+    if (err){
+      res.sendStatus(500);
+      return;
+    }
+    var query = "INSERT INTO Event (?, ?, ?, ?, ?, ?, ?, , ?, ?, ?);";
+    let rb = req.body;
+    connection.query(query, [req.params.userid, rb.streetName, rb.streetNumber, rb.state, rb.city, rb.postcode, rb.country, rb.duration, rb.description, rb.name], function(err2, rows, fields){
+      connection.release();
+      if (err2){
+        res.sendStatus(500);
+        return;
+      }
+      res.json(rows);
+    });
+  });
 });
 
 router.post("/signin",function(req,res,next)

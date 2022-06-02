@@ -27,35 +27,35 @@
                         <div class="event-form-first event-form col-lg-9 col-md-12 col-sm-12 col-xs-12 col-seperator">
                             <div class="inputs">
                                 <img src="/images/e.png" alt="event-name-img" class="create-event-images">
-                                <div class="input-inside-text"><input type="text" name="EventName" placeholder="Event Name" /></div>
+                                <div class="input-inside-text"><input type="text" v-model="eventName" name="EventName" placeholder="Event Name" /></div>
                             </div>
                             <div class="inputs inputs-textarea">
                                 <img src="/images/paintbrush.png" alt="paintbrush-img" class="paintbrush-img">
-                                <div class="input-inside-text"><textarea rows="4" cols="47" name="EventDescription" placeholder="Event Description..." ></textarea></div>
+                                <div class="input-inside-text"><textarea rows="4" v-model="eventDescription" cols="47" name="EventDescription" placeholder="Event Description..." ></textarea></div>
                             </div>
                             <div class="inputs">
                                 <img src="/images/calendar.png" alt="calendar-img" class="create-event-images">
-                                <div class="input-inside-text"><input type="number" min="1" name="EventDuration" placeholder="Event Duration" /></div>
+                                <div class="input-inside-text"><input v-model="eventDuration" type="number" min="1" name="EventDuration" placeholder="Event Duration" /></div>
                             </div>
                         </div>
                         <div class="event-form col-lg-4 col-sm-12 col-xs-12">
                             <div class="inputs">
-                                <div class="input-inside-text  inputs-left"><input type="text" name="AddressName" placeholder="Street name" /></div>
+                                <div class="input-inside-text  inputs-left"><input v-model="eventStreetName" type="text" name="AddressName" placeholder="Street name" /></div>
                             </div>
                             <div class="inputs">
-                                <div class="input-inside-text  inputs-left"><input type="text" name="AddressNumber" placeholder="Street number" /></div>
+                                <div class="input-inside-text  inputs-left"><input v-model="eventStreetNumber" type="text" name="AddressNumber" placeholder="Street number" /></div>
                             </div>
                             <div class="inputs">
-                                <div class="input-inside-text  inputs-left"><input type="text" name="AddressState" placeholder="State" /></div>
+                                <div class="input-inside-text  inputs-left"><input v-model="eventState" type="text" name="AddressState" placeholder="State" /></div>
                             </div>
                             <div class="inputs">
-                                <div class="input-inside-text  inputs-left"><input type="text" name="AddressCity" placeholder="City" /></div>
+                                <div class="input-inside-text  inputs-left"><input v-model="eventCity" type="text" name="AddressCity" placeholder="City" /></div>
                             </div>
                             <div class="inputs">
-                                <div class="input-inside-text  inputs-left"><input type="text" name="AddressPostcode" placeholder="Postcode" /></div>
+                                <div class="input-inside-text  inputs-left"><input v-model="eventPostcode" type="number" min="0" name="AddressPostcode" placeholder="Postcode" /></div>
                             </div>
                             <div class="inputs">
-                                <div class="input-inside-text  inputs-left"><input type="text" name="AddressCountry" placeholder="Country" /></div>
+                                <div class="input-inside-text  inputs-left"><input v-model="eventCountry" type="text" name="AddressCountry" placeholder="Country" /></div>
                             </div>
                         </div>
                     </div>

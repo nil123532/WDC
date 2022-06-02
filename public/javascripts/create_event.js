@@ -16,6 +16,12 @@ var vuedate = new Vue({
         eventName: "",
         eventDescription: "",
         eventDuration: "",
+        eventStreetName: "",
+        eventStreetNumber: "",
+        eventState: "",
+        eventCity: "",
+        eventPostcode: "",
+        eventCountry: "",
     },
     computed: {
         printMonthandYear() {
@@ -61,14 +67,16 @@ var vuedate = new Vue({
         },
         submit: function() {
             var xhttp = new XMLHttpRequest();
-            // xhttp.onreadystatechange = function() {
-            //     if (this.readyState == 4 && this.status == 200) {
-            //         // INSERT RESPONSE? REDIRECT?
-            //     }
-            // };
-            xhttp.open("POST", "????", true); // INSERT ROUTE HERE
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log("Successfully created event");
+                    console.log(this.responseText);
+                }
+            };
+            console.log(JSON.stringify({ dates: this.selectedDates, name: this.eventName, description: this.eventDescription, duration: this.eventDuration, streetName: this.eventStreetName, streetNumber: this.eventStreetNumber, state: this.eventState, city: this.eventCity, postcode: this.eventPostcode, country: this.country }));
+            xhttp.open("POST", "/users/69/create_event", true); // INSERT ROUTE HERE
             xhttp.setRequestHeader("Content-type", "application/json");
-            xhttp.send(JSON.stringify({ dates: this.selectedDates }));
+            xhttp.send(JSON.stringify({ dates: this.selectedDates, name: this.eventName, description: this.eventDescription, duration: this.eventDuration, streetName: this.eventStreetName, streetNumber: this.eventStreetNumber, state: this.eventState, city: this.eventCity, postcode: this.eventPostcode, country: this.country }));
         },
         changePage : (i) => {
             this.currentPage = 2;
