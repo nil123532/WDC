@@ -12,7 +12,10 @@ var vuedate = new Vue({
         firstDay: "",
         lastDate: "",
         totalDateOffset: "",
-        selectedDates: []
+        selectedDates: [],
+        eventName: "",
+        eventDescription: "",
+        eventDuration: "",
     },
     computed: {
         printMonthandYear() {
@@ -54,7 +57,7 @@ var vuedate = new Vue({
             else {
                 this.selectedDates.push(newdate);
             }
-            
+
         },
         submit: function() {
             var xhttp = new XMLHttpRequest();
