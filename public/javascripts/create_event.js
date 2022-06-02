@@ -74,7 +74,7 @@ var vuedate = new Vue({
                 }
             };
             console.log(JSON.stringify({ dates: this.selectedDates, name: this.eventName, description: this.eventDescription, duration: this.eventDuration, streetName: this.eventStreetName, streetNumber: this.eventStreetNumber, state: this.eventState, city: this.eventCity, postcode: this.eventPostcode, country: this.country }));
-            xhttp.open("POST", "/users/69/create_event", true); // INSERT ROUTE HERE
+            xhttp.open("POST", "/users/create_event", true); // INSERT ROUTE HERE
             xhttp.setRequestHeader("Content-type", "application/json");
             xhttp.send(JSON.stringify({ dates: this.selectedDates, name: this.eventName, description: this.eventDescription, duration: this.eventDuration, streetName: this.eventStreetName, streetNumber: this.eventStreetNumber, state: this.eventState, city: this.eventCity, postcode: this.eventPostcode, country: this.country }));
         },

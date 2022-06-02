@@ -10,18 +10,20 @@ router.get('/', function(req, res, next) {
 });
 
 // Create an event
-router.post('/:userid/create_event', function(req, res, next){
+router.post('/create_event', function(req, res, next){
   console.log("Creating event");
   req.pool.getConnection(function(err, connection){
     if (err){
+      console.log(err);
       res.sendStatus(500);
       return;
     }
-    var query = "INSERT INTO Event (?, ?, ?, ?, ?, ?, ?, , ?, ?, ?);";
+    var query = "INSERT INTO Event (69, ?, ?, ?, ?, ?, ?, , ?, ?, ?);";
     let rb = req.body;
-    connection.query(query, [req.params.userid, rb.streetName, rb.streetNumber, rb.state, rb.city, rb.postcode, rb.country, rb.duration, rb.description, rb.name], function(err2, rows, fields){
+    connection.query(query, [rb.streetName, rb.streetNumber, rb.state, rb.city, rb.postcode, rb.country, rb.duration, rb.description, rb.name], function(err2, rows, fields){
       connection.release();
       if (err2){
+        console.log("SQL Error");
         res.sendStatus(500);
         return;
       }
