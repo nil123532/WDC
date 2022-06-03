@@ -10,15 +10,15 @@ router.get('/', function(req, res, next) {
 });
 
 // GET events a user is attending
-router.get('/get_events', function(req, res, next){
+router.get('/:userid/get_events', function(req, res, next){
   req.pool.getConnection(function(err, connection){
     if (err){
       console.log(err);
       res.sendStatus(500);
       return;
     }
-    var query = "SELECT * FROM Event WHERE ;";
-    connection.query(query, function(err2, rows, fields){
+    var query = "SELECT * FROM Event INNER JOIN Availability ON Event.creator_id=Availability.user_id WHERE Event.creator_id=?;";
+    connection.query(query, [req.params.userid], function(err2, rows, fields){
       connection.release();
       if (err2){
         console.log("SQL Error");
