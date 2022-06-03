@@ -12,15 +12,15 @@
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
     <script src="https://kit.fontawesome.com/f7293efbb8.js" crossorigin="anonymous"></script>
-    <script src="/javascripts/index.js" defer></script>
+    <script src="/javascripts/events.js" defer></script>
 </head>
 <body>
-    <div id="app" class="allEvents">
+    <div id="app">
         <div class="container-fluid">
             <div class="row">
                 <nav class="col-lg-2 col-sm-3 col-xs-3">
                     <h1 class="logo navbar-logo">MeetUps</h1>
-                    <div v-for="(page, i) in pages" v-bind:class="{ 'navbar-selected' : i===1 }" v-on:click="changePage"  class="navbar-item"><a class="navbar-hyperlink" v-bind:class="{ 'navbar-selected' : i===1 }" v-bind:href="page.link">{{ page.name }}</a></div>
+                    <div v-for="(page, i) in pages" v-bind:class="{ 'navbar-selected' : i===1 }"  class="navbar-item"><a class="navbar-hyperlink" v-bind:class="{ 'navbar-selected' : i===1 }" v-bind:href="page.link">{{ page.name }}</a></div>
                 </nav>
                 <main class="col-lg-10 col-sm-9 col-xs-9 main-page">
                     <div class="header">
