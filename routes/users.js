@@ -10,6 +10,26 @@ router.get('/', function(req, res, next) {
 });
 
 // GET events a user is attending
+router.get('/get_events', function(req, res, next){
+  req.pool.getConnection(function(err, connection){
+    if (err){
+      console.log(err);
+      res.sendStatus(500);
+      return;
+    }
+    var query = "SELECT * FROM Event WHERE ;";
+    connection.query(query, function(err2, rows, fields){
+      connection.release();
+      if (err2){
+        console.log("SQL Error");
+        console.log(query);
+        res.sendStatus(500);
+        return;
+      }
+      res.json(rows);
+    });
+  });
+});
 
 // Create an event
 router.post('/create_event', function(req, res, next){
