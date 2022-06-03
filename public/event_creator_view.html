@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/stylesheets/styles.css">
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
-    <script src="/javascripts/index.js" defer></script>
+    <script src="/javascripts/event_creator.js" defer></script>
 </head>
 <body>
     <div id="app">
@@ -48,7 +48,7 @@
                         <img src="/images/arrow.png" alt="back-arrow" class="back-arrow"/>
                         <div class="row creator-event-buttons">
                             <button class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 create-event-button">Cancel Event</button>
-                            <button class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 create-event-button">Get Event Link</button>
+                            <button v-on:click="getPageLink" class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 create-event-button">Get Event Link</button>
                             <button class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 create-event-button">Create Event</button>
                         </div>
                     </div>
