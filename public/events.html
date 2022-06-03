@@ -32,16 +32,16 @@
                             <div class="col-9">
                                 <div class="event-name-date-create-time">
                                     <span class="">{{ event.name }}</span>
-                                    <span class="">Date : {{ event.date }}</span>
+                                    <span class="">Date : -</span>
                                 </div>
                                 <div class="event-name-date-create-time">
                                     <span style="font-size:0.5em;color:blue;width:15em">{{event.created}}</span>
-                                    <span>Time : {{ event.time }}</span>
+                                    <span>Time : -</span>
                                 </div>
-                                <p>{{ event.desc }}</p>
-                                <div class="event-item-people"><i class="fa-solid fa-people-group people-icon"></i>{{ event.count }}</div>
+                                <p>{{ event.description }}</p>
+                                <div class="event-item-people"><i class="fa-solid fa-people-group people-icon"></i>{{ 1 }}</div>
                             </div>
-                            <div class="col-3"><p style="font-weight:bold">{{event.address}}</p></div>
+                            <div class="col-3"><p style="font-weight:bold">{{event.address_street_number + " " + event.address_street_name + ", " + event.address_city + " "  + event.address_postcode + ", " + event.address_city + ", " + event.address_country}}</p></div>
                         </div>
                     </a>
                     <div class="pagination">

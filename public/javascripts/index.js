@@ -41,27 +41,14 @@ var vueinst = new Vue({
         changePage : (i) => {
             this.currentPage = 2;
         },
-        get_events : () => {
-            const xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function(){
-                if (this.readyState==4 && this.status == 200){
-                    for (const i of JSON.parse(this.responseText)){
-                        console.log(i);
-                        this.events.push(i);
-                    }
-                }
-            };
-            xhttp.open("GET", "/get_events", true);
-            xhttp.send();
-        }
     },
-    beforeMount : function(){
+    mounted : function(){
         const xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function(){
             if (this.readyState==4 && this.status == 200){
                 for (const i of JSON.parse(this.responseText)){
                     console.log(i);
-                    this.events.push(i);
+                    vueinst.events.push(i);
                 }
             }
         };
