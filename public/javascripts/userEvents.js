@@ -39,7 +39,7 @@ var vueinst = new Vue({
                     }
                 }
             };
-            xhttp.open("GET", "/get_availabilities/" + params.eventid, true);
+            xhttp.open("GET", "/get_availabilities/" + i, true);
             xhttp.send();
         },
     },
