@@ -6,6 +6,27 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+router.get('/proposed_dates/:eventid', function(req, res, next){
+  req.pool.getConnection(function(err, connection){
+    if (err){
+      console.log(err);
+      res.sendStatus(500);
+      return;
+    }
+    var query = "SELECT Dates.date FROM Dates INNER JOIN Event ON Event.event_id=Dates.event_id WHERE Event.event_id=?;";
+    connection.query(query, [req.params.eventid], function(err2, rows, fields){
+      connection.release();
+      if (err2){
+        console.log("SQL Error");
+        console.log(query);
+        res.sendStatus(500);
+        return;
+      }
+      res.json(rows);
+    });
+  });
+});
+
 // GET all events
 router.get('/get_events', function(req, res, next){
   req.pool.getConnection(function(err, connection){

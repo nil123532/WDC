@@ -14,7 +14,7 @@ var vueinst = new Vue({
         pages : [{name : "Home", link : "/home.html"}, {name : "Events", link : "/events.html"}, {name : "Settings", link : "/settings.html"}],
         eventDetail : {},
         authorName : "",
-        dummyDates : [],
+        proposedDates : [],
         times : ["00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24"],
         myAvailabilities : [],
         users:["Julia Robbins","Samuel Smith"]
@@ -58,11 +58,27 @@ var vueinst = new Vue({
             };
             xhttp.open("GET", `/users/${params.userid}/events/${params.eventid}/my_availability`, true);
             xhttp.send();
+        },
+        getProposedDates : () => {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function(){
+                if (this.readyState==4 && this.status == 200){
+                    for (const i of JSON.parse(this.responseText)){
+                        let xDateObject = sqlToJsDate(i.date);
+                        let xDate = xDateObject.toDateString();
+                        console.log(xDate);
+                        vueinst.proposedDates.push(xDate);
+                    }
+                }
+            };
+            xhttp.open("GET", `/proposed_dates/${params.eventid}`, true);
+            xhttp.send();
         }
     },
     mounted : function(){
         this.getEventDetails();
         this.getAuthor();
         this.getMyAvailabilities();
+        this.getProposedDates();
     },
 });

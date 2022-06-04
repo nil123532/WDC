@@ -72,7 +72,7 @@ var vuedate = new Vue({
                     // console.log("Successfully created event");
                     // console.log(this.responseText);
                     // res.redirect("/home.html");
-                    window.location.href = "/events.html";
+                    window.location.href = location.href.split("/creat")[0] + "/events.html";
                 }
             };
             console.log(JSON.stringify({ dates: this.selectedDates, name: this.eventName, description: this.eventDescription, duration: this.eventDuration, streetName: this.eventStreetName, streetNumber: this.eventStreetNumber, state: this.eventState, city: this.eventCity, postcode: this.eventPostcode, country: this.eventCountry }));

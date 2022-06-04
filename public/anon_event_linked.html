@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/stylesheets/styles.css">
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
-    <script src="/javascripts/index.js" defer></script>
+    <script src="/javascripts/event_details.js" defer></script>
 </head>
 <body>
     <div id="app">
@@ -20,14 +20,14 @@
         </header>
         <main class="main-page">
             <div class="row">
-                <h2 class="event-linked-name">You've been invited to Pizza party</h2>
-                <p class="event-linked-duration">Duration: XD</p>
-                <p class="event-linked-desc">Event Description, Lorem Ipsum dolor sit amet</p>
+                <h2 class="event-linked-name">You've been invited to {{ eventDetail.name }}</h2>
+                <p class="event-linked-duration">Duration: {{ eventDetail.duration }}</p>
+                <p class="event-linked-desc">{{ eventDetail.description }}</p>
             </div>
             <div class="row pick-availability">
                 <h2>Please pick the suitable times for your attendence from below:</h2>
                 <form action="#">
-                    <div v-for="date in dummyDates">
+                    <div v-for="date in proposedDates">
                         <p>{{ date }}</p>
                         <div class="event-linked-checkboxes">
                             <div v-for="hour in times" class="event-linked-checkbox">
