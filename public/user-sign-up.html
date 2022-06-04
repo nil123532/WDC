@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="/stylesheets/styles.css">
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
-    <script src="/javascripts/vue.js" defer></script>
+    <script src="/javascripts/user_login.js" defer></script>
     <script src="/javascripts/google.js" defer></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="https://kit.fontawesome.com/f7293efbb8.js" crossorigin="anonymous"></script>
@@ -32,6 +32,7 @@
                             <div class="sign-up-text-up"><a class="a-color" href="/user-sign-up.html">Sign Up</a></div>
                         </div>
                         <div class="login-form">
+                            <div v-if="error" class="error-text">{{ errorMessage }}</div>
                             <div class="inputs">
                                 <div><img src="/images/name.png" alt="Name" class="login-img"></div>
                                 <div class="input-inside-text"><input type="text" id="FirstName" name="First Name" placeholder="First Name" v-model="first_name"></div>

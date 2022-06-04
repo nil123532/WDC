@@ -460,6 +460,10 @@ textarea {
     margin-bottom : 2em;
 }
 
+.error-text {
+    color: red;
+}
+
 .logo {
     font-weight : bold;
 }
