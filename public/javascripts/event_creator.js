@@ -24,7 +24,7 @@ var vueinst = new Vue({
             this.currentPage = 2;
         },
         getPageLink : () => {
-            navigator.clipboard.writeText("https://patricks136-code50-70998845-699xv6rw73xxrv-8080.githubpreview.dev/event_invite/14");
+            navigator.clipboard.writeText(location.href.split("/even")[0] + "/event_invite/14");
             alert("Copied to clipboard");
         },
         getEventDetails : () => {
