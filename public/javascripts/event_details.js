@@ -17,6 +17,16 @@ var vueinst = new Vue({
         changePage : (i) => {
             this.currentPage = 2;
         },
+        getEventDetails : () => {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function(){
+                if (this.readyState==4 && this.status == 200){
+                    vueinst.eventDetail = JSON.parse(this.responseText)[0];
+                }
+            };
+            xhttp.open("GET", "/get_event_details/" + params.eventid, true);
+            xhttp.send();
+        }
     },
     mounted : function(){
         const xhttp = new XMLHttpRequest();
