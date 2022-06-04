@@ -3,7 +3,7 @@ const params = new Proxy(new URLSearchParams(window.location.search), {
 });
 
 function sqlToJsDate(sqlDate){
-    console.log(sqlDate);
+    console.log(sqlDate.length);
     //sqlDate in SQL DATETIME format ("yyyy-mm-dd hh:mm:ss.ms")
     var sqlDateArr1 = sqlDate.split("-");
     //format of sqlDateArr1[] = ['yyyy','mm','dd hh:mm:ms']
