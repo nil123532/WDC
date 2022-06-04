@@ -89,7 +89,6 @@ router.post("/signin",function(req,res,next)
         if(error){
           console.log(error);
           res.sendStatus(500);
-          return;
         }
         let query = "SELECT user_id,first_name,last_name,email,password FROM User WHERE email= ?";
         connection.query(query,[val.email], async function(error,rows,fields)
@@ -108,7 +107,9 @@ router.post("/signin",function(req,res,next)
             try {
               if (await argon2.verify(rows[0].password, val.password)) {
                 console.log("success");
-                //req.session.user = rows[0]; //session?
+                req.session.user = rows[0].user_id; //session?
+                console.log(req.session.user)
+                testVal = req.session.user
                 res.sendStatus(200);
                 // password match
               } else {
@@ -167,6 +168,7 @@ router.post("/signin",function(req,res,next)
             }
             if (rows.length > 0)
             {
+              req.session.user = rows[0].user_id;
               console.log("success");
             }
             else
@@ -199,111 +201,140 @@ router.post("/signup",function(req,res,next)
             console.log(error);
             res.sendStatus(500);
           }
-          let hash= null;
-          try {
-            hash = await argon2.hash(val.password);
-          } catch (err) {
-            console.log("to err is human");
-            console.log(error);
-            res.sendStatus(500);
-            return;
-          }
-        let query = "INSERT INTO User(first_name,last_name,email,password) VALUES(?,?,?,?);";
-        connection.query(query,[val.first_name,val.last_name,val.email,hash],async function(error,rows,fields)
-        {
-          //connection.release();
-          if(error)
-          {
-            console.log(error);
-            res.sendStatus(403);
-            return;
-          }
-          let query = "SELECT user_id,first_name,last_name,email,password FROM User WHERE user_id=LAST_INSERT_ID();";
-          connection.query(query,async function(error,rows,fields)
-          {
-            connection.release();
-            if(error)
-            {
-              console.log(error);
-              res.sendStatus(403);
-              return;
-            }
-            if (rows.length > 0)
-            {
-              console.log("success");
-              //req.session.user = rows[0]; //session?
-              res.sendStatus(200);
-            }
-            else
-            {
-              console.log("bag login");
-              res.sendStatus(401);
-            }
-          });
-        });
-      });
-    }
-    else if ("token" in val)
-    {
-      let email = null;
-      var name = null;
-      async function verify() {
-        const ticket = await client.verifyIdToken({
-            idToken: val.token,
-            audience: '710141737855-re05dhe02ji6trjmum35ben9k7lk1gec.apps.googleusercontent.com',  // Specify the CLIENT_ID of the app that accesses the backend
-            // Or, if multiple clients access the backend:
-            //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
-        });
-        const payload = ticket.getPayload();
-        const userid = payload['sub'];
-        email = payload['email'];
-        name = payload['name'];
-        // If request specified a G Suite domain:
-        // const domain = payload['hd'];
-      }
-      verify().then(function()
-      {
-        req.pool.getConnection(async function(error,connection)
-        {
-          if(error){
-            console.log(error);
-            res.sendStatus(500);
-          }
-          var names = name.split(" ");
-          var first_name = names[0];
-          names.shift();
-          var last_name = names.join(' ');
-          let query = "INSERT INTO User(first_name,last_name,email) VALUES(?,?,?);";
-          connection.query(query,[first_name,last_name,email],async function(error,rows,fields)
+
+          //check if email already exists in database
+          //if it does then throw error and do not allow user.
+          let query = "SELECT * FROM User WHERE email = ?";
+          connection.query(query,[val.email],async function(error,rows,fields)
           {
             //connection.release();
-            if(error)
+            if(rows.length > 0)
             {
-              console.log(error);
-              res.sendStatus(403);
+              console.log('email exists');
+              res.sendStatus(123);
               return;
             }
-            let query = "SELECT user_id,first_name,last_name,email FROM User WHERE user_id=LAST_INSERT_ID();";
-            connection.query(query,async function(error,rows,fields)
+              let hash= null;
+              try {
+                hash = await argon2.hash(val.password);
+              } catch (err) {
+                console.log("to err is human");
+                console.log(error);
+                res.sendStatus(500);
+                return;
+              }
+            let query = "INSERT INTO User(first_name,last_name,email,password) VALUES(?,?,?,?);";
+            connection.query(query,[val.first_name,val.last_name,val.email,hash],async function(error,rows,fields)
             {
-              connection.release();
+              //connection.release();
               if(error)
               {
                 console.log(error);
                 res.sendStatus(403);
                 return;
               }
-              if (rows.length > 0)
+              let query = "SELECT user_id,first_name,last_name,email,password FROM User WHERE user_id=LAST_INSERT_ID();";
+              connection.query(query,async function(error,rows,fields)
               {
-                console.log("success");
-                //req.session.user = rows[0]; //session?
-                res.sendStatus(200);
-              }
-              else
+                connection.release();
+                if(error)
+                {
+                  console.log(error);
+                  res.sendStatus(403);
+                  return;
+                }
+                if (rows.length > 0)
+                {
+                  console.log("success");
+                  //req.session.user = rows[0]; //session?
+                  res.sendStatus(200);
+                }
+                else
+                {
+                  console.log("bad login");
+                  res.sendStatus(401);
+                }
+              });
+            });
+          });
+        });
+      }
+      else if ("token" in val)
+      {
+        let email = null;
+        var name = null;
+        async function verify() {
+          const ticket = await client.verifyIdToken({
+              idToken: val.token,
+              audience: '710141737855-re05dhe02ji6trjmum35ben9k7lk1gec.apps.googleusercontent.com',  // Specify the CLIENT_ID of the app that accesses the backend
+              // Or, if multiple clients access the backend:
+              //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
+          });
+          const payload = ticket.getPayload();
+          const userid = payload['sub'];
+          email = payload['email'];
+          name = payload['name'];
+          // If request specified a G Suite domain:
+          // const domain = payload['hd'];
+        }
+        verify().then(function()
+        {
+          req.pool.getConnection(async function(error,connection)
+          {
+            if(error){
+              console.log(error);
+              res.sendStatus(500);
+            }
+
+          //check if email already exists in database
+          //if it does then throw error and do not allow user.
+          let query = "SELECT * FROM User WHERE email = ?";
+          connection.query(query,[val.email],async function(error,rows,fields)
+          {
+            //connection.release();
+            if(rows.length > 0)
+            {
+              console.log('email exists');
+              res.sendStatus(123);
+              return;
+            }
+
+            var names = name.split(" ");
+            var first_name = names[0];
+            names.shift();
+            var last_name = names.join(' ');
+            let query = "INSERT INTO User(first_name,last_name,email) VALUES(?,?,?);";
+            connection.query(query,[first_name,last_name,email],async function(error,rows,fields)
+            {
+              //connection.release();
+              if(error)
               {
-                console.log("bag login");
-                res.sendStatus(401);
+                console.log(error);
+                res.sendStatus(403);
+                return;
               }
+              let query = "SELECT user_id,first_name,last_name,email FROM User WHERE user_id=LAST_INSERT_ID();";
+              connection.query(query,async function(error,rows,fields)
+              {
+                connection.release();
+                if(error)
+                {
+                  console.log(error);
+                  res.sendStatus(403);
+                  return;
+                }
+                if (rows.length > 0)
+                {
+                  console.log("success");
+                  //req.session.user = rows[0]; //session?
+                  res.sendStatus(200);
+                }
+                else
+                {
+                  console.log("bag login");
+                  res.sendStatus(401);
+                }
+              });
             });
           });
         });
@@ -316,11 +347,14 @@ router.post("/signup",function(req,res,next)
 });
 
 
-router.post('/logout', function(req, res, next) {
-  /*if ('user' in req.session)
+router.get('/logout', function(req, res, next) {
+  //console.log("runs 1");
+  console.log(req.session.user);
+  if ('user' in req.session)
   {
+    //console.log("runs 2");
     delete req.session.user;
-  }*/
+  }
   res.send();
 });
 
