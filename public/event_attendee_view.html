@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/stylesheets/styles.css">
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
-    <script src="/javascripts/index.js" defer></script>
+    <script src="/javascripts/event_details.js" defer></script>
 </head>
 <body>
     <div id="app">
@@ -22,14 +22,14 @@
                     <div v-for="(page, i) in pages" v-bind:class="{ 'navbar-selected' : i===1 }" v-on:click="changePage"  class="navbar-item"><a class="navbar-hyperlink" v-bind:class="{ 'navbar-selected' : i===1 }" v-bind:href="page.link">{{ page.name }}</a></div>
                 </nav>
                 <main class="col-lg-10 col-sm-9 col-xs-9 main-page">
-                    <h2 class="viewer-event-name">Domino Night | Created by John</h2>
-                    <h4>Domino Night with Friends</h4>
-                    <p>Duration: 2</p>
+                    <h2 class="viewer-event-name">{{ eventDetail.name }} | Created by John</h2>
+                    <h4>{{ eventDetail.description }}</h4>
+                    <p>Duration: {{ eventDetail.duration }}</p>
                     <br />
                     <div class="event-attendee-details">
                         <div class="event-attendee-status">
-                            <h4>Status: Confirmed</h4>
-                            <h4>Date: 12/05/2022<br />Time: 8pm</h4>
+                            <h4>Status: {{ eventDetail.finalised_time ? "Confirmed" : "Not confirmed"}}</h4>
+                            <h4>Date: -<br />Time: -</h4>
                         </div>
                         <div>
                             <h4>My availability :</h4>
