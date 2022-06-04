@@ -23,10 +23,10 @@
                 </nav>
                 <main class="col-lg-10 col-sm-9 col-xs-9 main-page">
                     <div class="row">
-                        <h2>Event name</h2>
-                        <p>Duration: XD</p>
+                        <h2>{{ eventDetail.name }}</h2>
+                        <p>Duration: {{ eventDetail.duration }}</p>
                         <p>Number of guests responded: 3</p>
-                        <p class="event-linked-desc">Event Description, Lorem Ipsum dolor sit amet</p>
+                        <p class="event-linked-desc">{{ eventDetail.description }}</p>
                     </div>
                     <div class="row date-selection">
                         <div class="event-form col-lg-4 col-sm-12 col-xs-12 date-input">
@@ -38,7 +38,7 @@
                         </div>
                         <div class="col-lg-6 col-sm-12 col-xs-12">
                             <h2>Possible times</h2>
-                            <div v-for="choice in possibleTimes">
+                            <div v-for="choice in availabilities">
                                 <input type="radio" id="html" name="fav_language" value="HTML">
                                 <label for="html">{{choice}}</label><br>
                             </div>
