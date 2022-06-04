@@ -3,25 +3,8 @@ const params = new Proxy(new URLSearchParams(window.location.search), {
 });
 
 function sqlToJsDate(sqlDate){
-    console.log(sqlDate.length);
-    //sqlDate in SQL DATETIME format ("yyyy-mm-dd hh:mm:ss.ms")
-    var sqlDateArr1 = sqlDate.split("-");
-    //format of sqlDateArr1[] = ['yyyy','mm','dd hh:mm:ms']
-    var sYear = sqlDateArr1[0];
-    var sMonth = (Number(sqlDateArr1[1]) - 1).toString();
-    var sqlDateArr2 = sqlDateArr1[2].split(" ");
-    //format of sqlDateArr2[] = ['dd', 'hh:mm:ss.ms']
-    var sDay = sqlDateArr2[0];
-    var sqlDateArr3 = sqlDateArr2[1].split(":");
-    //format of sqlDateArr3[] = ['hh','mm','ss.ms']
-    var sHour = sqlDateArr3[0];
-    var sMinute = sqlDateArr3[1];
-    var sqlDateArr4 = sqlDateArr3[2].split(".");
-    //format of sqlDateArr4[] = ['ss','ms']
-    var sSecond = sqlDateArr4[0];
-    var sMillisecond = sqlDateArr4[1];
-
-    return new Date(sYear,sMonth,sDay,sHour,sMinute,sSecond,sMillisecond);
+    let dateParts = sqlDate.split("-");
+    return new Date(dateParts[0], dateParts[1] - 1, dateParts[2].substr(0,2));
 }
 
 var vueinst = new Vue({
@@ -31,9 +14,9 @@ var vueinst = new Vue({
         pages : [{name : "Home", link : "/home.html"}, {name : "Events", link : "/events.html"}, {name : "Settings", link : "/settings.html"}],
         eventDetail : {},
         authorName : "",
-        dummyDates : ["December 9th 2022", "December 13th 2022", "December 13th 2022"],
+        dummyDates : [],
         times : ["00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24"],
-        possibleTimes : ["December 9th 2022, 9PM", "December 13th 2022, 3AM", "December 13th 2022, 4PM"],
+        myAvailabilities : [],
         users:["Julia Robbins","Samuel Smith"]
     },
     methods : {
@@ -66,7 +49,10 @@ var vueinst = new Vue({
             xhttp.onreadystatechange = function(){
                 if (this.readyState==4 && this.status == 200){
                     for (const i of JSON.parse(this.responseText)){
-                        sqlToJsDate(i.startTime);
+                        let xDateObject = sqlToJsDate(i.startTime);
+                        let xTime = xDateObject.toTimeString().split(" ")[0];
+                        let xDate = xDateObject.toDateString();
+                        vueinst.myAvailabilities.push(xDate + ", " + xTime);
                     }
                 }
             };
