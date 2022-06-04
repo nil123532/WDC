@@ -9,6 +9,29 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
+// GET a user's availability for an event
+router.get('/:userid/events/:eventid/my_availability', function(req, res, next){
+  req.pool.getConnection(function(err, connection){
+    if (err){
+      console.log(err);
+      res.sendStatus(500);
+      return;
+    }
+    var query = "SELECT startTime FROM Availability INNER JOIN User ON Availability.user_id=User.user_id INNER JOIN Event ON Event.event_Id=Availability.event_id WHERE Event.event_id=? AND User.user_id=?;";
+    connection.query(query, [req.params.eventid, req.params.userid], function(err2, rows, fields){
+      connection.release();
+      if (err2){
+        console.log("SQL Error");
+        console.log(query);
+        res.sendStatus(500);
+        return;
+      }
+      res.json(rows);
+    });
+  });
+});
+
+
 // GET events a user is attending
 router.get('/:userid/get_events', function(req, res, next){
   req.pool.getConnection(function(err, connection){

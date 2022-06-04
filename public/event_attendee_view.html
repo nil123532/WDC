@@ -22,7 +22,7 @@
                     <div v-for="(page, i) in pages" v-bind:class="{ 'navbar-selected' : i===1 }" v-on:click="changePage"  class="navbar-item"><a class="navbar-hyperlink" v-bind:class="{ 'navbar-selected' : i===1 }" v-bind:href="page.link">{{ page.name }}</a></div>
                 </nav>
                 <main class="col-lg-10 col-sm-9 col-xs-9 main-page">
-                    <h2 class="viewer-event-name">{{ eventDetail.name }} | Created by John</h2>
+                    <h2 class="viewer-event-name">{{ eventDetail.name }} | Created by {{ authorName }}</h2>
                     <h4>{{ eventDetail.description }}</h4>
                     <p>Duration: {{ eventDetail.duration }}</p>
                     <br />
