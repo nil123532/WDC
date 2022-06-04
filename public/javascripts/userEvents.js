@@ -26,6 +26,23 @@ var vueinst = new Vue({
         pages : [{name : "Home", link : "/home.html"}, {name : "Events", link : "/events.html"}, {name : "Settings", link : "/settings.html"}],
         attendingEvents : [],
     },
+    method : {
+        getParticipants : (i) => {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function(){
+                if (this.readyState==4 && this.status == 200){
+                    for (const i of JSON.parse(this.responseText)){
+                        let xDateObject = sqlToJsDate(i.startTime);
+                        let xTime = xDateObject.toTimeString().split(" ")[0];
+                        let xDate = xDateObject.toDateString();
+                        vueinst.availabilities.push(xDate + ", " + xTime);
+                    }
+                }
+            };
+            xhttp.open("GET", "/get_availabilities/" + params.eventid, true);
+            xhttp.send();
+        },
+    },
     mounted : function(){
         console.log("User events");
         const xhttp = new XMLHttpRequest();
