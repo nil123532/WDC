@@ -13,6 +13,16 @@ var vueinst = new Vue
     {
         changePage : (i) => {
             this.currentPage = 2;
+        },
+        user_logout:function(){
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    redirectLogOut();
+                }
+             };
+            xhttp.open("GET", "/users/logout", true);
+            xhttp.send();
         }
     }
 });
