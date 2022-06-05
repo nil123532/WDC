@@ -33,14 +33,6 @@ router.get('/settings', function(req, res, next) {
   }
 });
 
-router.get('/user-sign-in', function(req, res, next) {
-    res.sendFile(__dirname + '/html-files/user-sign-in');
-});
-
-router.get('/user-sign-up', function(req, res, next) {
-  res.sendFile(__dirname + '/html-files/user-sign-up.html');
-});
-
 router.get('/events', function(req, res, next) {
   if ('user' in req.session)
   {
