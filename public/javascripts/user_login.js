@@ -84,9 +84,9 @@ var login = new Vue
 
 //this function redirects user to Sign in page once sign-up is successful
 function redirectSignUp(){
-    location.href = '/user-sign-in.html';
+    location.href = '/user-sign-in';
 }
 
 function redirectSignIn(){
-    location.href = '/home.html';
+    location.href = '/home';
 }
