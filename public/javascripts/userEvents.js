@@ -23,7 +23,7 @@
 var vueinst = new Vue({
     el : "#app",
     data : {
-        pages : [{name : "Home", link : "/home.html"}, {name : "Events", link : "/events.html"}, {name : "Settings", link : "/settings.html"}],
+        pages : [{name : "Home", link : "/home"}, {name : "Events", link : "/events"}, {name : "Settings", link : "/settings"}],
         attendingEvents : [],
     },
     method : {
