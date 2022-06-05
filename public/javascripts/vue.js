@@ -7,7 +7,7 @@ var vueinst = new Vue
         last_name : "",
         email :  "",
         password : "",
-        pages : [{name : "Home", link : "/home.html"}, {name : "Events", link : "/events.html"}, {name : "Settings", link : "/settings.html"}],
+        pages : [{name : "Home", link : "/home"}, {name : "Events", link : "/events"}, {name : "Settings", link : "/settings"}],
     },
     methods:
     {
@@ -18,7 +18,7 @@ var vueinst = new Vue
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
-                    location.href = '/index.html';
+                    location.href = '/';
                 }
              };
             xhttp.open("GET", "/users/logout", true);
