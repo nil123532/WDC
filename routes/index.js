@@ -1,10 +1,59 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+router.get("/", (req, res) => {
+  res.sendFile(__dirname + '/html-files/index.html');
 });
+
+
+//redirection links. Do not edit this code
+//any links that need to be logged in for, they need the if else statement
+//like the one below
+router.get('/home', function(req, res, next) {
+  if ('user' in req.session)
+  {
+    console.log("user logged in");
+    res.sendFile(__dirname + '/html-files/home.html');
+  }
+  else{
+    console.log("user not logged in");
+    res.sendStatus(401);
+  }
+});
+
+router.get('/settings', function(req, res, next) {
+  if ('user' in req.session)
+  {
+    console.log("user logged in");
+    res.sendFile(__dirname + '/html-files/settings.html');
+  }
+  else{
+    console.log("user not logged in");
+    res.sendStatus(401);
+  }
+});
+
+router.get('/user-sign-in', function(req, res, next) {
+    res.sendFile(__dirname + '/html-files/user-sign-in');
+});
+
+router.get('/user-sign-up', function(req, res, next) {
+  res.sendFile(__dirname + '/html-files/user-sign-up.html');
+});
+
+router.get('/events', function(req, res, next) {
+  if ('user' in req.session)
+  {
+    console.log("user logged in");
+    res.sendFile(__dirname + '/html-files/events.html');
+  }
+  else{
+    console.log("user not logged in");
+    res.sendStatus(401);
+  }
+});
+
+//redirection links end here
 
 router.get('/proposed_dates/:eventid', function(req, res, next){
   req.pool.getConnection(function(err, connection){
