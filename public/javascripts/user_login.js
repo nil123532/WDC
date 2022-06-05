@@ -90,7 +90,3 @@ function redirectSignUp(){
 function redirectSignIn(){
     location.href = '/home.html';
 }
-
-function redirectLogOut(){
-    location.href = '/user-sign-in.html';
-}
