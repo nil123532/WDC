@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Patrick Sumarli, Nilesh Ramgolam, Ti Wei Lu, Muhammad Sharjeel Nawaz">
+    <meta name="google-signin-client_id" content="710141737855-re05dhe02ji6trjmum35ben9k7lk1gec.apps.googleusercontent.com">
+    <meta name="google-signin-plugin_name" content="APP">
+    <title>MeetUps</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script src="/javascripts/vue.js" defer></script>
+    <script src="/javascripts/google.js" defer></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+</head>
+<body>
+    <div id="app">
+        <div class="container-fluid">
+            <div class="row">
+                <nav class="col-lg-2 col-sm-3 col-xs-3" style="height:auto">
+                    <h1 class="logo navbar-logo">MeetUps</h1>
+                    <div v-for="(page, i) in pages" v-bind:class="{ 'navbar-selected' : i===2 }" v-on:click="changePage"  class="navbar-item"><a class="navbar-hyperlink" v-bind:class="{ 'navbar-selected' : i===2 }" v-bind:href="page.link">{{ page.name }}</a></div>
+                </nav>
+                <main class="col-lg-10 col-sm-9 col-xs-9 main-page">
+                        <p style="font-size:3em; color:black">Settings</p>
+                        <div class="inputs" style="width:15em">
+                            <div><img src="/images/name.png" alt="Name" class="login-img"></div>
+                            <div class="input-inside-text"><input type="text" id="FirstName" name="First Name" placeholder="First Name"></div>
+                        </div>
+                        <div class="inputs" style="width:15em">
+                            <div><img src="/images/L.jpg" alt="Last" class="login-pass"></div>
+                            <div class="input-inside-text"><input type="text" id="LastName" name="Last Name" placeholder="Last Name"></div>
+                        </div>
+                        <div class="inputs" style="width:15em">
+                            <div><img src="/images/user.png" alt="Default Profile Photo" class="login-img"></div>
+                            <div class="input-inside-text"><input type="text" id="email-username" name="ID" placeholder="Email or Username"></div>
+                        </div>
+                        <div class="inputs" style="width:15em">
+                            <div><img src="/images/password.png" alt="password" class="login-pass"></div>
+                            <div class="input-inside-text"><input type="text" id="password" name="Password" placeholder="New Password"></div>
+                        </div>
+                        <div class="inputs" style="width:15em">
+                            <div><img src="/images/password.png" alt="new_password" class="login-pass"></div>
+                            <div class="input-inside-text"><input type="text" id="new_password" name="Password" placeholder="Confirm New Password"></div>
+                        </div>
+                        <!--<button class="link-calendar"><a>Link Calendar</a></button>-->
+                        <button class="create-event-button">Link Calendar</button>
+                        <p style="font-size:1.5em; color:black; padding-bottom:0.6em; padding-top:2em">Email Notifications</p>
+                        <form style="margin-bottom:5em">
+                            <input type="checkbox" id="emailnoti1" name="emailnoti1" value="emailFinal">
+                            <label for="emailnoti1">Notify me when events are finalized</label><br/>
+                            <input type="checkbox" id="emailnoti2" name="emailnoti2" value="emailCancel">
+                            <label for="emailnoti2">Notify me of any event cancellation</label><br/>
+                            <input type="checkbox" id="emailnoti3" name="emailnoti3" value="emailEventDay">
+                            <label for="emailnoti3">Notify me a day before events</label><br/>
+                            <input type="checkbox" id="emailnoti4" name="emailnoti4" value="emailUser">
+                            <label for="emailnoti4">Notify me when users respond to events</label><br/>
+                        </form>
+                        <div class="save-settings">
+                            <button class="create-event-button">Save Changes</button>
+                            <button class="create-event-button" v-on:click="user_logout()">Logout</button>
+                            <!--<button class="link-calendar"><a>Save Changes</a></button>
+                            <button class="link-calendar"><a>Logout</a></button>-->
+                        </div>
+                </main>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
