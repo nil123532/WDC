@@ -8,10 +8,21 @@ var login = new Vue
         email :  "",
         password : "",
         error: false,
-        errorMessage: ""
+        errorMessage: "",
+        signup: false
     },
     methods:
     {
+        switchsignin:function()
+        {
+            if(this.signup){ this.signup = !this.signup;}
+            this.error = false;
+        },
+        switchsignup:function()
+        {
+            if(!this.signup){ this.signup = !this.signup;}
+            this.error = false;
+        },
         user_signup:function()
         {
             if(this.first_name == "" || this.last_name == "" || this.email == "" || this.password == ""){
@@ -33,12 +44,12 @@ var login = new Vue
                     else if (this.status == 400){
                         login.errorMessage = "Unknown error occured.";
                     }
-                    else if (this.status == 401){
-                        login.errorMessage = "Incorrect credentials.";
+                    else if (this.status == 123){
+                        login.errorMessage = "This email is already in use.";
                     }
                 }
                 else if (this.readyState == 4 && this.status == 200){
-                    window.location.href = location.href.split("/user-sign-up")[0] + "/home.html";
+                    redirectSignUp();
                 }
             };
             xhttp.setRequestHeader("Content-type", "application/json");
@@ -62,11 +73,34 @@ var login = new Vue
                     }
                 }
                 else if (this.readyState == 4 && this.status == 200){
-                    window.location.href = location.href.split("/user-sign-in")[0] + "/home.html";
+                    redirectSignIn();
                 }
             };
             xhttp.setRequestHeader("Content-type", "application/json");
             xhttp.send(JSON.stringify({email : this.email , password: this.password}));
+        },
+        user_logout:function(){
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    redirectLogOut();
+                }
+             };
+            xhttp.open("GET", "/users/logout", true);
+            xhttp.send();
         }
     }
 });
+
+//this function redirects user to Sign in page once sign-up is successful
+function redirectSignUp(){
+    location.href = '/user-sign-in.html';
+}
+
+function redirectSignIn(){
+    location.href = '/home.html';
+}
+
+function redirectLogOut(){
+    location.href = '/user-sign-in.html';
+}

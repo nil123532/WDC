@@ -490,18 +490,31 @@ textarea {
     /* width : 30em; */
     margin : auto;
 }
-.sign-in-text
+
+.sign-in-form-text
 {
     text-align:center;
-    border-top-left-radius : 1em;
-    border-right: 2px solid #000000;
-    border-bottom: 2px solid #000000;
     width:15em;
     padding-top:1em;
     padding-bottom:0.5em;
     font-weight:bold;
     font-size:1.5em;
 }
+
+.sign-in-form-text-selected
+{
+    border-top-left-radius : 1em;
+    border-right: 2px solid #000000;
+    border-bottom: 2px solid #000000;
+}
+
+.sign-up-form-text-selected
+{
+    border-top-right-radius : 1em;
+    border-left: 2px solid #000000;
+    border-bottom: 2px solid #000000;
+}
+
 .user-login {
     background-color : grey;
     padding : 2em 3em 6.1em;
@@ -711,27 +724,10 @@ pre
     margin-right:0.5em;
 }
 
-.sign-in-text-up
-{
-    text-align:center;
-    width:15em;
-    padding-top:1em;
-    padding-bottom:0.5em;
-    font-weight:bold;
-    font-size:1.5em;
+.error-text {
+    color: red;
 }
-.sign-up-text-up
-{
-    text-align:center;
-    border-top-right-radius : 1em;
-    border-left: 2px solid #000000;
-    border-bottom: 2px solid #000000;
-    width:15em;
-    padding-top:1em;
-    padding-bottom:0.5em;
-    font-weight:bold;
-    font-size:1.5em;
-}
+
 .sign-up
 {
     background-color:#000000;

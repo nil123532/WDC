@@ -89,6 +89,7 @@ router.post("/signin",function(req,res,next)
         if(error){
           console.log(error);
           res.sendStatus(500);
+          return;
         }
         let query = "SELECT user_id,first_name,last_name,email,password FROM User WHERE email= ?";
         connection.query(query,[val.email], async function(error,rows,fields)
