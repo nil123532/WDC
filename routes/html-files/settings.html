@@ -15,9 +15,9 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="/javascripts/vue.js" defer></script>
-    
+
 </head>
-<body>
+<body onload="getSettingsInfo()">
     <div id="app">
         <div class="container-fluid">
             <div class="row">
@@ -29,24 +29,25 @@
                         <p style="font-size:3em; color:black">Settings</p>
                         <div class="inputs" style="width:15em">
                             <div><img src="/images/name.png" alt="Name" class="login-img"></div>
-                            <div class="input-inside-text"><input type="text" id="FirstName" name="First Name" placeholder="First Name"></div>
+                            <div class="input-inside-text"><input type="text" id="settingsFirstName" name="First Name" readonly></div>
                         </div>
                         <div class="inputs" style="width:15em">
                             <div><img src="/images/L.jpg" alt="Last" class="login-pass"></div>
-                            <div class="input-inside-text"><input type="text" id="LastName" name="Last Name" placeholder="Last Name"></div>
+                            <div class="input-inside-text"><input type="text" id="settingsLastName" name="Last Name" readonly></div>
                         </div>
                         <div class="inputs" style="width:15em">
                             <div><img src="/images/user.png" alt="Default Profile Photo" class="login-img"></div>
-                            <div class="input-inside-text"><input type="text" id="email-username" name="ID" placeholder="Email or Username"></div>
-                        </div>
-                        <div class="inputs" style="width:15em">
-                            <div><img src="/images/password.png" alt="password" class="login-pass"></div>
-                            <div class="input-inside-text"><input type="password" id="password" name="Password" placeholder="New Password"></div>
+                            <div class="input-inside-text"><input type="text" id="settingsEmail" name="ID" readonly></div>
                         </div>
                         <div class="inputs" style="width:15em">
                             <div><img src="/images/password.png" alt="new_password" class="login-pass"></div>
-                            <div class="input-inside-text"><input type="password" id="new_password" name="Password" placeholder="Confirm New Password"></div>
+                            <div class="input-inside-text"><input type="password" id="new_password" name="NPassword" placeholder="New Password" v-model="new_password"></div>
                         </div>
+                        <div class="inputs" style="width:15em">
+                            <div><img src="/images/password.png" alt="confirm_password" class="login-pass"></div>
+                            <div class="input-inside-text"><input type="password" id="confirm_password" name="CPassword" placeholder="Confirm New Password" v-model="confirm_password"></div>
+                        </div>
+                        <div v-if="passError" class="error-text">{{ passwordError }}</div>
                         <!--<button class="link-calendar"><a>Link Calendar</a></button>-->
                         <button class="create-event-button">Link Calendar</button>
                         <p style="font-size:1.5em; color:black; padding-bottom:0.6em; padding-top:2em">Email Notifications</p>
@@ -61,7 +62,7 @@
                             <label for="emailnoti4">Notify me when users respond to events</label><br/>
                         </form>
                         <div class="save-settings">
-                            <button class="create-event-button">Save Changes</button>
+                            <button class="create-event-button" v-on:click="passwordChange1()">Save Changes</button>
                             <button class="create-event-button" v-on:click="user_logout()">Logout</button>
                             <!--<button class="link-calendar"><a>Save Changes</a></button>
                             <button class="link-calendar"><a>Logout</a></button>-->
