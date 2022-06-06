@@ -398,6 +398,47 @@ router.get('/events', function(req, res, next) {
     res.sendFile(__dirname + '/html-files/events.html');
 });
 
+router.post('/settingsChangePassword1', function(req, res, next) {
+  let val = req.body
+  if ("new_password" in val)
+    {
+      req.pool.getConnection(async function(error,connection)
+      {
+        if(error){
+          console.log(error);
+          res.sendStatus(500);
+          return;
+        }
+
+        let hash= null;
+            try {
+              hash = await argon2.hash(val.new_password);
+            } catch (err) {
+              console.log("to err is human");
+              console.log(error);
+              res.sendStatus(500);
+              return;
+            }
+
+        let query = "UPDATE User SET password = ? WHERE user_id = ?";
+        connection.query(query,[hash,req.session.user], async function(error,rows,fields)
+        {
+          connection.release();
+          if(error)
+          {
+            console.log(error);
+            res.sendStatus(500);
+            return;
+          }
+          else{
+            res.sendStatus(200);
+            return;
+          }
+        });
+      });
+    }
+});
+
 router.get('/create_event', function(req, res, next) {
   res.sendFile(__dirname + '/html-files/create_event.html');
 });
