@@ -76,6 +76,38 @@ router.post('/create_event', function(req, res, next){
   });
 });
 
+//info to display in the settings page
+router.get('/getSettingsInfo', function(req, res, next) {
+  //console.log("runs 1");
+  console.log(req.session.user);
+  if ('user' in req.session)
+  {
+    req.pool.getConnection(function(err, connection){
+      if (err){
+        console.log(err);
+        res.sendStatus(500);
+        return;
+      }
+    //get first name last name and email using session user id
+    var query = "SELECT first_name, last_name, email FROM User WHERE user_id = ?";
+    connection.query(query, [req.session.user], function(err2, rows, fields){
+      connection.release();
+      if (err2){
+        console.log("SQL Error");
+        console.log(query);
+        res.sendStatus(500);
+        return;
+      }
+      res.json(rows);
+    });
+  });
+  }
+
+  else{
+    res.sendStatus(401);
+  }
+});
+
 router.get('/logout', function(req, res, next) {
   //console.log("runs 1");
   console.log(req.session.user);
