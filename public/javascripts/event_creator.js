@@ -24,7 +24,7 @@ var vueinst = new Vue({
             this.currentPage = 2;
         },
         getPageLink : () => {
-            navigator.clipboard.writeText(location.href.split("/even")[0] + "/event_invite/14");
+            navigator.clipboard.writeText(location.href.split("/even")[0] + "/event_invite/" + params.eventid);
             alert("Copied to clipboard");
         },
         getEventDetails : () => {

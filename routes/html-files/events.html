@@ -44,6 +44,7 @@
                             <div class="col-3"><p style="font-weight:bold">{{event.address_street_number + " " + event.address_street_name + ", " + event.address_city + " "  + event.address_postcode + ", " + event.address_city + ", " + event.address_country}}</p></div>
                         </div>
                     </a>
+                    <p v-if="events.length === 0" style="width:100%;text-align:center">No events found. Why not make your own?</p>
                     <div class="pagination">
                         <i class="fa-solid fa-arrow-left events-left-arrow"></i>
                         <span>Page 2</span>

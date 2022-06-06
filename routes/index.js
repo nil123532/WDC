@@ -8,6 +8,53 @@ router.get("/", (req, res) => {
   res.sendFile(__dirname + '/html-files/index.html');
 });
 
+// GET page for event invite links
+router.get("/event_invite/:eventid", function(req, res) {
+
+  // Get creator
+  let creatorid = "";
+  req.pool.getConnection(function(err, connection){
+    if (err){
+      console.log(err);
+      res.sendStatus(500);
+      return;
+    }
+    var query = "SELECT creator_id FROM Event WHERE event_id=?;";
+    connection.query(query, [req.params.eventid], function(err2, rows, fields){
+      connection.release();
+      if (err2){
+        console.log("SQL Error");
+        console.log(query);
+        res.sendStatus(500);
+        return;
+      }
+      if(rows.length == 0){
+        console.log("event does not exist");
+        res.sendStatus(404);
+        return;
+      }
+      else{
+        creatorid = rows[0].creator_id;
+        // Check user in session
+        if ('user' in req.session)
+        {
+          // If user is creator, redirect to creator event page
+          if(req.session.user == creatorid){
+            res.redirect("/event_view?eventid=" + req.params.eventid + "&userid=" + req.session.user);
+          }
+          else{
+            res.redirect('/auth_event_linked?eventid=' + req.params.eventid);
+          }
+        }
+        else{
+          res.sendFile(__dirname + '/html-files/anon_event_linked.html');
+        }
+      }
+      
+    });
+  });
+});
+
 router.post("/signin",function(req,res,next)
 {
     var val = req.body;
@@ -279,6 +326,52 @@ router.post("/signup",function(req,res,next)
     }
 });
 
+// GET details for an event
+router.get("/get_event_details/:eventid", function(req, res, next){
+  req.pool.getConnection(function(err, connection){
+    if (err){
+      console.log(err);
+      res.sendStatus(500);
+      return;
+    }
+    var query = "SELECT * FROM Event WHERE event_id=?;";
+    connection.query(query, [req.params.eventid], function(err2, rows, fields){
+      connection.release();
+      if (err2){
+        console.log("SQL Error");
+        console.log(query);
+        res.sendStatus(500);
+        return;
+      }
+      res.json(rows);
+    });
+  });
+});
+
+// GET event author
+router.get("/get_author/:eventid", function(req, res, next){
+  req.pool.getConnection(function(err, connection){
+    if (err){
+      console.log(err);
+      res.sendStatus(500);
+      return;
+    }
+    var query = "SELECT first_name, last_name FROM User INNER JOIN Event ON User.user_id=Event.creator_id WHERE Event.event_id=?;";
+    connection.query(query, [req.params.eventid], function(err2, rows, fields){
+      connection.release();
+      if (err2){
+        console.log("SQL Error");
+        console.log(query);
+        res.sendStatus(500);
+        return;
+      }
+      res.json(rows);
+    });
+  });
+});
+
+//AUTHORIZATION BLOCK
+//ALL ROUTES FROM HERE REQUIRE AUTHORIZATION
 //Redirection links.
 router.use(function(req, res, next) {
   if ('user' in req.session)
@@ -319,28 +412,13 @@ router.get('/event_view', function(req, res, next){
     res.sendFile(__dirname + '/html-files/event_attendee_view.html');
   }
 });
+
+router.get('/auth_event_linked', function(req, res, next) {
+  res.sendFile(__dirname + '/html-files/auth_event_linked.html');
+});
+
 //Redirection links end here
 
-router.get('/proposed_dates/:eventid', function(req, res, next){
-  req.pool.getConnection(function(err, connection){
-    if (err){
-      console.log(err);
-      res.sendStatus(500);
-      return;
-    }
-    var query = "SELECT Dates.date FROM Dates INNER JOIN Event ON Event.event_id=Dates.event_id WHERE Event.event_id=?;";
-    connection.query(query, [req.params.eventid], function(err2, rows, fields){
-      connection.release();
-      if (err2){
-        console.log("SQL Error");
-        console.log(query);
-        res.sendStatus(500);
-        return;
-      }
-      res.json(rows);
-    });
-  });
-});
 
 // GET a user's events
 router.get('/get_user_events', function(req, res, next){
@@ -409,37 +487,15 @@ router.get("/get_availabilities/:eventid", function(req, res, next){
   });
 });
 
-// GET details for an event
-router.get("/get_event_details/:eventid", function(req, res, next){
+// GET proposed dates for an event
+router.get('/proposed_dates/:eventid', function(req, res, next){
   req.pool.getConnection(function(err, connection){
     if (err){
       console.log(err);
       res.sendStatus(500);
       return;
     }
-    var query = "SELECT * FROM Event WHERE event_id=?;";
-    connection.query(query, [req.params.eventid], function(err2, rows, fields){
-      connection.release();
-      if (err2){
-        console.log("SQL Error");
-        console.log(query);
-        res.sendStatus(500);
-        return;
-      }
-      res.json(rows);
-    });
-  });
-});
-
-// GET event author
-router.get("/get_author/:eventid", function(req, res, next){
-  req.pool.getConnection(function(err, connection){
-    if (err){
-      console.log(err);
-      res.sendStatus(500);
-      return;
-    }
-    var query = "SELECT first_name, last_name FROM User INNER JOIN Event ON User.user_id=Event.creator_id WHERE Event.event_id=14;";
+    var query = "SELECT Dates.date FROM Dates INNER JOIN Event ON Event.event_id=Dates.event_id WHERE Event.event_id=?;";
     connection.query(query, [req.params.eventid], function(err2, rows, fields){
       connection.release();
       if (err2){
