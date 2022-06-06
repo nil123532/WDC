@@ -36,7 +36,7 @@ var login = new Vue
                 }
             }
             var xhttp = new XMLHttpRequest();
-            xhttp.open("POST", "/users/signup", true);
+            xhttp.open("POST", "/signup", true);
             xhttp.onreadystatechange = function() {
                 if (this.readyState==4 && this.status != 200){
                     login.error = true;
@@ -56,7 +56,7 @@ var login = new Vue
             };
             xhttp.setRequestHeader("Content-type", "application/json");
             if(gtoken) {
-                console.log("ExCUESE");
+                console.log("gtoken found");
                 xhttp.send(JSON.stringify({ token : gtoken }));
             }
             else {
@@ -66,7 +66,7 @@ var login = new Vue
         user_signin:function(gtoken)
         {
             var xhttp = new XMLHttpRequest();
-            xhttp.open("POST", "/users/signin", true);
+            xhttp.open("POST", "/signin", true);
             xhttp.onreadystatechange = function() {
                 if (this.readyState==4 && this.status != 200){
                     login.error = true;
@@ -92,7 +92,6 @@ var login = new Vue
                 xhttp.send(JSON.stringify({ token : gtoken }));
             }
             else {
-                console.log("HELLO");
                 xhttp.send(JSON.stringify({ email : this.email , password: this.password }));
             }
         },
