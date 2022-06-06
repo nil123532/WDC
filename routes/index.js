@@ -50,12 +50,12 @@ router.get("/event_invite/:eventid", function(req, res) {
           res.sendFile(__dirname + '/html-files/anon_event_linked.html');
         }
       }
-      
+
     });
   });
 });
 
-router.post("/signin",function(req,res,next)
+router.post("/usersignin",function(req,res,next)
 {
     var val = req.body;
     if ("email" in val && "password" in val)
@@ -208,7 +208,7 @@ router.post("/signup",function(req,res,next)
             if(rows.length > 0)
             {
               console.log('email exists');
-              res.sendStatus(409); 
+              res.sendStatus(409);
               return;
             }
 

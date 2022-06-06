@@ -66,7 +66,7 @@ var login = new Vue
         user_signin:function(gtoken)
         {
             var xhttp = new XMLHttpRequest();
-            xhttp.open("POST", "/signin", true);
+            xhttp.open("POST", "/usersignin", true);
             xhttp.onreadystatechange = function() {
                 if (this.readyState==4 && this.status != 200){
                     login.error = true;
@@ -74,7 +74,7 @@ var login = new Vue
                         if(gtoken){ login.errorMessage = "Could not log in with Google, try again later."; }
                         else{
                             login.errorMessage = "Server error occured, try again later.";
-                        }  
+                        }
                     }
                     else if (this.status == 400){
                         login.errorMessage = "Unknown error occured.";
