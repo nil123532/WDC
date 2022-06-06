@@ -309,10 +309,16 @@ router.get('/create_event', function(req, res, next) {
   res.sendFile(__dirname + '/html-files/create_event.html');
 });
 
-router.get('/create_event', function(req, res, next) {
-  res.sendFile(__dirname + '/html-files/create_event.html');
+router.get('/event_view', function(req, res, next){
+  let userid = req.session.user;
+  let creatorid = req.query.userid;
+  if (userid == creatorid){
+    res.sendFile(__dirname + '/html-files/event_creator_view.html');
+  }
+  else{
+    res.sendFile(__dirname + '/html-files/event_attendee_view.html');
+  }
 });
-
 //Redirection links end here
 
 router.get('/proposed_dates/:eventid', function(req, res, next){
@@ -324,6 +330,29 @@ router.get('/proposed_dates/:eventid', function(req, res, next){
     }
     var query = "SELECT Dates.date FROM Dates INNER JOIN Event ON Event.event_id=Dates.event_id WHERE Event.event_id=?;";
     connection.query(query, [req.params.eventid], function(err2, rows, fields){
+      connection.release();
+      if (err2){
+        console.log("SQL Error");
+        console.log(query);
+        res.sendStatus(500);
+        return;
+      }
+      res.json(rows);
+    });
+  });
+});
+
+// GET a user's events
+router.get('/get_user_events', function(req, res, next){
+  let userid = req.session.user;
+  req.pool.getConnection(function(err, connection){
+    if (err){
+      console.log(err);
+      res.sendStatus(500);
+      return;
+    }
+    var query = "SELECT * FROM Event WHERE creator_id = ?;";
+    connection.query(query, userid, function(err2, rows, fields){
       connection.release();
       if (err2){
         console.log("SQL Error");

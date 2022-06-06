@@ -27,7 +27,7 @@
                         <h2>All Events:</h2>
                      <button onclick="location.href='/create_event'" class="col-2 events-button"><i class="fa-solid fa-plus plus-icon"></i>   Create an event</button>
                     </div>
-                    <a v-for="event in events" class="event_box_link" v-bind:href="`/event_attendee_view?eventid=${event.event_id}&userid=${event.creator_id}`">
+                    <a v-for="event in events" class="event_box_link" v-bind:href="`/event_view?eventid=${event.event_id}&userid=${event.creator_id}`">
                         <div class="row event-item">
                             <div class="col-9">
                                 <div class="event-name-date-create-time">

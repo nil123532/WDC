@@ -15,7 +15,7 @@ var vueinst = new Vue
             this.currentPage = 2;
         },
         user_logout:function(){
-            GsignOut();
+            //GsignOut(); //FIX THIS?
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
