@@ -326,6 +326,28 @@ router.post("/signup",function(req,res,next)
     }
 });
 
+// GET proposed dates for an event
+router.get('/proposed_dates/:eventid', function(req, res, next){
+  req.pool.getConnection(function(err, connection){
+    if (err){
+      console.log(err);
+      res.sendStatus(500);
+      return;
+    }
+    var query = "SELECT Dates.date FROM Dates INNER JOIN Event ON Event.event_id=Dates.event_id WHERE Event.event_id=?;";
+    connection.query(query, [req.params.eventid], function(err2, rows, fields){
+      connection.release();
+      if (err2){
+        console.log("SQL Error");
+        console.log(query);
+        res.sendStatus(500);
+        return;
+      }
+      res.json(rows);
+    });
+  });
+});
+
 // GET details for an event
 router.get("/get_event_details/:eventid", function(req, res, next){
   req.pool.getConnection(function(err, connection){
@@ -443,6 +465,53 @@ router.get('/create_event', function(req, res, next) {
   res.sendFile(__dirname + '/html-files/create_event.html');
 });
 
+router.post('/create_proposed_dates', function(req, res, next){
+  let userid = req.session.user;
+  req.pool.getConnection(function(err, connection){
+    if (err){
+      console.log(err);
+      res.sendStatus(500);
+      return;
+    }
+    var query = "INSERT INTO Dates VALUES ";
+    for (const i of req.body.possibleDate){
+      query += `(${req.body.event_id}, '${i}'), `;
+    }
+    console.log(query.substr(0, query.length-2));
+    // console.log(`INSERT INTO Dates VALUES ${req.body.event_id}, ${req.body.possibleDate}`);
+    connection.query(query.substr(0, query.length-2) + ";", function(err2, rows, fields){
+      connection.release();
+      if (err2){
+        res.sendStatus(500);
+        return;
+      }
+      res.json(rows);
+    });
+  });
+});
+
+router.get('/most_recent_event_insertion', function(req, res, next){
+  let userid = req.session.user;
+  req.pool.getConnection(function(err, connection){
+    if (err){
+      console.log(err);
+      res.sendStatus(500);
+      return;
+    }
+    var query = "SELECT MAX(event_id) FROM Event WHERE creator_id = ?;";
+    connection.query(query, userid, function(err2, rows, fields){
+      connection.release();
+      if (err2){
+        console.log("SQL Error");
+        console.log(query);
+        res.sendStatus(500);
+        return;
+      }
+      res.json(rows);
+    });
+  });
+});
+
 router.get('/event_view', function(req, res, next){
   let userid = req.session.user;
   let creatorid = req.query.userid;
@@ -515,28 +584,6 @@ router.get("/get_availabilities/:eventid", function(req, res, next){
       return;
     }
     var query = "SELECT startTime, Availability.event_id, user_id FROM Availability INNER JOIN Event ON Availability.event_id=Event.event_id WHERE Event.event_id=?;";
-    connection.query(query, [req.params.eventid], function(err2, rows, fields){
-      connection.release();
-      if (err2){
-        console.log("SQL Error");
-        console.log(query);
-        res.sendStatus(500);
-        return;
-      }
-      res.json(rows);
-    });
-  });
-});
-
-// GET proposed dates for an event
-router.get('/proposed_dates/:eventid', function(req, res, next){
-  req.pool.getConnection(function(err, connection){
-    if (err){
-      console.log(err);
-      res.sendStatus(500);
-      return;
-    }
-    var query = "SELECT Dates.date FROM Dates INNER JOIN Event ON Event.event_id=Dates.event_id WHERE Event.event_id=?;";
     connection.query(query, [req.params.eventid], function(err2, rows, fields){
       connection.release();
       if (err2){
