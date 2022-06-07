@@ -47,7 +47,11 @@ var vuedate = new Vue({
             }
         },
         dateAdded: function(x) {
-            let newdate = this.currentYear + "-" + this.currentMonth + "-" + x;
+            let newdate = this.currentYear + "-";
+            if (this.currentMonth<10) newdate += "0";
+            newdate += this.currentMonth + "-";
+            if (x<10) newdate += "0";
+            newdate += x;
             var index = this.selectedDates.indexOf(newdate);
             if (index !== -1) {
                 return index+1;
@@ -55,7 +59,11 @@ var vuedate = new Vue({
             return false;
         },
         addDate: function(date) {
-            let newdate = this.currentYear + "-" + this.currentMonth + "-" + date;
+            let newdate = this.currentYear + "-";
+            if (this.currentMonth<10) newdate += "0";
+            newdate += this.currentMonth + "-";
+            if (date<10) newdate += "0";
+            newdate += date;
             let index = this.dateAdded(date);
             if (index) {
                 this.selectedDates.splice(index-1, 1);
@@ -65,20 +73,40 @@ var vuedate = new Vue({
             }
 
         },
-        submit: function() {
+        createEvent : () => {
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
                     // console.log("Successfully created event");
-                    // console.log(this.responseText);
+                    console.log(this.responseText);
                     // res.redirect("/home.html");
-                    window.location.href = location.href.split("/creat")[0] + "/events";
+                    // window.location.href = location.href.split("/creat")[0] + "/events";
                 }
             };
             console.log(JSON.stringify({ dates: this.selectedDates, name: this.eventName, description: this.eventDescription, duration: this.eventDuration, streetName: this.eventStreetName, streetNumber: this.eventStreetNumber, state: this.eventState, city: this.eventCity, postcode: this.eventPostcode, country: this.eventCountry }));
             xhttp.open("POST", "/users/create_event", true); // INSERT ROUTE HERE
             xhttp.setRequestHeader("Content-type", "application/json");
             xhttp.send(JSON.stringify({ dates: this.selectedDates, name: this.eventName, description: this.eventDescription, duration: this.eventDuration, streetName: this.eventStreetName, streetNumber: this.eventStreetNumber, state: this.eventState, city: this.eventCity, postcode: this.eventPostcode, country: this.eventCountry }));
+        },
+        createProposedDates : () => {
+            console.log(vuedate.selectedDates);
+            // var xhttp = new XMLHttpRequest();
+            // xhttp.onreadystatechange = function() {
+            //     if (this.readyState == 4 && this.status == 200) {
+            //         // console.log("Successfully created event");
+            //         // console.log(this.responseText);
+            //         // res.redirect("/home.html");
+            //         // window.location.href = location.href.split("/creat")[0] + "/events";
+            //     }
+            // };
+            // xhttp.open("POST", "/users/create_event", true); // INSERT ROUTE HERE
+            // xhttp.setRequestHeader("Content-type", "application/json");
+            // xhttp.send(JSON.stringify({ dates: this.selectedDates }));
+        },
+        submit: function() {
+            this.createEvent();
+            this.createProposedDates();
+            window.location.href = location.href.split("/creat")[0] + "/events";
         },
         changePage : (i) => {
             this.currentPage = 2;

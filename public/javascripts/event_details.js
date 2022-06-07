@@ -30,7 +30,7 @@ var vueinst = new Vue({
                     vueinst.eventDetail = JSON.parse(this.responseText)[0];
                 }
             };
-            xhttp.open("GET", "/get_event_details/" + params.eventid, true);
+            xhttp.open("GET", "/get_event_details/" + location.href.split("/event_invite/")[1], true);
             xhttp.send();
         },
         getAuthor : () => {
@@ -41,7 +41,7 @@ var vueinst = new Vue({
                     vueinst.authorName += author.first_name + " " + author.last_name;
                 }
             };
-            xhttp.open("GET", "/get_author/" + params.eventid, true);
+            xhttp.open("GET", "/get_author/" + location.href.split("/event_invite/")[1], true);
             xhttp.send();
         },
         getMyAvailabilities : () => {
@@ -56,7 +56,7 @@ var vueinst = new Vue({
                     }
                 }
             };
-            xhttp.open("GET", `/users/${params.userid}/events/${params.eventid}/my_availability`, true);
+            xhttp.open("GET", `/users/${params.userid}/events/${location.href.split("/event_invite/")[1]}/my_availability`, true);
             xhttp.send();
         },
         getProposedDates : () => {
@@ -71,9 +71,12 @@ var vueinst = new Vue({
                     }
                 }
             };
-            xhttp.open("GET", `/proposed_dates/${params.eventid}`, true);
+            xhttp.open("GET", `/proposed_dates/${location.href.split("/event_invite/")[1]}`, true);
             xhttp.send();
-        }
+        },
+        goToLogin : () => {
+            window.location.href = location.href.split("/even")[0];
+        },
     },
     mounted : function(){
         this.getEventDetails();
