@@ -8,6 +8,10 @@ router.get("/", (req, res) => {
   res.sendFile(__dirname + '/html-files/index.html');
 });
 
+router.get('/form', function(req, res, next) {
+  res.sendFile(__dirname + '/html-files/signing.html');
+});
+
 // GET page for event invite links
 router.get("/event_invite/:eventid", function(req, res) {
 
@@ -392,6 +396,8 @@ router.get("/get_author/:eventid", function(req, res, next){
   });
 });
 
+
+
 //AUTHORIZATION BLOCK
 //ALL ROUTES FROM HERE REQUIRE AUTHORIZATION
 //Redirection links.
@@ -404,7 +410,7 @@ router.use(function(req, res, next) {
   else{
     console.log("user not logged in");
     res.statusCode = 401;
-    res.sendFile(__dirname + '/html-files/index.html');
+    res.sendFile(__dirname + '/html-files/signing.html');
   }
 });
 
