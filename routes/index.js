@@ -47,7 +47,7 @@ router.get("/event_invite/:eventid", function(req, res) {
             res.redirect("/event_view?eventid=" + req.params.eventid + "&userid=" + req.session.user);
           }
           else{
-            res.redirect('/auth_event_linked?eventid=' + req.params.eventid);
+            res.sendFile(__dirname + '/html-files/auth_event_linked.html');
           }
         }
         else{

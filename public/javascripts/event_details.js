@@ -17,6 +17,7 @@ var vueinst = new Vue({
         proposedDates : [],
         times : ["00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24"],
         myAvailabilities : [],
+        selectedAvailabilities: [],
         users:["Julia Robbins","Samuel Smith"]
     },
     methods : {
@@ -64,19 +65,37 @@ var vueinst = new Vue({
             xhttp.onreadystatechange = function(){
                 if (this.readyState==4 && this.status == 200){
                     for (const i of JSON.parse(this.responseText)){
-                        let xDateObject = sqlToJsDate(i.date);
-                        let xDate = xDateObject.toDateString();
-                        console.log(xDate);
-                        vueinst.proposedDates.push(xDate);
+                        let x = i.date.split("T")[0];
+                        vueinst.proposedDates.push(x);
+                        // let xDateObject = sqlToJsDate(i.date);
+                        // let xDate = xDateObject.toDateString();
+                        // console.log(xDate);
+                        // vueinst.proposedDates.push(xDate);
                     }
                 }
             };
             xhttp.open("GET", `/proposed_dates/${location.href.split("/event_invite/")[1]}`, true);
             xhttp.send();
         },
+        prettyPrintDate(date){
+            let dateParts = date.split("-");
+            let dateObj = new Date(dateParts[0], dateParts[1] - 1, dateParts[2].substr(0,2));
+            return dateObj.toDateString();
+        },
         goToLogin : () => {
             window.location.href = location.href.split("/even")[0];
         },
+        submitAnonForm : () => {
+            // submit form stuff here? Might need a different or followup function for authorized user?
+            // const xhttp = new XMLHttpRequest();
+            // xhttp.onreadystatechange = function(){
+            //     if (this.readyState==4 && this.status == 200){
+            //         }
+            //     }
+            // };
+            // xhttp.open("GET", `/proposed_dates/${location.href.split("/event_invite/")[1]}`, true);
+            // xhttp.send();
+        }
     },
     mounted : function(){
         this.getEventDetails();

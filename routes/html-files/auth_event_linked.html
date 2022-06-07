@@ -32,10 +32,10 @@
                         <h2>Please pick the suitable times for your attendence from below:</h2>
                         <form action="#">
                             <div v-for="date in proposedDates">
-                                <p>{{ date }}</p>
+                                <p>{{ prettyPrintDate(date) }}</p>
                                 <div class="event-linked-checkboxes">
                                     <div v-for="hour in times" class="event-linked-checkbox">
-                                        <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+                                        <input type="checkbox" v-bind:value="date + '/' + hour" v-model="selectedAvailabilities">
                                         <div>{{hour + ":00"}}</div>
                                     </div>
                                 </div>

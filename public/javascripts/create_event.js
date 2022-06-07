@@ -135,7 +135,7 @@ var vuedate = new Vue({
                 // }
             }, 4000);
             setTimeout(() => {
-                window.location.href = location.href.split("/creat")[0] + "/events"
+                window.location.href = location.href.split("/creat")[0] + "/events";
             }, 5000);
         },
         changePage : (i) => {
