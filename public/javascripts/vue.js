@@ -19,13 +19,11 @@ var vueinst = new Vue
             this.currentPage = 2;
         },
         user_logout:function(){
-            //GsignOut(); //FIX THIS?
-            try{
-            var auth2 = gapi.auth2.getAuthInstance();
-            auth2.signOut().then(function () {
-              console.log('User signed out.');
-            });
-        } catch (error) {}
+            var newWindow = window.open('https://mail.google.com/mail/?logout&hl=fr','Disconnect from Google','width=100,height=50,menubar=no,status=no,location=no,toolbar=no,scrollbars=no,top=200,left=200');
+            setTimeout(function(){
+                if (newWindow) newWindow.close();
+                window.location="/";
+            },1500);
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
