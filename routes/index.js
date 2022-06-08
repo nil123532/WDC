@@ -460,7 +460,7 @@ router.get('/existing_availabilities/:eventid', function(req, res, next){
       return;
     }
     var query = "SELECT * FROM Availability WHERE event_id=? AND NOT startTime='1000-01-01 00:00:00';";
-    connection.query(query, [req.params.eventid] function(err2, rows, fields){
+    connection.query(query, [req.params.eventid], function(err2, rows, fields){
       connection.release();
       if (err2){
         res.sendStatus(500);
@@ -484,7 +484,7 @@ router.post('/auth_submit_availability/:eventid', function(req, res, next){
     for (const i of req.body.availability){
       query += `(${i}, ${req.params.event_id}, '${userid}'), `;
     }
-    connection.query(query.substr(0, query.length-2) + ";", [req.params.eventid, userid] function(err2, rows, fields){
+    connection.query(query.substr(0, query.length-2) + ";", [req.params.eventid, userid], function(err2, rows, fields){
       connection.release();
       if (err2){
         res.sendStatus(500);
