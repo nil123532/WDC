@@ -17,7 +17,7 @@ var vueinst = new Vue({
         dummyDates : [],
         times : ["00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24"],
         availabilities : [],
-        users:["Julia Robbins","Samuel Smith"]
+        finalised_time : "",
     },
     methods : {
         changePage : (i) => {
@@ -54,14 +54,37 @@ var vueinst = new Vue({
                 if (this.readyState==4 && this.status == 200){
                     for (const i of JSON.parse(this.responseText)){
                         let xDateObject = sqlToJsDate(i.startTime);
-                        let xTime = xDateObject.toTimeString().split(" ")[0];
                         let xDate = xDateObject.toDateString();
-                        vueinst.availabilities.push(xDate + ", " + xTime);
+                        vueinst.availabilities.push({ display : xDate + ", " + i.startTime.split('T')[1].split('.0')[0], raw : i.startTime.split('T')[0] + " " + i.startTime.split('T')[1].split('.0')[0]});
                     }
                 }
             };
-            xhttp.open("GET", "/get_availabilities/" + params.eventid, true);
+            xhttp.open("GET", "/existing_availabilities/" + params.eventid, true);
             xhttp.send();
+        },
+        deleteEvent : () => {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function(){
+                if (this.readyState==4 && this.status == 200){
+                    window.location.href = location.href.split("/even")[0] + "/events";
+                }
+            };
+            xhttp.open("POST", "/delete_event/" + params.eventid, true);
+            xhttp.setRequestHeader("Content-type", "application/json");
+            xhttp.send(JSON.stringify());
+        },
+        finalise : () => {
+            // /finalise_time/:eventid
+            console.log(vueinst.finalised_time);
+            const xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function(){
+                if (this.readyState==4 && this.status == 200){
+                    window.location.href = location.href.split("/even")[0] + "/events";
+                }
+            };
+            xhttp.open("POST", "/finalise_time/" + params.eventid, true);
+            xhttp.setRequestHeader("Content-type", "application/json");
+            xhttp.send(JSON.stringify({ final : vueinst.finalised_time }));
         }
     },
     mounted : function(){

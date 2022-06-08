@@ -190,12 +190,13 @@ var vueinst = new Vue({
                 vueinst.reInsertAvailability();
                 // console.log(vueinst.filteredSelectedAvailabilities);
                 setTimeout(()=>{
+                    vueinst.submitting = false;
                     vueinst.goToHome();
                 }, 2000);
             }, 3000);
         },
         submitAuthForm : () => {
-            // console.log(vueinst.selectedAvailabilities);
+            console.log("Auth form");
             if (vueinst.submitting) return;
             vueinst.submitting = true;
             vueinst.getExistingAvailabilities();
@@ -227,6 +228,7 @@ var vueinst = new Vue({
                 vueinst.reInsertAvailability();
                 // console.log(vueinst.filteredSelectedAvailabilities);
                 setTimeout(()=>{
+                    vueinst.submitting = false;
                     vueinst.goToHome();
                 }, 2000);
             }, 3000);

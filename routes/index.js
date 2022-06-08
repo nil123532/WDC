@@ -541,6 +541,47 @@ router.get('/events', function(req, res, next) {
     res.sendFile(__dirname + '/html-files/events.html');
 });
 
+router.post('/delete_event/:eventid', function(req, res, next) {
+  req.pool.getConnection(function(err, connection){
+    if (err){
+      console.log(err);
+      res.sendStatus(500);
+      return;
+    }
+    var query = "DELETE Event, Dates, Availability 
+    FROM Event WHERE event_id=?;";
+    connection.query(query, [req.params.eventid], function(err2, rows, fields){
+      connection.release();
+      if (err2){
+        console.log(err2);
+        res.sendStatus(500);
+        return;
+      }
+      res.json(rows);
+    });
+  });
+});
+
+router.post('/finalise_time/:eventid', function(req, res, next) {
+  req.pool.getConnection(function(err, connection){
+    if (err){
+      console.log(err);
+      res.sendStatus(500);
+      return;
+    }
+    var query = "UPDATE Event SET finalised_time=? WHERE event_id=?;";
+    connection.query(query, [req.body.final, req.params.eventid], function(err2, rows, fields){
+      connection.release();
+      if (err2){
+        console.log(err2);
+        res.sendStatus(500);
+        return;
+      }
+      res.json(rows);
+    });
+  });
+});
+
 // INSERT auth availability
 router.post('/auth_submit_availability/:eventid', function(req, res, next){
   let userid = req.session.user;

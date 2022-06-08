@@ -25,31 +25,35 @@
                     <div class="row">
                         <h2>{{ eventDetail.name }}</h2>
                         <p>Duration: {{ eventDetail.duration }}</p>
-                        <p>Number of guests responded: {{ availabilities.length }}</p>
+                        <p>Number of guests responded: -</p>
                         <p class="event-linked-desc">{{ eventDetail.description }}</p>
                     </div>
-                    <div class="row date-selection">
-                        <div class="event-form col-lg-4 col-sm-12 col-xs-12 date-input">
+                    <div class="event-attendee-status row">
+                        <h4>Status: {{ eventDetail.finalised_time ? "Confirmed" : "Not confirmed"}}</h4>
+                        <h4>Date: {{ eventDetail.finalised_time ? eventDetail.finalised_time.split('T')[0] : "-"}}<br />Time: {{ eventDetail.finalised_time ? eventDetail.finalised_time.split('T')[1].split('.0')[0] : "-"}}</h4>
+                    </div>
+                    <div v-if="!eventDetail.finalised_time" class="row date-selection">
+                        <!-- <div class="event-form col-lg-4 col-sm-12 col-xs-12 date-input">
                             <div class="inputs">
                                 <img src="/images/calendar.png" alt="calendar-img" class="create-event-images">
                                 <div class="input-inside-text"><input type="text" name="EventDate" placeholder="Date" /></div>
                             </div>
                             <div class="date-input-box"></div>
-                        </div>
+                        </div> -->
                         <div class="col-lg-6 col-sm-12 col-xs-12">
                             <h2>Possible times</h2>
                             <div v-for="choice in availabilities">
-                                <input type="radio" id="html" name="fav_language" value="HTML">
-                                <label for="html">{{choice}}</label><br>
+                                <input type="radio" v-bind:value="choice.raw" v-model="finalised_time">
+                                <label for="html">{{choice.display}}</label><br>
                             </div>
                         </div>
                     </div>
                     <div class="d-flex justify-content-between creator-event-footer">
                         <img src="/images/arrow.png" alt="back-arrow" class="back-arrow"/>
                         <div class="row creator-event-buttons">
-                            <button class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 create-event-button">Cancel Event</button>
+                            <button class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 create-event-button" v-on:click="deleteEvent">Cancel Event</button>
                             <button v-on:click="getPageLink" class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 create-event-button">Get Event Link</button>
-                            <button class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 create-event-button">Create Event</button>
+                            <button class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 create-event-button" v-on:click="finalise">Create Event</button>
                         </div>
                     </div>
                 </main>
