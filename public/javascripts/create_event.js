@@ -23,6 +23,7 @@ var vuedate = new Vue({
         eventPostcode: "",
         eventCountry: "",
         newEventId : -1,
+        creatingEvent : false,
     },
     computed: {
         printMonthandYear() {
@@ -127,6 +128,7 @@ var vuedate = new Vue({
                 alert("Dates cant be empty");
                 return;
             }
+            creatingEvent = true;
             this.createEvent();
             setTimeout(this.getNewEventId, 2000);
             setTimeout(() => {
