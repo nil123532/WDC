@@ -23,29 +23,32 @@
                     <div v-for="(page, i) in pages" v-bind:class="{ 'navbar-selected' : i===1 }" v-on:click="changePage"  class="navbar-item"><a class="navbar-hyperlink" v-bind:class="{ 'navbar-selected' : i===1 }" v-bind:href="page.link">{{ page.name }}</a></div>
                 </nav>
                 <main class="col-lg-10 col-sm-9 col-xs-9 main-page">
-                    <div class="row">
-                        <h2 class="event-linked-name">You've been invited to {{ eventDetail.name }}</h2>
-                        <p class="event-linked-duration">Duration: {{ eventDetail.duration }}</p>
-                        <p class="event-linked-desc">{{ eventDetail.description }}</p>
-                    </div>
-                    <div class="row pick-availability">
-                        <h2>Please pick the suitable times for your attendence from below:</h2>
-                        <form action="#">
-                            <div v-for="date in proposedDates">
-                                <p>{{ prettyPrintDate(date) }}</p>
-                                <div class="event-linked-checkboxes">
-                                    <div v-for="hour in times" class="event-linked-checkbox">
-                                        <input type="checkbox" v-bind:value="date + ' ' + hour + ':00:00'" v-model="selectedAvailabilities">
-                                        <div>{{hour + ":00"}}</div>
+                    <h1 v-if="eventDetail.finalised_time">{{ eventDetail.name }} has been finalised, no more submissions</h1>
+                    <div v-else>
+                        <div class="row">
+                            <h2 class="event-linked-name">You've been invited to {{ eventDetail.name }}</h2>
+                            <p class="event-linked-duration">Duration: {{ eventDetail.duration }}</p>
+                            <p class="event-linked-desc">{{ eventDetail.description }}</p>
+                        </div>
+                        <div class="row pick-availability">
+                            <h2>Please pick the suitable times for your attendence from below:</h2>
+                            <form action="#">
+                                <div v-for="date in proposedDates">
+                                    <p>{{ prettyPrintDate(date) }}</p>
+                                    <div class="event-linked-checkboxes">
+                                        <div v-for="hour in times" class="event-linked-checkbox">
+                                            <input type="checkbox" v-bind:value="date + ' ' + hour + ':00:00'" v-model="selectedAvailabilities">
+                                            <div>{{hour + ":00"}}</div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="row event-invite-footer">
-                        <img src="/images/arrow.png" alt="back-arrow" class="back-arrow col-1"/>
-                        <div class="col-6 col-xl-10"></div>
-                        <div class="col-1 authenticated-invite-submit"><button v-on:click="submitAuthForm" class="create-event-button">{{submitting ? "Loading..." : "Submit"}}</button></div>
+                            </form>
+                        </div>
+                        <div class="row event-invite-footer">
+                            <img src="/images/arrow.png" alt="back-arrow" class="back-arrow col-1"/>
+                            <div class="col-6 col-xl-10"></div>
+                            <div class="col-1 authenticated-invite-submit"><button v-on:click="submitAuthForm" class="create-event-button">{{submitting ? "Loading..." : "Submit"}}</button></div>
+                        </div>
                     </div>
                 </main>
             </div>
