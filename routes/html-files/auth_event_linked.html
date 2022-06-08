@@ -35,7 +35,7 @@
                                 <p>{{ prettyPrintDate(date) }}</p>
                                 <div class="event-linked-checkboxes">
                                     <div v-for="hour in times" class="event-linked-checkbox">
-                                        <input type="checkbox" v-bind:value="date + '/' + hour" v-model="selectedAvailabilities">
+                                        <input type="checkbox" v-bind:value="date + ' ' + hour + ':00:00'" v-model="selectedAvailabilities">
                                         <div>{{hour + ":00"}}</div>
                                     </div>
                                 </div>
