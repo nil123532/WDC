@@ -16,20 +16,19 @@
     <script src="/javascripts/google.js" defer></script>
     <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
     <script src="/javascripts/settings.js" defer></script>
-    <script src="/javascripts/vue.js" defer></script>
-    
+
 
 </head>
 <body onload="getSettingsInfo()">
-    <div>
+    <div id="app">
         <div class="container-fluid">
             <div class="row">
-                <nav id="app" class="col-lg-2 col-sm-3 col-xs-3" style="height:auto">
+                <nav class="col-lg-2 col-sm-3 col-xs-3" style="height:auto">
                     <h1 class="logo navbar-logo">MeetUps</h1>
                     <div v-for="(page, i) in pages" v-bind:class="{ 'navbar-selected' : i===2 }" v-on:click="changePage"  class="navbar-item"><a class="navbar-hyperlink" v-bind:class="{ 'navbar-selected' : i===2 }" v-bind:href="page.link">{{ page.name }}</a></div>
                 </nav>
                 <main class="col-lg-10 col-sm-9 col-xs-9 main-page">
-                    <div id="settings">
+                    <div>
                         <p style="font-size:3em; color:black">Settings</p>
                         <div class="inputs" style="width:15em">
                             <div><img src="/images/name.png" alt="Name" class="login-img"></div>
@@ -70,7 +69,7 @@
                             <label for="emailnoti4">Notify me when users respond to events</label><br/>
                         </form>
                         <div class="save-settings">
-                            <button class="create-event-button" v-on:click="passwordChange1()">Save Changes</button>
+                            <button class="create-event-button" v-on:click="passwordChange1(); settingsNotifications();">Save Changes</button>
                             <button class="create-event-button" onclick="user_logout()">Logout</button>
                             <!--<button class="link-calendar"><a>Save Changes</a></button>
                             <button class="link-calendar"><a>Logout</a></button>-->
@@ -81,3 +80,4 @@
     </div>
 </body>
 </html>
+
