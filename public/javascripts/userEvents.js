@@ -54,7 +54,7 @@ var vueinst = new Vue({
                 }
             }
         };
-        xhttp.open("GET", "/get_user_events", true);
+        xhttp.open("GET", "/get_user_finalised_events", true);
         xhttp.send();
     },
 });

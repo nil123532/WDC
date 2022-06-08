@@ -781,6 +781,30 @@ router.get('/get_user_events', function(req, res, next){
   });
 });
 
+// GET a user's finalised events only
+router.get('/get_user_finalised_events', function(req, res, next){
+  let userid = req.session.user;
+  req.pool.getConnection(function(err, connection){
+    if (err){
+      console.log(err);
+      res.sendStatus(500);
+      return;
+    }
+    // This is so jank lmao
+    var query = "SELECT * FROM (SELECT * FROM Event WHERE Event.creator_id = ? UNION SELECT Event.* FROM Event INNER JOIN (SELECT DISTINCT event_id, user_id from Availability) AS DT ON Event.event_id = DT.event_id WHERE DT.user_id = ?) AS FT WHERE FT.finalised_time IS NOT NULL;";
+    connection.query(query, [userid, userid], function(err2, rows, fields){
+      connection.release();
+      if (err2){
+        console.log("SQL Error");
+        console.log(query);
+        res.sendStatus(500);
+        return;
+      }
+      res.json(rows);
+    });
+  });
+});
+
 // GET all events
 router.get('/get_events', function(req, res, next){
   req.pool.getConnection(function(err, connection){

@@ -32,11 +32,11 @@
                             <div class="col-9">
                                 <div class="event-name-date-create-time">
                                     <span class="">{{ event.name }}</span>
-                                    <span class="">Date : -</span>
+                                    <span class="">Date : {{ event.finalised_time ? event.finalised_time.split('T')[0] : "-" }}</span>
                                 </div>
                                 <div class="event-name-date-create-time">
                                     <span style="font-size:0.5em;color:blue;width:15em">{{event.created}}</span>
-                                    <span>Time : -</span>
+                                    <span>Time : {{ event.finalised_time ? event.finalised_time.split('T')[1].split('.0')[0] : "-"}}</span>
                                 </div>
                                 <p>{{ event.description }}</p>
                                 <div class="event-item-people"><i class="fa-solid fa-people-group people-icon"></i>{{ 1 }}</div>
