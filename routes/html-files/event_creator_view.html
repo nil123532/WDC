@@ -51,7 +51,7 @@
                     <div class="d-flex justify-content-between creator-event-footer">
                         <img src="/images/arrow.png" alt="back-arrow" class="back-arrow"/>
                         <div class="row creator-event-buttons">
-                            <button class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 create-event-button" v-on:click="deleteEvent">Cancel Event</button>
+                            <button class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 create-event-button" v-on:click="cancelEvent">{{cancelling ? "Cancelling" : "Cancel Event"}}</button>
                             <button v-on:click="getPageLink" class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 create-event-button">Get Event Link</button>
                             <button class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 create-event-button" v-on:click="finalise">Create Event</button>
                         </div>

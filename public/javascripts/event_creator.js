@@ -18,6 +18,7 @@ var vueinst = new Vue({
         times : ["00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24"],
         availabilities : [],
         finalised_time : "",
+        cancelling : false
     },
     methods : {
         changePage : (i) => {
@@ -62,16 +63,48 @@ var vueinst = new Vue({
             xhttp.open("GET", "/existing_availabilities/" + params.eventid, true);
             xhttp.send();
         },
+        deleteAvail : () => {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function(){
+                if (this.readyState==4 && this.status == 200){
+                    // window.location.href = location.href.split("/even")[0] + "/events";
+                }
+            };
+            xhttp.open("POST", "/delete_avail/" + params.eventid, true);
+            xhttp.setRequestHeader("Content-type", "application/json");
+            xhttp.send(JSON.stringify());
+        },
+        deleteDates : () => {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function(){
+                if (this.readyState==4 && this.status == 200){
+                    // window.location.href = location.href.split("/even")[0] + "/events";
+                }
+            };
+            xhttp.open("POST", "/delete_dates/" + params.eventid, true);
+            xhttp.setRequestHeader("Content-type", "application/json");
+            xhttp.send(JSON.stringify());
+        },
         deleteEvent : () => {
             const xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function(){
                 if (this.readyState==4 && this.status == 200){
-                    window.location.href = location.href.split("/even")[0] + "/events";
+                    // window.location.href = location.href.split("/even")[0] + "/events";
                 }
             };
             xhttp.open("POST", "/delete_event/" + params.eventid, true);
             xhttp.setRequestHeader("Content-type", "application/json");
             xhttp.send(JSON.stringify());
+        },
+        cancelEvent : () => {
+            if (cancelling) return;
+            cancelling = true;
+            vueinst.deleteAvail();
+            vueinst.deleteDates();
+            setTimeout(vueinst.deleteEvent,1500);
+            setTimeout(()=>{
+                window.location.href = location.href.split("/even")[0] + "/events";
+            },3000);
         },
         finalise : () => {
             // /finalise_time/:eventid
