@@ -15,7 +15,7 @@ var vueinst = new Vue({
         eventDetail : {},
         authorName : "",
         proposedDates : [],
-        times : ["00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24"],
+        times : ["00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23"],
         myAvailabilities: [],
         selectedAvailabilities: [],
         existingAvailabilities: [],
@@ -88,6 +88,9 @@ var vueinst = new Vue({
         goToLogin : () => {
             window.location.href = location.href.split("/even")[0];
         },
+        goToHome : () => {
+            window.location.href = location.href.split("/even")[0] + "/home";
+        },
         getExistingAvailabilities : () => {
             const xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function(){
@@ -125,33 +128,69 @@ var vueinst = new Vue({
             // xhttp.open("POST", `/anon_availability/${location.href.split("/event_invite/")[1]}`, true);
             // xhttp.send({ possibleTimes :  vueinst.selectedAvailabilities});
         },
+        addAuthAvailability : () => {
+            console.log(vueinst.filteredSelectedAvailabilities);
+            const xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function(){
+                if (this.readyState==4 && this.status == 200){
+                    console.log("Successfully added filtered new availabilities");
+                }
+            };
+            xhttp.open("POST", `/auth_submit_availability/${vueinst.eventDetail.event_id}`, true);
+            xhttp.setRequestHeader("Content-type", "application/json");
+            xhttp.send(JSON.stringify({ timestamps :  vueinst.filteredSelectedAvailabilities }));
+        },
+        reInsertAvailability : () => {
+            console.log(vueinst.filteredExistingAvailabilities);
+            const xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function(){
+                if (this.readyState==4 && this.status == 200){
+                    console.log("Successfully added filtered existing availabilities");
+                }
+            };
+            xhttp.open("POST", `/reinsert_availability/${location.href.split("/event_invite/")[1]}`, true);
+            xhttp.setRequestHeader("Content-type", "application/json");
+            xhttp.send(JSON.stringify({ nonDummy :  vueinst.filteredExistingAvailabilities}));
+        },
         submitAuthForm : () => {
             // console.log(vueinst.selectedAvailabilities);
             if (vueinst.submitting) return;
             vueinst.submitting = true;
             vueinst.getExistingAvailabilities();
             const intersects = new Map();
-            for (const i of vueinst.selectedAvailabilities){
-                intersects.set(i, false);
-            }
             // console.log(vueinst.existingAvailabilities);
             setTimeout(()=>{
-                for (const j of vueinst.existingAvailabilities){
-                    console.log(sqlToJsDate(j.startTime).toDateString());
-                    // console.log(j.startTime);
-                    // if (map1.has(i))
+                // console.log(vueinst.selectedAvailabilities);
+                // console.log(vueinst.existingAvailabilities);
+                for (const i of vueinst.selectedAvailabilities){
+                    intersects.set(i, vueinst.existingAvailabilities.length===0 ? true : false);
                 }
-            }, 2000);
-            // submit form stuff here? Might need a different or followup function for authorized user?
-            // const xhttp = new XMLHttpRequest();
-            // xhttp.onreadystatechange = function(){
-            //         if (this.readyState==4 && this.status == 200){
-
-            //         }
-            //     }
-            // };
-            // xhttp.open("POST", `/anon_availability/${location.href.split("/event_invite/")[1]}`, true);
-            // xhttp.send({ possibleTimes :  vueinst.selectedAvailabilities});
+                for (let j of vueinst.existingAvailabilities){
+                    let foundTime = j.startTime.split('T')[0] + " " + j.startTime.split('T')[1].split('.0')[0];
+                    // console.log(j.startTime.split('T')[0] + " " + j.startTime.split('T')[1].split('.0')[0]);
+                    // console.log(foundTime);
+                    if (intersects.has(foundTime)){
+                        vueinst.filteredExistingAvailabilities.push(j);
+                        j.startTime = foundTime;
+                        intersects.set(foundTime, true);
+                        // console.log(`${foundTime} : ${intersects.get(foundTime)}`);
+                    }
+                }
+                for (const k of vueinst.selectedAvailabilities){
+                    // console.log(`${k} : ${intersects.get(k)}`);
+                    if (intersects.get(k)===true){
+                        vueinst.filteredSelectedAvailabilities.push(k);
+                    }
+                }
+                // console.log(vueinst.filteredExistingAvailabilities);
+                vueinst.deleteExistingAvailabilities();
+                vueinst.addAuthAvailability();
+                vueinst.reInsertAvailability();
+                // console.log(vueinst.filteredSelectedAvailabilities);
+                setTimeout(()=>{
+                    vueinst.goToHome();
+                }, 2000);
+            }, 3000);
         }
     },
     mounted : function(){

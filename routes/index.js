@@ -475,14 +475,41 @@ router.get('/existing_availabilities/:eventid', function(req, res, next){
 router.post('/delete_non_dummy_availability/:eventid', function(req, res, next){
   req.pool.getConnection(function(err, connection){
     if (err){
+      // console.log(err);
+      res.sendStatus(500);
+      return;
+    }
+    var query = "DELETE FROM Availability WHERE event_id=? AND NOT startTime='1000-01-01 00:00:00';";
+    connection.query(query, [req.params.eventid], function(err2, rows, fields){
+      connection.release();
+      if (err2){
+        // console.log(err2);
+        res.sendStatus(500);
+        return;
+      }
+      res.json(rows);
+    });
+  });
+});
+
+// Re-INSERT non-dummy availability
+router.post('/reinsert_availability/:eventid', function(req, res, next){
+  req.pool.getConnection(function(err, connection){
+    if (err){
       console.log(err);
       res.sendStatus(500);
       return;
     }
-    var query = "DELETE FROM Availability WHERE event_id=? NOT startTime='1000-01-01 00:00:00';";
-    connection.query(query, [req.params.eventid], function(err2, rows, fields){
+    var query = "INSERT INTO Availability (startTime, event_id, user_id) VALUES ";
+    console.log(req.body.nonDummy);
+    for (const i of req.body.nonDummy){
+      // console.log(i);
+      query += `('${i.startTime}', '${req.params.eventid}', '${i.user_id}'), `;
+    }
+    connection.query(query.substr(0, query.length-2) + ";", function(err2, rows, fields){
       connection.release();
       if (err2){
+        console.log(err2);
         res.sendStatus(500);
         return;
       }
@@ -501,12 +528,15 @@ router.post('/auth_submit_availability/:eventid', function(req, res, next){
       return;
     }
     var query = "INSERT INTO Availability (startTime, event_id, user_id) VALUES ('1000-01-01 00:00:00', ?, ?), ";
-    for (const i of req.body.availability){
-      query += `(${i}, ${req.params.event_id}, '${userid}'), `;
+    console.log(req.params);
+    for (const i of req.body.timestamps){
+      query += `('${i}', '${req.params.eventid}', '${userid}'), `;
     }
+    console.log(query.substr(0, query.length-2) + ";");
     connection.query(query.substr(0, query.length-2) + ";", [req.params.eventid, userid], function(err2, rows, fields){
       connection.release();
       if (err2){
+        console.log(err2);
         res.sendStatus(500);
         return;
       }
