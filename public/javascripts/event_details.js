@@ -16,7 +16,12 @@ var vueinst = new Vue({
         authorName : "",
         proposedDates : [],
         times : ["00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24"],
+        myAvailabilities: [],
         selectedAvailabilities: [],
+        existingAvailabilities: [],
+        filteredSelectedAvailabilities: [],
+        filteredExistingAvailabilities: [],
+        submitting: false
     },
     methods : {
         changePage : (i) => {
@@ -84,14 +89,26 @@ var vueinst = new Vue({
             window.location.href = location.href.split("/even")[0];
         },
         getExistingAvailabilities : () => {
-            // const xhttp = new XMLHttpRequest();
+            const xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function(){
-                    if (this.readyState==4 && this.status == 200){
-                        console.log(this.responseText);
+                if (this.readyState==4 && this.status == 200){
+                    // console.log(this.responseText);
+                    for (const i of JSON.parse(this.responseText)){
+                        vueinst.existingAvailabilities.push(i);
                     }
                 }
             };
-            xhttp.open("GET", "/existing_availabilities/" + eventDetails.event_id, true);
+            xhttp.open("GET", `/existing_availabilities/${vueinst.eventDetail.event_id}`, true);
+            xhttp.send();
+        },
+        deleteExistingAvailabilities : () => {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function(){
+                if (this.readyState==4 && this.status == 200){
+                    console.log(this.responseText);
+                }
+            };
+            xhttp.open("POST", `/delete_non_dummy_availability/${vueinst.eventDetail.event_id}`, true);
             xhttp.send();
         },
         submitAnonForm : () => {
@@ -109,8 +126,22 @@ var vueinst = new Vue({
             // xhttp.send({ possibleTimes :  vueinst.selectedAvailabilities});
         },
         submitAuthForm : () => {
-            console.log(vueinst.selectedAvailabilities);
+            // console.log(vueinst.selectedAvailabilities);
+            if (vueinst.submitting) return;
+            vueinst.submitting = true;
             vueinst.getExistingAvailabilities();
+            const intersects = new Map();
+            for (const i of vueinst.selectedAvailabilities){
+                intersects.set(i, false);
+            }
+            // console.log(vueinst.existingAvailabilities);
+            setTimeout(()=>{
+                for (const j of vueinst.existingAvailabilities){
+                    console.log(sqlToJsDate(j.startTime).toDateString());
+                    // console.log(j.startTime);
+                    // if (map1.has(i))
+                }
+            }, 2000);
             // submit form stuff here? Might need a different or followup function for authorized user?
             // const xhttp = new XMLHttpRequest();
             // xhttp.onreadystatechange = function(){
