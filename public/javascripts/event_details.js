@@ -88,15 +88,15 @@ var vueinst = new Vue({
         submitAnonForm : () => {
             console.log(vueinst.selectedAvailabilities);
             // submit form stuff here? Might need a different or followup function for authorized user?
-            const xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function(){
-                    if (this.readyState==4 && this.status == 200){
+            // const xhttp = new XMLHttpRequest();
+            // xhttp.onreadystatechange = function(){
+            //         if (this.readyState==4 && this.status == 200){
 
-                    }
-                }
-            };
-            xhttp.open("POST", `/proposed_dates/${location.href.split("/event_invite/")[1]}`, true);
-            xhttp.send({});
+            //         }
+            //     }
+            // };
+            // xhttp.open("POST", `/anon_availability/${location.href.split("/event_invite/")[1]}`, true);
+            // xhttp.send({ possibleTimes :  vueinst.selectedAvailabilities});
         }
     },
     mounted : function(){
