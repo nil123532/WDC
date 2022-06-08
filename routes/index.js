@@ -460,13 +460,11 @@ router.post('/auth_submit_availability/:eventid', function(req, res, next){
       res.sendStatus(500);
       return;
     }
-    var query = "INSERT INTO Dates VALUES ";
-    for (const i of req.body.possibleDate){
-      query += `(${req.body.event_id}, '${i}'), `;
+    var query = "INSERT INTO Availability (startTime, event_id, user_id) VALUES ('1000-01-01 00:00:00', ?, ?), ";
+    for (const i of req.body.availability){
+      query += `(${i}, ${req.params.event_id}, '${userid}'), `;
     }
-    console.log(query.substr(0, query.length-2));
-    // console.log(`INSERT INTO Dates VALUES ${req.body.event_id}, ${req.body.possibleDate}`);
-    connection.query(query.substr(0, query.length-2) + ";", function(err2, rows, fields){
+    connection.query(query.substr(0, query.length-2) + ";", [req.params.eventid, userid] function(err2, rows, fields){
       connection.release();
       if (err2){
         res.sendStatus(500);
