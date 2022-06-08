@@ -24,7 +24,7 @@
                 <main class="col-lg-10 col-sm-9 col-xs-9 main-page">
                     <div class="row">
                         <h2>{{ eventDetail.name }}</h2>
-                        <p>Duration: {{ eventDetail.duration }}</p>
+                        <p>Duration: {{ eventDetail.duration }} hours</p>
                         <p>Number of guests responded: -</p>
                         <p class="event-linked-desc">{{ eventDetail.description }}</p>
                     </div>
@@ -42,6 +42,7 @@
                         </div> -->
                         <div class="col-lg-6 col-sm-12 col-xs-12">
                             <h2>Possible times</h2>
+                            <p v-if="!availabilities.length">No one has responded to your event yet!</p>
                             <div v-for="choice in availabilities">
                                 <input type="radio" v-bind:value="choice.raw" v-model="finalised_time">
                                 <label for="html">{{choice.display}}</label><br>

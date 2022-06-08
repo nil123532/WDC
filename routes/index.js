@@ -767,8 +767,8 @@ router.get('/get_user_events', function(req, res, next){
       res.sendStatus(500);
       return;
     }
-    var query = "SELECT * FROM Event WHERE creator_id = ?;";
-    connection.query(query, userid, function(err2, rows, fields){
+    var query = "SELECT * FROM Event WHERE Event.creator_id = ? UNION SELECT Event.* FROM Event INNER JOIN (SELECT DISTINCT event_id, user_id from Availability) AS DT ON Event.event_id = DT.event_id WHERE DT.user_id = ?;";
+    connection.query(query, [userid, userid], function(err2, rows, fields){
       connection.release();
       if (err2){
         console.log("SQL Error");

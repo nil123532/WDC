@@ -13,19 +13,23 @@
     <link rel="stylesheet" href="/stylesheets/styles.css">
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="/javascripts/google.js" defer></script>
+    <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+    <script src="/javascripts/settings.js" defer></script>
     <script src="/javascripts/vue.js" defer></script>
+    
 
 </head>
 <body onload="getSettingsInfo()">
-    <div id="app">
+    <div>
         <div class="container-fluid">
             <div class="row">
-                <nav class="col-lg-2 col-sm-3 col-xs-3" style="height:auto">
+                <nav id="app" class="col-lg-2 col-sm-3 col-xs-3" style="height:auto">
                     <h1 class="logo navbar-logo">MeetUps</h1>
                     <div v-for="(page, i) in pages" v-bind:class="{ 'navbar-selected' : i===2 }" v-on:click="changePage"  class="navbar-item"><a class="navbar-hyperlink" v-bind:class="{ 'navbar-selected' : i===2 }" v-bind:href="page.link">{{ page.name }}</a></div>
                 </nav>
                 <main class="col-lg-10 col-sm-9 col-xs-9 main-page">
+                    <div id="settings">
                         <p style="font-size:3em; color:black">Settings</p>
                         <div class="inputs" style="width:15em">
                             <div><img src="/images/name.png" alt="Name" class="login-img"></div>
@@ -48,8 +52,12 @@
                             <div class="input-inside-text"><input type="password" id="confirm_password" name="CPassword" placeholder="Confirm New Password" v-model="confirm_password"></div>
                         </div>
                         <div v-if="passError" class="error-text">{{ passwordError }}</div>
+                    </div>
                         <!--<button class="link-calendar"><a>Link Calendar</a></button>-->
-                        <button class="create-event-button">Link Calendar</button>
+                        <div id="GoogleCalendar">
+                            <button v-if="!GcalendarLinked" onclick="linkCalendar()" class="create-event-button">Link Calendar</button>
+                            <p v-if="GcalendarLinked">Calendar Linked.</p>
+                        </div>
                         <p style="font-size:1.5em; color:black; padding-bottom:0.6em; padding-top:2em">Email Notifications</p>
                         <form style="margin-bottom:5em">
                             <input type="checkbox" id="emailnoti1" name="emailnoti1" value="emailFinal">
@@ -63,7 +71,7 @@
                         </form>
                         <div class="save-settings">
                             <button class="create-event-button" v-on:click="passwordChange1()">Save Changes</button>
-                            <button class="create-event-button" v-on:click="user_logout()">Logout</button>
+                            <button class="create-event-button" onclick="user_logout()">Logout</button>
                             <!--<button class="link-calendar"><a>Save Changes</a></button>
                             <button class="link-calendar"><a>Logout</a></button>-->
                         </div>
