@@ -97,8 +97,9 @@ var vueinst = new Vue({
             xhttp.send(JSON.stringify());
         },
         cancelEvent : () => {
-            if (cancelling) return;
-            cancelling = true;
+            console.log("works here");
+            if (vueinst.cancelling) return;
+            vueinst.cancelling = true;
             vueinst.deleteAvail();
             vueinst.deleteDates();
             setTimeout(vueinst.deleteEvent,1500);
