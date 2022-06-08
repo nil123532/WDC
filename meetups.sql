@@ -110,6 +110,33 @@ LOCK TABLES `Event` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `Notifications`
+--
+
+DROP TABLE IF EXISTS `Notifications`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `Notifications` (
+  `NotiCancel` tinyint(1) DEFAULT NULL,
+  `NotiRespond` tinyint(1) DEFAULT NULL,
+  `NotiDayBefore` tinyint(1) DEFAULT NULL,
+  `NotiFinal` tinyint(1) DEFAULT NULL,
+  `user_id` int DEFAULT NULL,
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `Notifications_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `User` (`user_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Notifications`
+--
+
+LOCK TABLES `Notifications` WRITE;
+/*!40000 ALTER TABLE `Notifications` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Notifications` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `User`
 --
 
@@ -145,4 +172,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-26 10:00:28
+-- Dump completed on 2022-06-08 23:43:07
