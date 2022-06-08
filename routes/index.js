@@ -4,6 +4,22 @@ const argon2 = require('argon2');
 const {OAuth2Client} = require('google-auth-library');
 const client = new OAuth2Client('710141737855-re05dhe02ji6trjmum35ben9k7lk1gec.apps.googleusercontent.com');
 
+//nodemailer config
+const nodemailer = require('nodemailer');
+var nodemSender = 'wdcproject123@gmail.com';
+var nodemPassword = 'lktchdcgejymvajf';
+var transporter = nodemailer.createTransport({
+            //host: 'smtp.ethereal.email',
+            //port: 587,
+            //secure: nodemSender.smtp.secure,
+            service: 'gmail',
+            auth: {
+               user: nodemSender,
+               pass: nodemPassword
+            },
+});
+//ends here
+
 router.get("/", (req, res) => {
   res.sendFile(__dirname + '/html-files/index.html');
 });
@@ -258,7 +274,7 @@ router.post("/signup",function(req,res,next)
               let query = "SELECT user_id,first_name,last_name,email FROM User WHERE user_id=LAST_INSERT_ID();";
               connection.query(query,async function(error,rows,fields)
               {
-                connection.release();
+                //connection.release();
                 if(error)
                 {
                   console.log(error);
@@ -269,6 +285,20 @@ router.post("/signup",function(req,res,next)
                 {
                   console.log("success");
                   req.session.user = rows[0].user_id; //session?
+
+                  //Notifcation default settings set to 0, meaning they do not want notifications
+                  let query = "INSERT INTO Notifications VALUES (0,0,0,0,?)";
+                  connection.query(query,[rows[0].user_id],async function(error,rows,fields)
+                  {
+                    connection.release();
+                    if(error)
+                    {
+                      console.log(error);
+                      res.sendStatus(403);
+                      return;
+                    }
+                  });
+                  ///
                   res.sendStatus(200);
                 }
                 else
@@ -326,7 +356,7 @@ router.post("/signup",function(req,res,next)
             let query = "SELECT user_id,first_name,last_name,email,password FROM User WHERE user_id=LAST_INSERT_ID();";
             connection.query(query,async function(error,rows,fields)
             {
-              connection.release();
+              //connection.release();
               if(error)
               {
                 console.log(error);
@@ -337,6 +367,21 @@ router.post("/signup",function(req,res,next)
               {
                 console.log("success");
                 req.session.user = rows[0].user_id; //session?
+
+                //Notifcation default settings set to 0, meaning they do not want notifications
+                let query = "INSERT INTO Notifications VALUES (0,0,0,0,?)";
+                connection.query(query,[rows[0].user_id],async function(error,rows,fields)
+                {
+                  connection.release();
+                  if(error)
+                  {
+                    console.log(error);
+                    res.sendStatus(403);
+                    return;
+                  }
+                });
+                ///
+
                 res.sendStatus(200);
               }
               else
@@ -582,6 +627,7 @@ router.post('/delete_dates/:eventid', function(req, res, next) {
 });
 
 router.post('/delete_event/:eventid', function(req, res, next) {
+  var eventID = req.params.eventid;
   req.pool.getConnection(function(err, connection){
     if (err){
       console.log(err);
@@ -590,19 +636,51 @@ router.post('/delete_event/:eventid', function(req, res, next) {
     }
     var query = "DELETE FROM Event WHERE event_id=?;";
     connection.query(query, [req.params.eventid], function(err2, rows, fields){
-      connection.release();
+      //connection.release();
       if (err2){
         console.log(err2);
         res.sendStatus(500);
         return;
       }
+      ///////nodemailer select query to get all emails that want cancelled events notifications
+       var query = "SELECT email from User WHERE user_id IN (SELECT user_id FROM Availability WHERE event_id = ? AND user_id IN (SELECT user_id FROM Notifications WHERE NotiCancel = 1));";
+       connection.query(query, [eventID], function(err2, rows, fields){
+         connection.release();
+         if (err2){
+           console.log(err2);
+           res.sendStatus(500);
+           return;
+         }
+         console.log(rows[0].email);
+
+         //nodemailer Code
+         var allEmails = [];
+         for(i = 0; i < rows.length; i++){
+           allEmails[i] = rows[i].email;
+           console.log(allEmails[i]);
+         }
+         const mailOptions =
+         {
+           from: nodemSender, // sender address
+           to: allEmails, // list of receivers
+           subject: 'Event Cancelled', // Subject line
+           html: '<p>An event you were attending has been cancelled.</p>'// plain text body
+         };
+         transporter.sendMail(mailOptions, function (err, info) {
+           if(err) console.log(err)
+           else console.log(info);
+         });
+         //////ends here
+
       res.json(rows);
+      });
     });
   });
 });
 
 router.post('/finalise_time/:eventid', function(req, res, next) {
   req.pool.getConnection(function(err, connection){
+    var eventID = req.params.eventid;
     if (err){
       console.log(err);
       res.sendStatus(500);
@@ -610,13 +688,44 @@ router.post('/finalise_time/:eventid', function(req, res, next) {
     }
     var query = "UPDATE Event SET finalised_time=? WHERE event_id=?;";
     connection.query(query, [req.body.final, req.params.eventid], function(err2, rows, fields){
-      connection.release();
+      //connection.release();
       if (err2){
         console.log(err2);
         res.sendStatus(500);
         return;
       }
-      res.json(rows);
+      ///////nodemailer select query to get all emails that want finalized events notifications
+      var query = "SELECT email from User WHERE user_id IN (SELECT user_id FROM Availability WHERE event_id = ? AND user_id IN (SELECT user_id FROM Notifications WHERE NotiFinal = 1));";
+      connection.query(query, [eventID], function(err2, rows, fields){
+        connection.release();
+        if (err2){
+          console.log(err2);
+          res.sendStatus(500);
+          return;
+        }
+        console.log(rows[0].email);
+
+        //nodemailer Code
+        var allEmails = [];
+        for(i = 0; i < rows.length; i++){
+          allEmails[i] = rows[i].email;
+          console.log(allEmails[i]);
+        }
+        const mailOptions =
+        {
+          from: nodemSender, // sender address
+          to: allEmails, // list of receivers
+          subject: 'Event Finalized', // Subject line
+          html: '<p>An event you joined has been finalized! Head over to the website to see</p>'// plain text body
+        };
+        transporter.sendMail(mailOptions, function (err, info) {
+          if(err) console.log(err)
+          else console.log(info);
+        });
+        //////ends here
+
+        res.json(rows);
+      });
     });
   });
 });
@@ -624,6 +733,7 @@ router.post('/finalise_time/:eventid', function(req, res, next) {
 // INSERT auth availability
 router.post('/auth_submit_availability/:eventid', function(req, res, next){
   let userid = req.session.user;
+  var eventID = req.params.eventid;
   req.pool.getConnection(function(err, connection){
     if (err){
       console.log(err);
@@ -637,13 +747,43 @@ router.post('/auth_submit_availability/:eventid', function(req, res, next){
     }
     console.log(query.substr(0, query.length-2) + ";");
     connection.query(query.substr(0, query.length-2) + ";", [req.params.eventid, userid], function(err2, rows, fields){
-      connection.release();
+      //connection.release();
       if (err2){
         console.log(err2);
         res.sendStatus(500);
         return;
       }
-      res.json(rows);
+      ///////nodemailer select query to get all emails that want response events notifications
+      var query = "SELECT email from User WHERE user_id IN (SELECT user_id FROM Availability WHERE event_id = ? AND user_id IN (SELECT user_id FROM Notifications WHERE NotiFinal = 1));";
+      connection.query(query, [eventID], function(err2, rows, fields){
+        connection.release();
+        if (err2){
+          console.log(err2);
+          res.sendStatus(500);
+          return;
+        }
+        console.log(rows[0].email);
+
+        //nodemailer Code
+        var allEmails = [];
+        for(i = 0; i < rows.length; i++){
+          allEmails[i] = rows[i].email;
+          console.log(allEmails[i]);
+        }
+        const mailOptions =
+        {
+          from: nodemSender, // sender address
+          to: allEmails, // list of receivers
+          subject: 'Event Response', // Subject line
+          html: '<p>An event you are attending just got a response from a user for when they are available to join</p>'// plain text body
+        };
+        transporter.sendMail(mailOptions, function (err, info) {
+          if(err) console.log(err)
+          else console.log(info);
+        });
+        //////ends here
+        res.json(rows);
+      });
     });
   });
 });
@@ -848,5 +988,4 @@ router.get("/get_availabilities/:eventid", function(req, res, next){
     });
   });
 });
-
 module.exports = router;
