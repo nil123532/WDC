@@ -451,6 +451,32 @@ router.get('/events', function(req, res, next) {
     res.sendFile(__dirname + '/html-files/events.html');
 });
 
+// INSERT auth availability
+router.post('/auth_submit_availability/:eventid', function(req, res, next){
+  let userid = req.session.user;
+  req.pool.getConnection(function(err, connection){
+    if (err){
+      console.log(err);
+      res.sendStatus(500);
+      return;
+    }
+    var query = "INSERT INTO Dates VALUES ";
+    for (const i of req.body.possibleDate){
+      query += `(${req.body.event_id}, '${i}'), `;
+    }
+    console.log(query.substr(0, query.length-2));
+    // console.log(`INSERT INTO Dates VALUES ${req.body.event_id}, ${req.body.possibleDate}`);
+    connection.query(query.substr(0, query.length-2) + ";", function(err2, rows, fields){
+      connection.release();
+      if (err2){
+        res.sendStatus(500);
+        return;
+      }
+      res.json(rows);
+    });
+  });
+});
+
 router.post('/settingsChangePassword1', function(req, res, next) {
   let val = req.body
   if ("new_password" in val)
