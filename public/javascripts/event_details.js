@@ -85,8 +85,34 @@ var vueinst = new Vue({
         goToLogin : () => {
             window.location.href = location.href.split("/even")[0];
         },
+        getExistingAvailabilities : () => {
+            // const xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function(){
+                    if (this.readyState==4 && this.status == 200){
+                        console.log(this.responseText);
+                    }
+                }
+            };
+            xhttp.open("GET", "/existing_availabilities/" + eventDetails.event_id, true);
+            xhttp.send();
+        },
         submitAnonForm : () => {
             console.log(vueinst.selectedAvailabilities);
+            vueinst.getExistingAvailabilities();
+            // submit form stuff here? Might need a different or followup function for authorized user?
+            // const xhttp = new XMLHttpRequest();
+            // xhttp.onreadystatechange = function(){
+            //         if (this.readyState==4 && this.status == 200){
+
+            //         }
+            //     }
+            // };
+            // xhttp.open("POST", `/anon_availability/${location.href.split("/event_invite/")[1]}`, true);
+            // xhttp.send({ possibleTimes :  vueinst.selectedAvailabilities});
+        },
+        submitAuthForm : () => {
+            console.log(vueinst.selectedAvailabilities);
+            vueinst.getExistingAvailabilities();
             // submit form stuff here? Might need a different or followup function for authorized user?
             // const xhttp = new XMLHttpRequest();
             // xhttp.onreadystatechange = function(){

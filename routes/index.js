@@ -451,6 +451,26 @@ router.get('/events', function(req, res, next) {
     res.sendFile(__dirname + '/html-files/events.html');
 });
 
+router.get('/existing_availabilities/:eventid', function(req, res, next){
+  let userid = req.session.user;
+  req.pool.getConnection(function(err, connection){
+    if (err){
+      console.log(err);
+      res.sendStatus(500);
+      return;
+    }
+    var query = "SELECT * FROM Availability WHERE event_id=? AND NOT startTime='1000-01-01 00:00:00';";
+    connection.query(query, [req.params.eventid] function(err2, rows, fields){
+      connection.release();
+      if (err2){
+        res.sendStatus(500);
+        return;
+      }
+      res.json(rows);
+    });
+  });
+});
+
 // INSERT auth availability
 router.post('/auth_submit_availability/:eventid', function(req, res, next){
   let userid = req.session.user;
