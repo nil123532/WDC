@@ -86,6 +86,7 @@ var vueinst = new Vue({
             window.location.href = location.href.split("/even")[0];
         },
         submitAnonForm : () => {
+            console.log(vueinst.selectedAvailabilities);
             // submit form stuff here? Might need a different or followup function for authorized user?
             // const xhttp = new XMLHttpRequest();
             // xhttp.onreadystatechange = function(){

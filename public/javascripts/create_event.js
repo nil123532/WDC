@@ -124,11 +124,15 @@ var vuedate = new Vue({
             xhttp.send(JSON.stringify({ possibleDate: vuedate.selectedDates, event_id : vuedate.newEventId }));
         },
         submit: function() {
+            if (this.creatingEvent) {
+                console.log("Already creating an event");
+                return;
+            }
             if (this.selectedDates.length==0){
                 alert("Dates cant be empty");
                 return;
             }
-            creatingEvent = true;
+            this.creatingEvent = true;
             this.createEvent();
             setTimeout(this.getNewEventId, 2000);
             setTimeout(() => {
