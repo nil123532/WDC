@@ -45,7 +45,7 @@
                     <div class="row event-invite-footer">
                         <img src="/images/arrow.png" alt="back-arrow" class="back-arrow col-1"/>
                         <div class="col-6 col-xl-10"></div>
-                        <div class="col-1 authenticated-invite-submit"><button v-on:click="submitAuthForm" class="create-event-button">{{submitting ? "Loading..." : "Submit"}}</button></div>
+                        <div class="col-1 authenticated-invite-submit"><button v-on:click="submitting ? NULL : submitAuthForm" class="create-event-button">{{submitting ? "Loading..." : "Submit"}}</button></div>
                     </div>
                 </main>
             </div>

@@ -421,38 +421,7 @@ router.get("/get_author/:eventid", function(req, res, next){
   });
 });
 
-
-
-//AUTHORIZATION BLOCK
-//ALL ROUTES FROM HERE REQUIRE AUTHORIZATION
-//Redirection links.
-router.use(function(req, res, next) {
-  if ('user' in req.session)
-  {
-    console.log("user logged in");
-    next();
-  }
-  else{
-    console.log("user not logged in");
-    res.statusCode = 401;
-    res.sendFile(__dirname + '/html-files/signing.html');
-  }
-});
-
-router.get('/home', function(req, res, next) {
-    res.sendFile(__dirname + '/html-files/home.html');
-});
-
-router.get('/settings', function(req, res, next) {
-    res.sendFile(__dirname + '/html-files/settings.html');
-});
-
-router.get('/events', function(req, res, next) {
-    res.sendFile(__dirname + '/html-files/events.html');
-});
-
 router.get('/existing_availabilities/:eventid', function(req, res, next){
-  let userid = req.session.user;
   req.pool.getConnection(function(err, connection){
     if (err){
       console.log(err);
@@ -516,6 +485,60 @@ router.post('/reinsert_availability/:eventid', function(req, res, next){
       res.json(rows);
     });
   });
+});
+
+// INSERT anon availability
+router.post('/anon_submit_availability/:eventid', function(req, res, next){
+  req.pool.getConnection(function(err, connection){
+    if (err){
+      console.log(err);
+      res.sendStatus(500);
+      return;
+    }
+    var query = "INSERT INTO Availability (startTime, event_id, user_id) VALUES ";
+    console.log(req.params);
+    for (const i of req.body.timestamps){
+      query += `('${i}', '${req.params.eventid}', '0'), `;
+    }
+    console.log(query.substr(0, query.length-2) + ";");
+    connection.query(query.substr(0, query.length-2) + ";", function(err2, rows, fields){
+      connection.release();
+      if (err2){
+        console.log(err2);
+        res.sendStatus(500);
+        return;
+      }
+      res.json(rows);
+    });
+  });
+});
+
+//AUTHORIZATION BLOCK
+//ALL ROUTES FROM HERE REQUIRE AUTHORIZATION
+//Redirection links.
+router.use(function(req, res, next) {
+  if ('user' in req.session)
+  {
+    console.log("user logged in");
+    next();
+  }
+  else{
+    console.log("user not logged in");
+    res.statusCode = 401;
+    res.sendFile(__dirname + '/html-files/signing.html');
+  }
+});
+
+router.get('/home', function(req, res, next) {
+    res.sendFile(__dirname + '/html-files/home.html');
+});
+
+router.get('/settings', function(req, res, next) {
+    res.sendFile(__dirname + '/html-files/settings.html');
+});
+
+router.get('/events', function(req, res, next) {
+    res.sendFile(__dirname + '/html-files/events.html');
 });
 
 // INSERT auth availability

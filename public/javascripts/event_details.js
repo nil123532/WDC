@@ -49,6 +49,7 @@ var vueinst = new Vue({
             xhttp.send();
         },
         getMyAvailabilities : () => {
+            if (!params.userid) return;
             const xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function(){
                 if (this.readyState==4 && this.status == 200){
@@ -114,20 +115,6 @@ var vueinst = new Vue({
             xhttp.open("POST", `/delete_non_dummy_availability/${vueinst.eventDetail.event_id}`, true);
             xhttp.send();
         },
-        submitAnonForm : () => {
-            console.log(vueinst.selectedAvailabilities);
-            vueinst.getExistingAvailabilities();
-            // submit form stuff here? Might need a different or followup function for authorized user?
-            // const xhttp = new XMLHttpRequest();
-            // xhttp.onreadystatechange = function(){
-            //         if (this.readyState==4 && this.status == 200){
-
-            //         }
-            //     }
-            // };
-            // xhttp.open("POST", `/anon_availability/${location.href.split("/event_invite/")[1]}`, true);
-            // xhttp.send({ possibleTimes :  vueinst.selectedAvailabilities});
-        },
         addAuthAvailability : () => {
             console.log(vueinst.filteredSelectedAvailabilities);
             const xhttp = new XMLHttpRequest();
@@ -140,8 +127,21 @@ var vueinst = new Vue({
             xhttp.setRequestHeader("Content-type", "application/json");
             xhttp.send(JSON.stringify({ timestamps :  vueinst.filteredSelectedAvailabilities }));
         },
+        addAnonAvailability : () => {
+            console.log(vueinst.filteredSelectedAvailabilities);
+            const xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function(){
+                if (this.readyState==4 && this.status == 200){
+                    console.log("Successfully added filtered new availabilities");
+                }
+            };
+            xhttp.open("POST", `/anon_submit_availability/${vueinst.eventDetail.event_id}`, true);
+            xhttp.setRequestHeader("Content-type", "application/json");
+            xhttp.send(JSON.stringify({ timestamps :  vueinst.filteredSelectedAvailabilities }));
+        },
         reInsertAvailability : () => {
             console.log(vueinst.filteredExistingAvailabilities);
+            if (vueinst.filteredExistingAvailabilities.length===0) return;
             const xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function(){
                 if (this.readyState==4 && this.status == 200){
@@ -152,16 +152,17 @@ var vueinst = new Vue({
             xhttp.setRequestHeader("Content-type", "application/json");
             xhttp.send(JSON.stringify({ nonDummy :  vueinst.filteredExistingAvailabilities}));
         },
-        submitAuthForm : () => {
-            // console.log(vueinst.selectedAvailabilities);
+        submitAnonForm : () => {
+            console.log("Anon form");
+            console.log(vueinst.selectedAvailabilities);
             if (vueinst.submitting) return;
             vueinst.submitting = true;
             vueinst.getExistingAvailabilities();
             const intersects = new Map();
             // console.log(vueinst.existingAvailabilities);
             setTimeout(()=>{
-                // console.log(vueinst.selectedAvailabilities);
-                // console.log(vueinst.existingAvailabilities);
+                console.log(vueinst.selectedAvailabilities);
+                console.log(vueinst.existingAvailabilities);
                 for (const i of vueinst.selectedAvailabilities){
                     intersects.set(i, vueinst.existingAvailabilities.length===0 ? true : false);
                 }
@@ -170,10 +171,48 @@ var vueinst = new Vue({
                     // console.log(j.startTime.split('T')[0] + " " + j.startTime.split('T')[1].split('.0')[0]);
                     // console.log(foundTime);
                     if (intersects.has(foundTime)){
-                        vueinst.filteredExistingAvailabilities.push(j);
+                        // console.log(j.user_id);
+                        if (j.user_id!==0) vueinst.filteredExistingAvailabilities.push(j);
                         j.startTime = foundTime;
                         intersects.set(foundTime, true);
                         // console.log(`${foundTime} : ${intersects.get(foundTime)}`);
+                    }
+                }
+                for (const k of vueinst.selectedAvailabilities){
+                    // console.log(`${k} : ${intersects.get(k)}`);
+                    if (intersects.get(k)===true){
+                        vueinst.filteredSelectedAvailabilities.push(k);
+                    }
+                }
+                // console.log(vueinst.filteredExistingAvailabilities);
+                vueinst.deleteExistingAvailabilities();
+                vueinst.addAnonAvailability();
+                vueinst.reInsertAvailability();
+                // console.log(vueinst.filteredSelectedAvailabilities);
+                setTimeout(()=>{
+                    vueinst.goToHome();
+                }, 2000);
+            }, 3000);
+        },
+        submitAuthForm : () => {
+            // console.log(vueinst.selectedAvailabilities);
+            if (vueinst.submitting) return;
+            vueinst.submitting = true;
+            vueinst.getExistingAvailabilities();
+            const intersects = new Map();
+            // console.log(vueinst.existingAvailabilities);
+            setTimeout(()=>{
+                console.log(vueinst.selectedAvailabilities);
+                console.log(vueinst.existingAvailabilities);
+                for (const i of vueinst.selectedAvailabilities){
+                    intersects.set(i, vueinst.existingAvailabilities.length===0 ? true : false);
+                }
+                for (let j of vueinst.existingAvailabilities){
+                    let foundTime = j.startTime.split('T')[0] + " " + j.startTime.split('T')[1].split('.0')[0];
+                    if (intersects.has(foundTime)){
+                        if (j.user_id!==0) vueinst.filteredExistingAvailabilities.push(j);
+                        j.startTime = foundTime;
+                        intersects.set(foundTime, true);
                     }
                 }
                 for (const k of vueinst.selectedAvailabilities){

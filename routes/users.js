@@ -8,6 +8,8 @@ router.get('/', function(req, res, next) {
 
 // GET a user's availability for an event
 router.get('/:userid/events/:eventid/my_availability', function(req, res, next){
+  // console.log(req.session.user);
+  // if (!req.session.user) res.send(200);
   req.pool.getConnection(function(err, connection){
     if (err){
       console.log(err);
