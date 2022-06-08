@@ -1,6 +1,6 @@
 var settingsInst = new Vue
 ({
-    el : "#settings",
+    el : "#app",
     data :
     {
         first_name : "",
@@ -11,6 +11,7 @@ var settingsInst = new Vue
         confirm_password : "",
         passwordError : "",
         passError : false,
+        pages : [{name : "Home", link : "/home"}, {name : "Events", link : "/events"}, {name : "Settings", link : "/settings"}],
     },
     methods:
     {
@@ -47,7 +48,26 @@ var settingsInst = new Vue
             xhttp.setRequestHeader("Content-type", "application/json");
             xhttp.send(JSON.stringify({new_password: this.new_password }));
             }
-        }
+        },
+
+        //function that runs when Save Changes is clicked
+        //This is for changing the checkbox values in the database
+        settingsNotifications:function(){
+            var firstNoti = document.getElementById("emailnoti1").checked;
+            var secondNoti = document.getElementById("emailnoti2").checked;
+            var thirdNoti = document.getElementById("emailnoti3").checked;
+            var fourthNoti = document.getElementById("emailnoti4").checked;
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("POST", "/users/emailNotificationsSettings", true);
+            xhttp.setRequestHeader("Content-type", "application/json");
+            xhttp.send(JSON.stringify({emailFinal: firstNoti, emailCancel: secondNoti, emailDayBefore: thirdNoti, emailRes: fourthNoti }));
+
+
+        },
+        changePage : (i) => {
+            this.currentPage = 2;
+        },
     }
 });
 
@@ -67,7 +87,7 @@ function user_logout(){
      };
     xhttp.open("GET", "/users/logout", true);
     xhttp.send();
-}
+};
 
 ///FUNCTIONS FOR SETTINGS PAGE
 function getSettingsInfo(){
@@ -83,5 +103,4 @@ function getSettingsInfo(){
         };
         xhttp.open("GET", "/users/getSettingsInfo", true);
         xhttp.send();
-}
-
+};
