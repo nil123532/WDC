@@ -6,5 +6,3 @@ CREATE TABLE Notifications (
     user_id int,
     FOREIGN KEY (user_id) REFERENCES User(user_id) ON DELETE CASCADE
 );
-
-SELECT email from User WHERE user_id IS (SELECT user_id FROM Availability WHERE event_id = ? AND user_id IS (SELECT user_id FROM Notifications WHERE NotiFinal = 1));
