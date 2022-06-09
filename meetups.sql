@@ -120,7 +120,6 @@ DROP TABLE IF EXISTS `Notifications`;
 CREATE TABLE `Notifications` (
   `NotiCancel` tinyint(1) DEFAULT NULL,
   `NotiRespond` tinyint(1) DEFAULT NULL,
-  `NotiDayBefore` tinyint(1) DEFAULT NULL,
   `NotiFinal` tinyint(1) DEFAULT NULL,
   `user_id` int DEFAULT NULL,
   KEY `user_id` (`user_id`),
@@ -174,4 +173,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-06-09  4:01:21
+-- Dump completed on 2022-06-09 14:57:49
