@@ -80,3 +80,29 @@ function addEventToCalendar(eventdetails){
         });
     });
 }
+
+function checkAvailability(details){
+
+    var calendarDetails = {
+        "timeMin": datetime,
+        "timeMax": datetime,
+        "items": [
+            {
+            "id" : "primary",
+            }
+        ]
+    };
+
+    gapi.load('client', function() {
+        gapi.client.init({
+            'discoveryDocs': ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest']
+        }).then(function() {
+            return gapi.client.calendar.freebusy.query(calendarDetails);
+          }).then(function(response) {
+            console.log(response.result);
+          }, function(reason) {
+            console.log('Error: ' + reason.result.error.message);
+        });
+    });
+}
+
