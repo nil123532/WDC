@@ -50,7 +50,7 @@ var vueinst = new Vue({
             xhttp.send();
         },
         getAvailabilities : () => {
-            let 
+            let uniqueTimestamps = new Set();
             const xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function(){
                 if (this.readyState==4 && this.status == 200){
