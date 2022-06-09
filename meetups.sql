@@ -120,7 +120,6 @@ DROP TABLE IF EXISTS `Notifications`;
 CREATE TABLE `Notifications` (
   `NotiCancel` tinyint(1) DEFAULT NULL,
   `NotiRespond` tinyint(1) DEFAULT NULL,
-  `NotiDayBefore` tinyint(1) DEFAULT NULL,
   `NotiFinal` tinyint(1) DEFAULT NULL,
   `user_id` int DEFAULT NULL,
   KEY `user_id` (`user_id`),
