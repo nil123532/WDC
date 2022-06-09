@@ -762,7 +762,6 @@ router.post('/auth_submit_availability/:eventid', function(req, res, next){
           res.sendStatus(500);
           return;
         }
-        console.log(rows[0].email);
 
         //nodemailer Code
         var allEmails = [];
