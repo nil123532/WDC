@@ -38,7 +38,7 @@
                                     <!-- <span style="font-size:0.5em;color:blue;width:9em">{{event.created}}</span> -->
                                     <span style="margin-left:8.05em;">Time : {{ event.finalised_time ? event.finalised_time.split('T')[1].split('.0')[0] : "-"}}</span>
                                 </div>
-                                <!-- <div class="event-item-people"><i class="fa-solid fa-people-group people-icon"></i>{{ 1 }}</div> -->
+                                <div class="event-item-people"><i class="fa-solid fa-people-group people-icon"></i>{{ event.responses }}</div>
                             </div>
                             <div class="col-3"><p style="font-weight:bold">{{event.address_street_number + " " + event.address_street_name + ", " + event.address_city + " "  + event.address_postcode + ", " + event.address_city + ", " + event.address_country}}</p></div>
                         </div>

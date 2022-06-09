@@ -62,7 +62,7 @@ router.post('/create_event', function(req, res, next){
       res.sendStatus(500);
       return;
     }
-    var query = "INSERT INTO Event (creator_id, address_street_name, address_street_number, address_state, address_city, address_postcode, address_country, duration, description, name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+    var query = "INSERT INTO Event (creator_id, address_street_name, address_street_number, address_state, address_city, address_postcode, address_country, duration, description, name, responses) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0);";
     let rb = req.body;
     // let finalised_time = new Date().toISOString().slice(0, 19).replace('T', ' ');
     connection.query(query, [req.session.user, rb.streetName, rb.streetNumber, rb.state, rb.city, rb.postcode, rb.country, rb.duration, rb.description, rb.name], function(err2, rows, fields){

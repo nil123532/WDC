@@ -105,6 +105,16 @@ var vueinst = new Vue({
             xhttp.open("GET", `/existing_availabilities/${vueinst.eventDetail.event_id}`, true);
             xhttp.send();
         },
+        addNumberOfResponses : () => {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function(){
+                if (this.readyState==4 && this.status == 200){
+                    console.log(this.responseText);
+                }
+            };
+            xhttp.open("POST", `/add_number_of_responses/${vueinst.eventDetail.event_id}`, true);
+            xhttp.send(JSON.stringify({ responses : vueinst.eventDetail.responses+1 }));
+        },
         deleteExistingAvailabilities : () => {
             const xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function(){
@@ -159,6 +169,7 @@ var vueinst = new Vue({
             vueinst.submitting = true;
             vueinst.getExistingAvailabilities();
             const intersects = new Map();
+            vueinst.addNumberOfResponses();
             // console.log(vueinst.existingAvailabilities);
             setTimeout(()=>{
                 console.log(vueinst.selectedAvailabilities);
@@ -201,6 +212,7 @@ var vueinst = new Vue({
             vueinst.submitting = true;
             vueinst.getExistingAvailabilities();
             const intersects = new Map();
+            vueinst.addNumberOfResponses();
             // console.log(vueinst.existingAvailabilities);
             setTimeout(()=>{
                 console.log(vueinst.selectedAvailabilities);

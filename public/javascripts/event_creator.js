@@ -18,7 +18,8 @@ var vueinst = new Vue({
         times : ["00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24"],
         availabilities : [],
         finalised_time : "",
-        cancelling : false
+        cancelling : false,
+        finalising : false
     },
     methods : {
         changePage : (i) => {
@@ -114,7 +115,12 @@ var vueinst = new Vue({
         },
         finalise : () => {
             // /finalise_time/:eventid
-            console.log(vueinst.finalised_time);
+            if (vueinst.finalising) return;
+            if (vueinst.finalised_time.length===0){
+                alert("Please pick a time from the availability or cancel the event");
+                return;
+            }
+            vueinst.finalising = true;
             const xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function(){
                 if (this.readyState==4 && this.status == 200){

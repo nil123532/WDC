@@ -485,6 +485,27 @@ router.get('/existing_availabilities/:eventid', function(req, res, next){
   });
 });
 
+// ADD number of responses
+router.post('/add_number_of_responses/:eventid', function(req, res, next){
+  req.pool.getConnection(function(err, connection){
+    if (err){
+      // console.log(err);
+      res.sendStatus(500);
+      return;
+    }
+    var query = "UPDATE Event SET responses=? WHERE event_id=?;";
+    connection.query(query, [req.body.responses, req.params.eventid], function(err2, rows, fields){
+      connection.release();
+      if (err2){
+        // console.log(err2);
+        res.sendStatus(500);
+        return;
+      }
+      res.json(rows);
+    });
+  });
+});
+
 // DELETE all non-dummy availability for an event
 router.post('/delete_non_dummy_availability/:eventid', function(req, res, next){
   req.pool.getConnection(function(err, connection){
