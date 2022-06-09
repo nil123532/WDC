@@ -351,7 +351,7 @@ router.post("/signup",function(req,res,next)
                   req.session.user = rows[0].user_id; //session?
                   req.session.admin = rows[0].admin;
                   //Notifcation default settings set to 0, meaning they do not want notifications
-                  let query = "INSERT INTO Notifications VALUES (0,0,0,0,?)";
+                  let query = "INSERT INTO Notifications VALUES (0,0,0,?)";
                   connection.query(query,[rows[0].user_id],async function(error,rows,fields)
                   {
                     connection.release();
@@ -367,7 +367,7 @@ router.post("/signup",function(req,res,next)
                 }
                 else
                 {
-                  console.log("bag login");
+                  console.log("bad login");
                   res.sendStatus(401);
                 }
               });
@@ -434,7 +434,7 @@ router.post("/signup",function(req,res,next)
                 req.session.admin = rows[0].admin;
 
                 //Notifcation default settings set to 0, meaning they do not want notifications
-                let query = "INSERT INTO Notifications VALUES (0,0,0,0,?)";
+                let query = "INSERT INTO Notifications VALUES (0,0,0,?)";
                 connection.query(query,[rows[0].user_id],async function(error,rows,fields)
                 {
                   connection.release();
@@ -621,6 +621,7 @@ router.post('/reinsert_availability/:eventid', function(req, res, next){
 
 // INSERT anon availability
 router.post('/anon_submit_availability/:eventid', function(req, res, next){
+  var eventID = req.params.eventid;
   req.pool.getConnection(function(err, connection){
     if (err){
       console.log(err);
@@ -640,7 +641,35 @@ router.post('/anon_submit_availability/:eventid', function(req, res, next){
         res.sendStatus(500);
         return;
       }
-      res.json(rows);
+      ///////nodemailer select query to get all emails that want response events notifications
+      var query = "SELECT email from User WHERE user_id IN (SELECT creator_id FROM Event WHERE event_id = ? AND user_id IN (SELECT user_id FROM Notifications WHERE NotiRespond = 1));";
+      connection.query(query, [eventID], function(err2, rows, fields){
+        connection.release();
+        if (err2){
+          console.log(err2);
+          res.sendStatus(500);
+          return;
+        }
+
+        //nodemailer Code
+        var allEmails = [];
+        for(i = 0; i < rows.length; i++){
+          allEmails[i] = rows[i].email;
+        }
+        const mailOptions =
+        {
+          from: nodemSender, // sender address
+          to: allEmails, // list of receivers
+          subject: 'Event Response', // Subject line
+          html: '<p>An Event you are hosting just got a response from a user</p>'// plain text body
+        };
+        transporter.sendMail(mailOptions, function (err, info) {
+          if(err) console.log(err)
+          else console.log(info);
+        });
+        //////ends here
+        res.json(rows);
+      });
     });
   });
 });
@@ -836,7 +865,7 @@ router.post('/auth_submit_availability/:eventid', function(req, res, next){
         return;
       }
       ///////nodemailer select query to get all emails that want response events notifications
-      var query = "SELECT email from User WHERE user_id IN (SELECT user_id FROM Availability WHERE event_id = ? AND user_id IN (SELECT user_id FROM Notifications WHERE NotiRespond = 1));";
+      var query = "SELECT email from User WHERE user_id IN (SELECT creator_id FROM Event WHERE event_id = ? AND user_id IN (SELECT user_id FROM Notifications WHERE NotiRespond = 1));";
       connection.query(query, [eventID], function(err2, rows, fields){
         connection.release();
         if (err2){
@@ -855,7 +884,7 @@ router.post('/auth_submit_availability/:eventid', function(req, res, next){
           from: nodemSender, // sender address
           to: allEmails, // list of receivers
           subject: 'Event Response', // Subject line
-          html: '<p>An event you are attending just got a response from a user for when they are available to join</p>'// plain text body
+          html: '<p>An Event you are hosting just got a response from a user</p>'// plain text body
         };
         transporter.sendMail(mailOptions, function (err, info) {
           if(err) console.log(err)
