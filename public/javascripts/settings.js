@@ -107,6 +107,28 @@ function getSettingsInfo(){
         xhttp.send();
 }
 
+//settings function for giving state to checkboxes
+function getSettingsInfo2(){
+    var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                let rows = JSON.parse(this.responseText);
+                if(rows[0].NotiFinal){
+                    document.getElementById("emailnoti1").checked = true;
+                }
+                if(rows[0].NotiCancel){
+                    document.getElementById("emailnoti2").checked = true;
+                }
+                if(rows[0].NotiRespond){
+                document.getElementById("emailnoti3").checked = true;
+                }
+            }
+
+            }
+        xhttp.open("GET", "/users/getSettingsInfo2", true);
+        xhttp.send();
+}
+
 //GOOGLE
 var auth2;
 var accessToken;
