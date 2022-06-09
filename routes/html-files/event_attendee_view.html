@@ -12,6 +12,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
     <script src="/javascripts/event_attendee.js" defer></script>
+    <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
 </head>
 <body>
     <div id="app">
@@ -30,8 +31,11 @@
                         <div class="event-attendee-status">
                             <h4>Status: {{ eventDetail.finalised_time ? "Confirmed" : "Not confirmed"}}</h4>
                             <h4>Date: {{ eventDetail.finalised_time ? eventDetail.finalised_time.split('T')[0] : "-"}}<br />Time: {{ eventDetail.finalised_time ? eventDetail.finalised_time.split('T')[1].split('.0')[0] : "-"}}</h4>
+                            <button v-if="GsignedIn && !GcalendarLinked && eventDetail.finalised_time" class="create-event-button" onclick="linkCalendar()">Link Calendar</button>
+                            <button v-if="GcalendarLinked && !GeventAdded && eventDetail.finalised_time" class="create-event-button" onclick="addEventToCalendar(vueinst.eventDetail)">Add To Calendar</button>
+                            <p v-if="GeventAdded" class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12">Added To Calendar</p>
                         </div>
-                        <div>
+                        <div v-if="!eventDetail.finalised_time">
                             <h4>My availability :</h4>
                             <p v-if="getting && myAvailabilities.length===0">Loading...</p>
                             <p v-else-if="!getting && myAvailabilities.length===0">Your availabilities clash with all other submissions...</p>
