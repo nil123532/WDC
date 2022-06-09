@@ -30,13 +30,14 @@
                     <a v-for="event in events" class="event_box_link" v-bind:href="`/event_view?eventid=${event.event_id}&userid=${event.creator_id}`">
                         <div class="row event-item">
                             <div class="col-9">
-                                <div class="event-name-date-create-time">
-                                    <span class="">{{ event.name }}</span>
-                                    <span class="">Date : {{ event.finalised_time ? event.finalised_time.split('T')[0] : "-" }}</span>
-                                </div>
-                                <div class="event-name-date-create-time">
-                                    <!-- <span style="font-size:0.5em;color:blue;width:9em">{{event.created}}</span> -->
-                                    <span style="margin-left:8.05em;">Time : {{ event.finalised_time ? event.finalised_time.split('T')[1].split('.0')[0] : "-"}}</span>
+                                <div class="row">
+                                    <div class="col-3 event-box-name">
+                                        <span>{{ event.name }}</span>
+                                    </div>
+                                    <div class="event-date-time col-4">
+                                        <span class="" v-bind:style="{ 'margin-right' : event.finalised_time ? '0' : '0' }">Date : {{ event.finalised_time ? event.finalised_time.split('T')[0] : "-" }}</span>
+                                        <span>Time : {{ event.finalised_time ? event.finalised_time.split('T')[1].split('.0')[0] : "-"}}</span>
+                                    </div>
                                 </div>
                                 <div class="event-item-people"><i class="fa-solid fa-people-group people-icon"></i>{{ event.responses }}</div>
                             </div>

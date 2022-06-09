@@ -16,8 +16,8 @@ router.get('/:userid/events/:eventid/my_availability', function(req, res, next){
       res.sendStatus(500);
       return;
     }
-    var query = "SELECT startTime FROM Availability INNER JOIN User ON Availability.user_id=User.user_id INNER JOIN Event ON Event.event_Id=Availability.event_id WHERE Event.event_id=? AND User.user_id=?;";
-    connection.query(query, [req.params.eventid, req.params.userid], function(err2, rows, fields){
+    var query = "SELECT startTime FROM Availability INNER JOIN User ON Availability.user_id=User.user_id INNER JOIN Event ON Event.event_Id=Availability.event_id WHERE Event.event_id=? AND User.user_id=? AND NOT Availability.startTime='1000-01-01 00:00:00';";
+    connection.query(query, [req.params.eventid, req.session.user], function(err2, rows, fields){
       connection.release();
       if (err2){
         console.log("SQL Error");

@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/stylesheets/styles.css">
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
-    <script src="/javascripts/event_details.js" defer></script>
+    <script src="/javascripts/event_attendee.js" defer></script>
 </head>
 <body>
     <div id="app">
@@ -19,7 +19,7 @@
             <div class="row">
                 <nav class="col-lg-2 col-sm-3 col-xs-3">
                     <h1 class="logo navbar-logo">MeetUps</h1>
-                    <div v-for="(page, i) in pages" v-bind:class="{ 'navbar-selected' : i===1 }" v-on:click="changePage"  class="navbar-item"><a class="navbar-hyperlink" v-bind:class="{ 'navbar-selected' : i===1 }" v-bind:href="page.link">{{ page.name }}</a></div>
+                    <div v-for="(page, i) in pages" v-bind:class="{ 'navbar-selected' : i===1 }" class="navbar-item"><a class="navbar-hyperlink" v-bind:class="{ 'navbar-selected' : i===1 }" v-bind:href="page.link">{{ page.name }}</a></div>
                 </nav>
                 <main class="col-lg-10 col-sm-9 col-xs-9 main-page">
                     <h2 class="viewer-event-name">{{ eventDetail.name }} | Created by {{ authorName }}</h2>
@@ -29,20 +29,23 @@
                     <div class="event-attendee-details">
                         <div class="event-attendee-status">
                             <h4>Status: {{ eventDetail.finalised_time ? "Confirmed" : "Not confirmed"}}</h4>
-                            <h4>Date: -<br />Time: -</h4>
+                            <h4>Date: {{ eventDetail.finalised_time ? eventDetail.finalised_time.split('T')[0] : "-"}}<br />Time: {{ eventDetail.finalised_time ? eventDetail.finalised_time.split('T')[1].split('.0')[0] : "-"}}</h4>
                         </div>
                         <div>
                             <h4>My availability :</h4>
-                            <div v-for="choice in myAvailabilities">
-                                <input type="radio" id="html" name="fav_language" value="HTML">
-                                <label for="html">{{choice}}</label><br>
-                            </div>
+                            <p v-if="getting && myAvailabilities.length===0">Loading...</p>
+                            <p v-else-if="!getting && myAvailabilities.length===0">Your availabilities clash with all other submissions...</p>
+                            <ul v-else>
+                                <li v-for="choice in myAvailabilities">
+                                    {{ choice }}
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="event-attendee-footer">
+                    <!-- <div class="event-attendee-footer">
                         <img src="/images/arrow.png" alt="back-arrow" class="back-arrow"/>
                         <button class="remove-event-button">Remove Event</button>
-                    </div>
+                    </div> -->
                 </main>
             </div>
         </div>
