@@ -27,24 +27,24 @@ var vuedate = new Vue({
     },
     computed: {
         printMonthandYear() {
-            this.firstDay = new Date(this.currentYear, this.currentMonth).getDay();
-            this.lastDate = new Date(this.currentYear, this.currentMonth+1, 0).getDate();
+            this.firstDay = new Date(this.currentYear, this.currentMonth-1).getDay();
+            this.lastDate = new Date(this.currentYear, this.currentMonth, 0).getDate();
             this.totalDateOffset = this.firstDay + this.lastDate;
-            return this.months[this.currentMonth] + " " + this.currentYear;
+            return this.months[this.currentMonth-1] + " " + this.currentYear;
         }
     },
     methods : {
         nextmonth: function() {
             this.currentMonth += 1;
-            if (this.currentMonth == 12){
-                this.currentMonth = 0;
+            if (this.currentMonth == 13){
+                this.currentMonth = 1;
                 this.currentYear += 1;
             }
         },
         previousmonth: function() {
             this.currentMonth -= 1;
-            if (this.currentMonth == -1){
-                this.currentMonth = 11;
+            if (this.currentMonth == 0){
+                this.currentMonth = 12;
                 this.currentYear -= 1;
             }
         },
@@ -150,7 +150,7 @@ var vuedate = new Vue({
     },
     beforeMount : function(){
         let dateObj = new Date();
-        this.currentMonth = dateObj.getMonth();
+        this.currentMonth = dateObj.getMonth() + 1;
         this.currentYear = dateObj.getFullYear();
         this.currentDate = dateObj.getDate();
         this.currentDay = dateObj.getDay();

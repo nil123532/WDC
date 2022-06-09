@@ -19,7 +19,10 @@ var vueinst = new Vue({
         availabilities : [],
         finalised_time : "",
         cancelling : false,
-        finalising : false
+        finalising : false,
+        GsignedIn: false,
+        GcalendarLinked: false,
+        GeventAdded: false
     },
     methods : {
         changePage : (i) => {
@@ -34,6 +37,7 @@ var vueinst = new Vue({
             xhttp.onreadystatechange = function(){
                 if (this.readyState==4 && this.status == 200){
                     vueinst.eventDetail = JSON.parse(this.responseText)[0];
+                    alert(JSON.stringify(vueinst.eventDetail));
                 }
             };
             xhttp.open("GET", "/get_event_details/" + params.eventid, true);
@@ -130,7 +134,7 @@ var vueinst = new Vue({
             xhttp.open("POST", "/finalise_time/" + params.eventid, true);
             xhttp.setRequestHeader("Content-type", "application/json");
             xhttp.send(JSON.stringify({ final : vueinst.finalised_time }));
-        }
+        },
     },
     mounted : function(){
         this.getEventDetails();
@@ -138,3 +142,84 @@ var vueinst = new Vue({
         this.getAvailabilities();
     },
 });
+
+//GOOGLE
+
+var auth2;
+var accessToken;
+
+function init() {
+    gapi.load('auth2', function() {
+        auth2 = gapi.auth2.init({
+            client_id: '710141737855-re05dhe02ji6trjmum35ben9k7lk1gec.apps.googleusercontent.com',
+            cookiepolicy: 'single_host_origin',
+            // Request scopes in addition to 'profile' and 'email'
+            scope: 'profile email'
+          });
+        
+        auth2.isSignedIn.listen(signinChanged);
+      });
+    
+}
+
+var signinChanged = function (val) {
+    if(val){
+        let grantedScopes = auth2.currentUser.get().getGrantedScopes();
+        if (grantedScopes.includes('https://www.googleapis.com/auth/calendar')){
+            vueinst.GcalendarLinked = true;
+        }
+    }
+};
+
+function linkCalendar(){
+    let option = {
+        scope: 'https://www.googleapis.com/auth/calendar',
+        prompt: 'consent'
+    };
+    googleUser = auth2.currentUser.get();
+    googleUser.grant(option).then(
+    function(success){
+      console.log(JSON.stringify({message: "success", value: success}));
+      accessToken = success.access_token;
+      vueinst.GcalendarLinked = true;
+    },
+    function(fail){
+      //alert(JSON.stringify({message: "fail", value: fail}));
+    });
+}
+
+function addEventToCalendar(eventdetails){
+    let dateStartTime = eventdetails.finalised_time.split('Z')[0] + "+1000";
+    let dateEndTime = new Date(eventdetails.finalised_time);
+    dateEndTime.setTime(dateEndTime.getTime() + eventdetails.duration * 60 * 60 * 1000);
+    dateEndTime = dateEndTime.toISOString().split('Z')[0] + "+1000";
+
+    var event = {
+            'summary': eventdetails.name,
+            'location': eventdetails.address_street_number + " " + eventdetails.address_street_name + ", " + eventdetails.address_city + " "  + eventdetails.address_postcode + ", " + eventdetails.address_city + ", " + eventdetails.address_country,
+            'description': eventdetails.description,
+            'start': {
+                'dateTime': dateStartTime,
+            },
+            'end': {
+                'dateTime': dateEndTime,
+                
+            },
+        };
+
+    gapi.load('client', function() {
+        gapi.client.init({
+            'discoveryDocs': ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest']
+        }).then(function() {
+            return gapi.client.calendar.events.insert({
+                'calendarId': 'primary',
+                'resource': event    
+            });
+          }).then(function(response) {
+            console.log(response.result);
+            vueinst.GeventAdded = true;
+          }, function(reason) {
+            console.log('Error: ' + reason.result.error.message);
+        });
+    });
+}

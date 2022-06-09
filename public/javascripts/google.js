@@ -1,18 +1,8 @@
-var vueGoogle = new Vue({
-    el : "#GoogleCalendar",
-    data : {
-        GsignedIn: false,
-        GcalendarLinked: false
-    },
-    methods : {
-
-    },
-    mounted : function(){
-    },
-});
-
 var auth2;
 var accessToken;
+var GsignedIn = false;
+var GcalendarLinked = false;
+var GeventAdded = false;
 
 function init() {
     gapi.load('auth2', function() {
@@ -32,7 +22,7 @@ var signinChanged = function (val) {
     if(val){
         let grantedScopes = auth2.currentUser.get().getGrantedScopes();
         if (grantedScopes.includes('https://www.googleapis.com/auth/calendar')){
-            vueGoogle.GcalendarLinked = true;
+            GcalendarLinked = true;
         }
     }
 };
@@ -47,32 +37,36 @@ function linkCalendar(){
     function(success){
       console.log(JSON.stringify({message: "success", value: success}));
       accessToken = success.access_token;
-      vueGoogle.GcalendarLinked = true;
+      GcalendarLinked = true;
     },
     function(fail){
       //alert(JSON.stringify({message: "fail", value: fail}));
     });
 }
 
-function addEventToCalendar(){
+function addEventToCalendar(eventdetails){
     linkCalendar();
-    alert();
+
+    let dateStartTime = eventdetails.finalised_time.split('Z')[0] + "+1000";
+    let dateEndTime = new Date(eventdetails.finalised_time);
+    dateEndTime.setTime(dateEndTime.getTime() + eventdetails.duration * 60 * 60 * 1000);
+    dateEndTime = dateEndTime.toISOString().split('Z')[0] + "+1000";
+
     var event = {
-            'summary': 'Google I/O 2015',
-            'location': '800 Howard St., San Francisco, CA 94103',
-            'description': 'A chance to hear more about Google\'s developer products.',
+            'summary': eventdetails.name,
+            'location': eventdetails.address_street_number + " " + eventdetails.address_street_name + ", " + eventdetails.address_city + " "  + eventdetails.address_postcode + ", " + eventdetails.address_city + ", " + eventdetails.address_country,
+            'description': eventdetails.description,
             'start': {
-                'date': '2022-06-09',
+                'dateTime': dateStartTime,
             },
             'end': {
-                'date': '2022-06-10',
+                'dateTime': dateEndTime,
                 
             },
         };
 
     gapi.load('client', function() {
         gapi.client.init({
-            'apiKey': 'AIzaSyDnfjswm-r09OvRi9C26j-U4c0wYhF2PcA',
             'discoveryDocs': ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest']
         }).then(function() {
             return gapi.client.calendar.events.insert({
