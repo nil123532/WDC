@@ -59,12 +59,17 @@ var settingsInst = new Vue
             var firstNoti = document.getElementById("emailnoti1").checked;
             var secondNoti = document.getElementById("emailnoti2").checked;
             var thirdNoti = document.getElementById("emailnoti3").checked;
-            var fourthNoti = document.getElementById("emailnoti4").checked;
 
             var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    settingsInst.SavedChanges = true;
+                    settingsInst.SavedChangeText = "Changes saved!";
+                }
+            }
             xhttp.open("POST", "/users/emailNotificationsSettings", true);
             xhttp.setRequestHeader("Content-type", "application/json");
-            xhttp.send(JSON.stringify({emailFinal: firstNoti, emailCancel: secondNoti, emailDayBefore: thirdNoti, emailRes: fourthNoti }));
+            xhttp.send(JSON.stringify({emailFinal: firstNoti, emailCancel: secondNoti, emailRes: thirdNoti }));
 
 
         },
