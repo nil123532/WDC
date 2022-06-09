@@ -754,7 +754,7 @@ router.post('/auth_submit_availability/:eventid', function(req, res, next){
         return;
       }
       ///////nodemailer select query to get all emails that want response events notifications
-      var query = "SELECT email from User WHERE user_id IN (SELECT user_id FROM Availability WHERE event_id = ? AND user_id IN (SELECT user_id FROM Notifications WHERE NotiFinal = 1));";
+      var query = "SELECT email from User WHERE user_id IN (SELECT user_id FROM Availability WHERE event_id = ? AND user_id IN (SELECT user_id FROM Notifications WHERE NotiRespond = 1));";
       connection.query(query, [eventID], function(err2, rows, fields){
         connection.release();
         if (err2){
@@ -762,6 +762,7 @@ router.post('/auth_submit_availability/:eventid', function(req, res, next){
           res.sendStatus(500);
           return;
         }
+        //console.log(rows[0].email);
 
         //nodemailer Code
         var allEmails = [];
