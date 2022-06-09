@@ -32,7 +32,8 @@
                         <h4>Status: {{ eventDetail.finalised_time ? "Confirmed" : "Not confirmed"}}</h4>
                         <h4>Date: {{ eventDetail.finalised_time ? eventDetail.finalised_time.split('T')[0] : "-"}}<br />Time: {{ eventDetail.finalised_time ? eventDetail.finalised_time.split('T')[1].split('.0')[0] : "-"}}</h4>
                     </div>
-                    <div v-if="!eventDetail.finalised_time" class="row date-selection">
+                    <h5 class="row" v-if="!eventDetail.finalised_time && eventDetail.responses>0 && !availabilities.length">Seems that the submissions don't have any matching timestamps, please cancel this event and try again</h5>
+                    <div v-else-if="!eventDetail.finalised_time" class="row date-selection">
                         <!-- <div class="event-form col-lg-4 col-sm-12 col-xs-12 date-input">
                             <div class="inputs">
                                 <img src="/images/calendar.png" alt="calendar-img" class="create-event-images">

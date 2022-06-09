@@ -113,6 +113,7 @@ var vueinst = new Vue({
                 }
             };
             xhttp.open("POST", `/add_number_of_responses/${vueinst.eventDetail.event_id}`, true);
+            xhttp.setRequestHeader("Content-type", "application/json");
             xhttp.send(JSON.stringify({ responses : vueinst.eventDetail.responses+1 }));
         },
         deleteExistingAvailabilities : () => {
