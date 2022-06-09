@@ -587,21 +587,50 @@ router.get('/events', function(req, res, next) {
 });
 
 router.post('/delete_avail/:eventid', function(req, res, next) {
+  var eventID = req.params.eventid;
   req.pool.getConnection(function(err, connection){
     if (err){
       console.log(err);
       res.sendStatus(500);
       return;
     }
-    var query = "DELETE FROM Availability WHERE event_id=?;";
-    connection.query(query, [req.params.eventid], function(err2, rows, fields){
-      connection.release();
+    ///////nodemailer select query to get all emails that want cancelled events notifications
+    var query = "SELECT email from User WHERE user_id IN (SELECT user_id FROM Availability WHERE event_id = ? AND user_id IN (SELECT user_id FROM Notifications WHERE NotiCancel = 1));";
+    connection.query(query, [eventID], function(err2, rows, fields){
+      //connection.release();
       if (err2){
         console.log(err2);
         res.sendStatus(500);
         return;
       }
-      res.json(rows);
+      //nodemailer Code
+      var allEmails = [];
+      for(i = 0; i < rows.length; i++){
+        allEmails[i] = rows[i].email;
+      }
+      const mailOptions =
+      {
+        from: nodemSender, // sender address
+        to: allEmails, // list of receivers
+        subject: 'Event Cancelled', // Subject line
+        html: '<p>An event you were attending has been cancelled.</p>'// plain text body
+      };
+      transporter.sendMail(mailOptions, function (err, info) {
+        if(err) console.log(err)
+        else console.log(info);
+      });
+      //////ends here
+
+      var query = "DELETE FROM Availability WHERE event_id=?;";
+      connection.query(query, [req.params.eventid], function(err2, rows, fields){
+        connection.release();
+        if (err2){
+          console.log(err2);
+          res.sendStatus(500);
+          return;
+        }
+        res.json(rows);
+      });
     });
   });
 });
@@ -627,7 +656,6 @@ router.post('/delete_dates/:eventid', function(req, res, next) {
 });
 
 router.post('/delete_event/:eventid', function(req, res, next) {
-  var eventID = req.params.eventid;
   req.pool.getConnection(function(err, connection){
     if (err){
       console.log(err);
@@ -636,42 +664,13 @@ router.post('/delete_event/:eventid', function(req, res, next) {
     }
     var query = "DELETE FROM Event WHERE event_id=?;";
     connection.query(query, [req.params.eventid], function(err2, rows, fields){
-      //connection.release();
+      connection.release();
       if (err2){
         console.log(err2);
         res.sendStatus(500);
         return;
       }
-      ///////nodemailer select query to get all emails that want cancelled events notifications
-       var query = "SELECT email from User WHERE user_id IN (SELECT user_id FROM Availability WHERE event_id = ? AND user_id IN (SELECT user_id FROM Notifications WHERE NotiCancel = 1));";
-       connection.query(query, [eventID], function(err2, rows, fields){
-         connection.release();
-         if (err2){
-           console.log(err2);
-           res.sendStatus(500);
-           return;
-         }
-         //nodemailer Code
-         var allEmails = [];
-         for(i = 0; i < rows.length; i++){
-           allEmails[i] = rows[i].email;
-           console.log(allEmails[i]);
-         }
-         const mailOptions =
-         {
-           from: nodemSender, // sender address
-           to: allEmails, // list of receivers
-           subject: 'Event Cancelled', // Subject line
-           html: '<p>An event you were attending has been cancelled.</p>'// plain text body
-         };
-         transporter.sendMail(mailOptions, function (err, info) {
-           if(err) console.log(err)
-           else console.log(info);
-         });
-         //////ends here
-
       res.json(rows);
-      });
     });
   });
 });
@@ -706,7 +705,6 @@ router.post('/finalise_time/:eventid', function(req, res, next) {
         var allEmails = [];
         for(i = 0; i < rows.length; i++){
           allEmails[i] = rows[i].email;
-          console.log(allEmails[i]);
         }
         const mailOptions =
         {
@@ -759,13 +757,11 @@ router.post('/auth_submit_availability/:eventid', function(req, res, next){
           res.sendStatus(500);
           return;
         }
-        //console.log(rows[0].email);
 
         //nodemailer Code
         var allEmails = [];
         for(i = 0; i < rows.length; i++){
           allEmails[i] = rows[i].email;
-          console.log(allEmails[i]);
         }
         const mailOptions =
         {
@@ -986,3 +982,4 @@ router.get("/get_availabilities/:eventid", function(req, res, next){
   });
 });
 module.exports = router;
+
