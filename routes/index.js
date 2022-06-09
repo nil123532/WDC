@@ -651,8 +651,6 @@ router.post('/delete_event/:eventid', function(req, res, next) {
            res.sendStatus(500);
            return;
          }
-         console.log(rows[0].email);
-
          //nodemailer Code
          var allEmails = [];
          for(i = 0; i < rows.length; i++){
@@ -703,7 +701,6 @@ router.post('/finalise_time/:eventid', function(req, res, next) {
           res.sendStatus(500);
           return;
         }
-        console.log(rows[0].email);
 
         //nodemailer Code
         var allEmails = [];
