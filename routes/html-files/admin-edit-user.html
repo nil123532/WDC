@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/stylesheets/styles.css">
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
-    <script src="/javascripts/index.js" defer></script>
+    <script src="/javascripts/user_login.js" defer></script>
     <script src="https://kit.fontawesome.com/f7293efbb8.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -27,22 +27,30 @@
                     <h1 class="edit-users">Edit Users</h1>
                 </div>
                 <div>
-                    <input type="checkbox" id="Admin_Only" name="Admin_Only" value="Admin_Only">
+                    <input type="checkbox" id="Admin_Only" name="Admin_Only" value="Admin_Only" v-model="check">
                     <label for="Admin_Only">Show Administrators Only</label>
                 </div>
             </div>
-            <div class="list-of-users">
+            <div v-if="check" class="list-of-users">
                 <div class="name-div">Name</div>
-                <div v-for="name in users" class="users">
-                    <div class="one-user">{{ name }}</div>
-                    <button class="col-2 edit-user">Edit</button>
+                <div v-for="name in users" v-if="name.admin.data[0]" class="users">
+                    <div class="one-user">{{ name.first_name }} {{name.last_name}} </div>
+                    <button class="col-2 edit-user" v-on:click="remove_user(name.user_id)">Remove</button>
                 </div>
             </div>
-            <div class="pagination" style="margin-bottom:0">
+            <div v-if="!check" class="list-of-users">
+                <div class="name-div">Name</div>
+                <div v-for="name in users" class="users">
+                    <div class="one-user">{{ name.first_name }} {{name.last_name}} </div>
+                    <button class="col-2 edit-user" v-on:click="remove_user(name.user_id)">Remove</button>
+                </div>
+            </div>
+            <!-- <div class="pagination" style="margin-bottom:0">
                 <i class="fa-solid fa-arrow-left events-left-arrow"></i>
                 <span>Page 2</span>
                 <i class="fa-solid fa-arrow-right events-right-arrow"></i>
             </div>
+        -->
         </main>
     </div>
 </body>

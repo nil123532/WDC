@@ -150,6 +150,7 @@ CREATE TABLE `User` (
   `google` varchar(100) DEFAULT NULL,
   `password` varchar(200) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
+  `admin` BIT(1),
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -160,7 +161,7 @@ CREATE TABLE `User` (
 
 LOCK TABLES `User` WRITE;
 /*!40000 ALTER TABLE `User` DISABLE KEYS */;
-INSERT INTO `User` VALUES (0,'Anon','User',NULL,'$argon2i$v=19$m=4096,t=3,p=1$xHbbALAT4g9KyR3OyrkX5A$fo717dX/vxxvZuXwrfrsqBk8XQNymvdhnTLlqSCQFno','1');
+INSERT INTO `User` VALUES (0,'Anon','User',NULL,'$argon2i$v=19$m=4096,t=3,p=1$xHbbALAT4g9KyR3OyrkX5A$fo717dX/vxxvZuXwrfrsqBk8XQNymvdhnTLlqSCQFno','1',0);
 /*!40000 ALTER TABLE `User` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -173,4 +174,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-06-09 14:57:49
+-- Dump completed on 2022-06-09  4:01:21

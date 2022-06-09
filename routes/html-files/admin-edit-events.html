@@ -12,7 +12,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
     <script src="https://kit.fontawesome.com/f7293efbb8.js" crossorigin="anonymous"></script>
-    <script src="/javascripts/index.js" defer></script>
+    <script src="/javascripts/user_login.js" defer></script>
 </head>
 <body>
     <div id="app">
@@ -26,28 +26,19 @@
                 <h1 class="edit-users" style="margin-left:0.8em">Edit Events</h1>
 
             </div>
-            <a v-for="event in events" class="event_box_link" href="/event_attendee_view.html">
-                <div class="row event-item">
-                    <div class="col-9">
-                        <div class="event-name-date-create-time">
-                            <span class="">{{ event.name }}</span>
-                            <span class="">Date : {{ event.date }}</span>
-                        </div>
-                        <div class="event-name-date-create-time">
-                            <span style="font-size:0.5em;color:blue;width:15em">{{event.created}}</span>
-                            <span>Time : {{ event.time }}</span>
-                        </div>
-                        <p>{{ event.desc }}</p>
-                        <div class="event-item-people"><i class="fa-solid fa-people-group people-icon"></i>{{ event.count }}</div>
-                    </div>
-                    <div class="col-3"><p style="font-weight:bold">{{event.address}}</p></div>
+            <div class="list-of-users">
+                <div class="name-div">Name</div>
+                <div v-for="event in events" class="users">
+                    <div class="one-user">{{ event.name }} </div>
+                    <button class="col-2 edit-user" v-on:click="remove_events(event.event_id)">Remove</button>
                 </div>
-            </a>
-            <div class="pagination">
+            </div>
+            <!-- <div class="pagination">
                 <i class="fa-solid fa-arrow-left events-left-arrow"></i>
                 <span>Page 2</span>
                 <i class="fa-solid fa-arrow-right events-right-arrow"></i>
             </div>
+        -->
         </main>
     </div>
 </body>

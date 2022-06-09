@@ -19,7 +19,7 @@
 
 
 </head>
-<body onload="getSettingsInfo()">
+<body onload="getSettingsInfo(); getSettingsInfo2();">
     <div id="app">
         <div class="container-fluid">
             <div class="row">
@@ -50,6 +50,7 @@
                             <div><img src="/images/password.png" alt="confirm_password" class="login-pass"></div>
                             <div class="input-inside-text"><input type="password" id="confirm_password" name="CPassword" placeholder="Confirm New Password" v-model="confirm_password"></div>
                         </div>
+                        <div class="error-text"><p>Caution: Changing password will log you out!<p></div>
                         <div v-if="passError" class="error-text">{{ passwordError }}</div>
                     </div>
                         <!--<button class="link-calendar"><a>Link Calendar</a></button>-->
@@ -63,13 +64,12 @@
                             <label for="emailnoti1">Notify me when events are finalized</label><br/>
                             <input type="checkbox" id="emailnoti2" name="emailnoti2" value="emailCancel">
                             <label for="emailnoti2">Notify me of any event cancellation</label><br/>
-                            <input type="checkbox" id="emailnoti3" name="emailnoti3" value="emailEventDay">
-                            <label for="emailnoti3">Notify me a day before events</label><br/>
-                            <input type="checkbox" id="emailnoti4" name="emailnoti4" value="emailUser">
-                            <label for="emailnoti4">Notify me when users respond to events</label><br/>
+                            <input type="checkbox" id="emailnoti3" name="emailnoti3" value="emailRespond">
+                            <label for="emailnoti4">Notify me when users respond to my events</label><br/>
                         </form>
                         <div class="save-settings">
                             <button class="create-event-button" v-on:click="passwordChange1(); settingsNotifications();">Save Changes</button>
+                            <div v-if="SavedChanges" class="error-text">{{ SavedChangeText }}</div>
                             <button class="create-event-button" onclick="user_logout()">Logout</button>
                             <!--<button class="link-calendar"><a>Save Changes</a></button>
                             <button class="link-calendar"><a>Logout</a></button>-->
@@ -80,4 +80,3 @@
     </div>
 </body>
 </html>
-

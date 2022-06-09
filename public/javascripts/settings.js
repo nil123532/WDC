@@ -59,12 +59,17 @@ var settingsInst = new Vue
             var firstNoti = document.getElementById("emailnoti1").checked;
             var secondNoti = document.getElementById("emailnoti2").checked;
             var thirdNoti = document.getElementById("emailnoti3").checked;
-            var fourthNoti = document.getElementById("emailnoti4").checked;
 
             var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    settingsInst.SavedChanges = true;
+                    settingsInst.SavedChangeText = "Changes saved!";
+                }
+            }
             xhttp.open("POST", "/users/emailNotificationsSettings", true);
             xhttp.setRequestHeader("Content-type", "application/json");
-            xhttp.send(JSON.stringify({emailFinal: firstNoti, emailCancel: secondNoti, emailDayBefore: thirdNoti, emailRes: fourthNoti }));
+            xhttp.send(JSON.stringify({emailFinal: firstNoti, emailCancel: secondNoti, emailRes: thirdNoti }));
 
 
         },
@@ -76,12 +81,11 @@ var settingsInst = new Vue
 
 //Logout
 function user_logout(){
-    try{
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-      console.log('User signed out.');
-    });
-    } catch (error) {}
+    var newWindow = window.open('https://mail.google.com/mail/?logout&hl=fr','Disconnect from Google','width=100,height=50,menubar=no,status=no,location=no,toolbar=no,scrollbars=no,top=200,left=200');
+            setTimeout(function(){
+                if (newWindow) newWindow.close();
+                window.location="/";
+            },1500);
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -108,6 +112,28 @@ function getSettingsInfo(){
         xhttp.send();
 }
 
+//settings function for giving state to checkboxes
+function getSettingsInfo2(){
+    var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                let rows = JSON.parse(this.responseText);
+                if(rows[0].NotiFinal){
+                    document.getElementById("emailnoti1").checked = true;
+                }
+                if(rows[0].NotiCancel){
+                    document.getElementById("emailnoti2").checked = true;
+                }
+                if(rows[0].NotiRespond){
+                document.getElementById("emailnoti3").checked = true;
+                }
+            }
+
+            }
+        xhttp.open("GET", "/users/getSettingsInfo2", true);
+        xhttp.send();
+}
+
 //GOOGLE
 var auth2;
 var accessToken;
@@ -120,10 +146,10 @@ function init() {
             // Request scopes in addition to 'profile' and 'email'
             scope: 'profile email'
           });
-        
+
         auth2.isSignedIn.listen(signinChanged);
       });
-    
+
 }
 
 var signinChanged = function (val) {
@@ -169,7 +195,7 @@ function addEventToCalendar(eventdetails){
             },
             'end': {
                 'dateTime': dateEndTime,
-                
+
             },
         };
 
@@ -179,7 +205,7 @@ function addEventToCalendar(eventdetails){
         }).then(function() {
             return gapi.client.calendar.events.insert({
                 'calendarId': 'primary',
-                'resource': event    
+                'resource': event
             });
           }).then(function(response) {
             console.log(response.result);

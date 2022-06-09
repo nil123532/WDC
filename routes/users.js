@@ -110,6 +110,39 @@ router.get('/getSettingsInfo', function(req, res, next) {
   }
 });
 
+//info to display in the settings page for checkedboxes
+router.get('/getSettingsInfo2', function(req, res, next) {
+  //console.log("runs 1");
+  console.log(req.session.user);
+  if ('user' in req.session)
+  {
+    req.pool.getConnection(function(err, connection){
+      if (err){
+        console.log(err);
+        res.sendStatus(500);
+        return;
+      }
+    //get first name last name and email using session user id
+    var query = "SELECT NotiFinal, NotiCancel, NotiRespond FROM Notifications WHERE user_id = ?";
+    connection.query(query, [req.session.user], function(err2, rows, fields){
+      connection.release();
+      if (err2){
+        console.log("SQL Error");
+        console.log(query);
+        res.sendStatus(500);
+        return;
+      }
+      console.log(rows[0].NotiFinal);
+      res.json(rows);
+    });
+  });
+  }
+
+  else{
+    res.sendStatus(401);
+  }
+});
+
 //to change values of what emails users want
 router.post('/emailNotificationsSettings', function(req, res, next) {
   //console.log("runs 1");
@@ -122,7 +155,6 @@ router.post('/emailNotificationsSettings', function(req, res, next) {
     emailChecks[0] = 0;
     emailChecks[1] = 0;
     emailChecks[2] = 0;
-    emailChecks[3] = 0;
 
     //conditions to check which checkboxes were ticked
     if(req.body.emailFinal){
@@ -131,11 +163,8 @@ router.post('/emailNotificationsSettings', function(req, res, next) {
     if(req.body.emailCancel){
       emailChecks[1] = 1;
     }
-    if(req.body.emailDayBefore){
-      emailChecks[2] = 1;
-    }
     if(req.body.emailRes){
-      emailChecks[3] = 1;
+      emailChecks[2] = 1;
     }
 
     req.pool.getConnection(function(err, connection){
@@ -145,8 +174,8 @@ router.post('/emailNotificationsSettings', function(req, res, next) {
         return;
       }
     //get first name last name and email using session user id
-    var query = "UPDATE Notifications SET NotiFinal = ?, NotiCancel = ?, NotiDayBefore = ?, NotiRespond = ? WHERE user_id = ?;";
-    connection.query(query, [emailChecks[0],emailChecks[1],emailChecks[2],emailChecks[3],req.session.user], function(err2, rows, fields){
+    var query = "UPDATE Notifications SET NotiFinal = ?, NotiCancel = ?, NotiRespond = ? WHERE user_id = ?;";
+    connection.query(query, [emailChecks[0],emailChecks[1],emailChecks[2],req.session.user], function(err2, rows, fields){
       connection.release();
       if (err2){
         console.log("SQL Error");
