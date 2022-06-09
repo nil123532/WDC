@@ -635,7 +635,7 @@ router.post('/anon_submit_availability/:eventid', function(req, res, next){
     }
     console.log(query.substr(0, query.length-2) + ";");
     connection.query(query.substr(0, query.length-2) + ";", function(err2, rows, fields){
-      connection.release();
+      //connection.release();
       if (err2){
         console.log(err2);
         res.sendStatus(500);
