@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="/stylesheets/styles.css">
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
-    <script src="/javascripts/index.js" defer></script>
+    <script src="/javascripts/user_login.js" defer></script>
+
 </head>
 <body>
     <div id="app">
@@ -23,8 +24,8 @@
                 <p style="margin-bottom:3em">Will Smith | Administrator</p>
                 <button onclick="location.href='/admin-edit-user'" class="col-2 admin-buttons">Edit Users</button><br />
                 <button onclick="location.href='/admin-edit-events'" class="col-2 admin-buttons">Edit Events</button><br />
-                <button class="col-2 admin-buttons">Add Admin</button><br />
-                <button class="col-2 admin-buttons">Logout</button><br />
+                <button onclick="location.href='/admin-add-user' "class="col-2 admin-buttons">Add Admin</button><br />
+                <button class="col-2 admin-buttons" v-on:click="a_logout()" >Logout</button><br />
             </div>
         </main>
         <footer>
