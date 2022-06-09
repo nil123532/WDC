@@ -109,8 +109,8 @@ var vueinst = new Vue({
             console.log("works here");
             if (vueinst.cancelling) return;
             vueinst.cancelling = true;
-            vueinst.deleteAvail();
             vueinst.deleteDates();
+            vueinst.deleteAvail();
             setTimeout(vueinst.deleteEvent,1500);
             setTimeout(()=>{
                 window.location.href = location.href.split("/even")[0] + "/events";
