@@ -11,6 +11,8 @@ var settingsInst = new Vue
         confirm_password : "",
         passwordError : "",
         passError : false,
+        SavedChanges : false,
+        SavedChangeText : "",
         pages : [{name : "Home", link : "/home"}, {name : "Events", link : "/events"}, {name : "Settings", link : "/settings"}],
         GsignedIn: false,
         GcalendarLinked: false,
