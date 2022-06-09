@@ -57,7 +57,11 @@ var vueinst = new Vue({
                     for (const i of JSON.parse(this.responseText)){
                         let xDateObject = sqlToJsDate(i.startTime);
                         let xDate = xDateObject.toDateString();
-                        vueinst.availabilities.push({ display : xDate + ", " + i.startTime.split('T')[1].split('.0')[0], raw : i.startTime.split('T')[0] + " " + i.startTime.split('T')[1].split('.0')[0]});
+                        let displayDate = xDate + ", " + i.startTime.split('T')[1].split('.0')[0];
+                        let rawDate = i.startTime.split('T')[0] + " " + i.startTime.split('T')[1].split('.0')[0]
+                        if (uniqueTimestamps.has(rawDate)) continue;
+                        uniqueTimestamps.add(rawDate);
+                        vueinst.availabilities.push({ display : displayDate, raw : rawDate});
                     }
                 }
             };
