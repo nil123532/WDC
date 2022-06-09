@@ -37,7 +37,6 @@ var vueinst = new Vue({
             xhttp.onreadystatechange = function(){
                 if (this.readyState==4 && this.status == 200){
                     vueinst.eventDetail = JSON.parse(this.responseText)[0];
-                    alert(JSON.stringify(vueinst.eventDetail));
                 }
             };
             xhttp.open("GET", "/get_event_details/" + params.eventid, true);
