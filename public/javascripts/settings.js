@@ -68,7 +68,7 @@ var settingsInst = new Vue
                     settingsInst.SavedChanges = true;
                     settingsInst.SavedChangeText = "Changes saved!";
                 }
-            }
+            };
             xhttp.open("POST", "/users/emailNotificationsSettings", true);
             xhttp.setRequestHeader("Content-type", "application/json");
             xhttp.send(JSON.stringify({emailFinal: firstNoti, emailCancel: secondNoti, emailRes: thirdNoti }));
@@ -130,8 +130,7 @@ function getSettingsInfo2(){
                 document.getElementById("emailnoti3").checked = true;
                 }
             }
-
-            }
+        };
         xhttp.open("GET", "/users/getSettingsInfo2", true);
         xhttp.send();
 }
@@ -171,7 +170,7 @@ function linkCalendar(){
     googleUser = auth2.currentUser.get();
     googleUser.grant(option).then(
     function(success){
-      console.log(JSON.stringify({message: "success", value: success}));
+      //console.log(JSON.stringify({message: "success", value: success}));
       accessToken = success.access_token;
       settingsInst.GcalendarLinked = true;
     },
@@ -210,9 +209,9 @@ function addEventToCalendar(eventdetails){
                 'resource': event
             });
           }).then(function(response) {
-            console.log(response.result);
+            //console.log(response.result);
           }, function(reason) {
-            console.log('Error: ' + reason.result.error.message);
+            //console.log('Error: ' + reason.result.error.message);
         });
     });
 }

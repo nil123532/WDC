@@ -12,10 +12,10 @@ function init() {
             // Request scopes in addition to 'profile' and 'email'
             scope: 'profile email'
           });
-        
+
         auth2.isSignedIn.listen(signinChanged);
       });
-    
+
 }
 
 var signinChanged = function (val) {
@@ -35,7 +35,7 @@ function linkCalendar(){
     googleUser = auth2.currentUser.get();
     googleUser.grant(option).then(
     function(success){
-      console.log(JSON.stringify({message: "success", value: success}));
+      //console.log(JSON.stringify({message: "success", value: success}));
       accessToken = success.access_token;
       GcalendarLinked = true;
     },
@@ -61,7 +61,7 @@ function addEventToCalendar(eventdetails){
             },
             'end': {
                 'dateTime': dateEndTime,
-                
+
             },
         };
 
@@ -71,12 +71,12 @@ function addEventToCalendar(eventdetails){
         }).then(function() {
             return gapi.client.calendar.events.insert({
                 'calendarId': 'primary',
-                'resource': event    
+                'resource': event
             });
           }).then(function(response) {
-            console.log(response.result);
+            //console.log(response.result);
           }, function(reason) {
-            console.log('Error: ' + reason.result.error.message);
+            //console.log('Error: ' + reason.result.error.message);
         });
     });
 }
@@ -99,9 +99,9 @@ function checkAvailability(details){
         }).then(function() {
             return gapi.client.calendar.freebusy.query(calendarDetails);
           }).then(function(response) {
-            console.log(response.result);
+            //console.log(response.result);
           }, function(reason) {
-            console.log('Error: ' + reason.result.error.message);
+            //console.log('Error: ' + reason.result.error.message);
         });
     });
 }

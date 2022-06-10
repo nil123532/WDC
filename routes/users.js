@@ -8,11 +8,11 @@ router.get('/', function(req, res, next) {
 
 // GET a user's availability for an event
 router.get('/:userid/events/:eventid/my_availability', function(req, res, next){
-  // console.log(req.session.user);
+  // //console.log(req.session.user);
   // if (!req.session.user) res.send(200);
   req.pool.getConnection(function(err, connection){
     if (err){
-      console.log(err);
+      //console.log(err);
       res.sendStatus(500);
       return;
     }
@@ -20,8 +20,8 @@ router.get('/:userid/events/:eventid/my_availability', function(req, res, next){
     connection.query(query, [req.params.eventid, req.session.user], function(err2, rows, fields){
       connection.release();
       if (err2){
-        console.log("SQL Error");
-        console.log(query);
+        //console.log("SQL Error");
+        //console.log(query);
         res.sendStatus(500);
         return;
       }
@@ -35,7 +35,7 @@ router.get('/:userid/events/:eventid/my_availability', function(req, res, next){
 router.get('/:userid/get_events', function(req, res, next){
   req.pool.getConnection(function(err, connection){
     if (err){
-      console.log(err);
+      //console.log(err);
       res.sendStatus(500);
       return;
     }
@@ -43,8 +43,8 @@ router.get('/:userid/get_events', function(req, res, next){
     connection.query(query, [req.params.userid], function(err2, rows, fields){
       connection.release();
       if (err2){
-        console.log("SQL Error");
-        console.log(query);
+        //console.log("SQL Error");
+        //console.log(query);
         res.sendStatus(500);
         return;
       }
@@ -55,10 +55,10 @@ router.get('/:userid/get_events', function(req, res, next){
 
 // Create an event
 router.post('/create_event', function(req, res, next){
-  console.log("Creating event");
+  //console.log("Creating event");
   req.pool.getConnection(function(err, connection){
     if (err){
-      console.log(err);
+      //console.log(err);
       res.sendStatus(500);
       return;
     }
@@ -68,8 +68,8 @@ router.post('/create_event', function(req, res, next){
     connection.query(query, [req.session.user, rb.streetName, rb.streetNumber, rb.state, rb.city, rb.postcode, rb.country, rb.duration, rb.description, rb.name], function(err2, rows, fields){
       connection.release();
       if (err2){
-        console.log("SQL Error");
-        console.log(query);
+        //console.log("SQL Error");
+        //console.log(query);
         res.sendStatus(500);
         return;
       }
@@ -80,13 +80,13 @@ router.post('/create_event', function(req, res, next){
 
 //info to display in the settings page
 router.get('/getSettingsInfo', function(req, res, next) {
-  //console.log("runs 1");
-  console.log(req.session.user);
+  ////console.log("runs 1");
+  //console.log(req.session.user);
   if ('user' in req.session)
   {
     req.pool.getConnection(function(err, connection){
       if (err){
-        console.log(err);
+        //console.log(err);
         res.sendStatus(500);
         return;
       }
@@ -95,8 +95,8 @@ router.get('/getSettingsInfo', function(req, res, next) {
     connection.query(query, [req.session.user], function(err2, rows, fields){
       connection.release();
       if (err2){
-        console.log("SQL Error");
-        console.log(query);
+        //console.log("SQL Error");
+        //console.log(query);
         res.sendStatus(500);
         return;
       }
@@ -112,13 +112,13 @@ router.get('/getSettingsInfo', function(req, res, next) {
 
 //info to display in the settings page for checkedboxes
 router.get('/getSettingsInfo2', function(req, res, next) {
-  //console.log("runs 1");
-  console.log(req.session.user);
+  ////console.log("runs 1");
+  //console.log(req.session.user);
   if ('user' in req.session)
   {
     req.pool.getConnection(function(err, connection){
       if (err){
-        console.log(err);
+        //console.log(err);
         res.sendStatus(500);
         return;
       }
@@ -127,12 +127,12 @@ router.get('/getSettingsInfo2', function(req, res, next) {
     connection.query(query, [req.session.user], function(err2, rows, fields){
       connection.release();
       if (err2){
-        console.log("SQL Error");
-        console.log(query);
+        //console.log("SQL Error");
+        //console.log(query);
         res.sendStatus(500);
         return;
       }
-      console.log(rows[0].NotiFinal);
+      //console.log(rows[0].NotiFinal);
       res.json(rows);
     });
   });
@@ -145,8 +145,8 @@ router.get('/getSettingsInfo2', function(req, res, next) {
 
 //to change values of what emails users want
 router.post('/emailNotificationsSettings', function(req, res, next) {
-  //console.log("runs 1");
-  //console.log(req.session.user);
+  ////console.log("runs 1");
+  ////console.log(req.session.user);
 
   if ('user' in req.session)
   {
@@ -169,7 +169,7 @@ router.post('/emailNotificationsSettings', function(req, res, next) {
 
     req.pool.getConnection(function(err, connection){
       if (err){
-        console.log(err);
+        //console.log(err);
         res.sendStatus(500);
         return;
       }
@@ -178,8 +178,8 @@ router.post('/emailNotificationsSettings', function(req, res, next) {
     connection.query(query, [emailChecks[0],emailChecks[1],emailChecks[2],req.session.user], function(err2, rows, fields){
       connection.release();
       if (err2){
-        console.log("SQL Error");
-        console.log(query);
+        //console.log("SQL Error");
+        //console.log(query);
         res.sendStatus(500);
         return;
       }
@@ -195,11 +195,11 @@ router.post('/emailNotificationsSettings', function(req, res, next) {
 });
 
 router.get('/logout', function(req, res, next) {
-  //console.log("runs 1");
-  console.log(req.session.user);
+  ////console.log("runs 1");
+  //console.log(req.session.user);
   if ('user' in req.session)
   {
-    //console.log("runs 2");
+    ////console.log("runs 2");
     delete req.session.user;
   }
   res.send();

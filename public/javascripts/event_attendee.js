@@ -46,7 +46,7 @@ var vueinst = new Vue({
             const xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function(){
                 if (this.readyState==4 && this.status == 200){
-                    console.log(JSON.parse(this.responseText));
+                    //console.log(JSON.parse(this.responseText));
                     for (const i of JSON.parse(this.responseText)){
                         let xDateObject = sqlToJsDate(i.startTime);
                         let xTime = xDateObject.toTimeString().split(" ")[0];
@@ -87,10 +87,10 @@ function init() {
             // Request scopes in addition to 'profile' and 'email'
             scope: 'profile email'
           });
-        
+
         auth2.isSignedIn.listen(signinChanged);
       });
-    
+
 }
 
 var signinChanged = function (val) {
@@ -110,7 +110,7 @@ function linkCalendar(){
     googleUser = auth2.currentUser.get();
     googleUser.grant(option).then(
     function(success){
-      console.log(JSON.stringify({message: "success", value: success}));
+      //console.log(JSON.stringify({message: "success", value: success}));
       accessToken = success.access_token;
       vueinst.GcalendarLinked = true;
     },
@@ -136,7 +136,7 @@ function addEventToCalendar(eventdetails){
             },
             'end': {
                 'dateTime': dateEndTime,
-                
+
             },
         };
 
@@ -146,13 +146,13 @@ function addEventToCalendar(eventdetails){
         }).then(function() {
             return gapi.client.calendar.events.insert({
                 'calendarId': 'primary',
-                'resource': event    
+                'resource': event
             });
           }).then(function(response) {
-            console.log(response.result);
+            //console.log(response.result);
             vueinst.GeventAdded = true;
           }, function(reason) {
-            console.log('Error: ' + reason.result.error.message);
+            //console.log('Error: ' + reason.result.error.message);
         });
     });
 }

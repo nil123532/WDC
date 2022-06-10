@@ -26,7 +26,7 @@
                     <div v-for="(page, i) in pages" v-bind:class="{ 'navbar-selected' : i===1 }" v-on:click="changePage"  class="navbar-item"><a class="navbar-hyperlink" v-bind:class="{ 'navbar-selected' : i===1 }" v-bind:href="page.link">{{ page.name }}</a></div>
                 </nav>
                 <main class="col-lg-10 col-sm-9 col-xs-9 main-page">
-                    <h1 v-if="eventDetail.finalised_time">{{ eventDetail.name }} has been finalised, no more submissions</h1>
+                    <h2 v-if="eventDetail.finalised_time">{{ eventDetail.name }} has been finalised, no more submissions</h2>
                     <div v-else>
                         <div class="row">
                             <h2 class="event-linked-name">You've been invited to {{ eventDetail.name }}</h2>

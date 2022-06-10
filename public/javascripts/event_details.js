@@ -74,7 +74,7 @@ var vueinst = new Vue({
                         vueinst.proposedDates.push(x);
                         // let xDateObject = sqlToJsDate(i.date);
                         // let xDate = xDateObject.toDateString();
-                        // console.log(xDate);
+                        // //console.log(xDate);
                         // vueinst.proposedDates.push(xDate);
                     }
                 }
@@ -97,7 +97,7 @@ var vueinst = new Vue({
             const xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function(){
                 if (this.readyState==4 && this.status == 200){
-                    // console.log(this.responseText);
+                    // //console.log(this.responseText);
                     for (const i of JSON.parse(this.responseText)){
                         vueinst.existingAvailabilities.push(i);
                     }
@@ -110,7 +110,7 @@ var vueinst = new Vue({
             const xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function(){
                 if (this.readyState==4 && this.status == 200){
-                    console.log(this.responseText);
+                    //console.log(this.responseText);
                 }
             };
             xhttp.open("POST", `/add_number_of_responses/${vueinst.eventDetail.event_id}`, true);
@@ -121,18 +121,18 @@ var vueinst = new Vue({
             const xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function(){
                 if (this.readyState==4 && this.status == 200){
-                    console.log(this.responseText);
+                    //console.log(this.responseText);
                 }
             };
             xhttp.open("POST", `/delete_non_dummy_availability/${vueinst.eventDetail.event_id}`, true);
             xhttp.send();
         },
         addAuthAvailability : () => {
-            console.log(vueinst.filteredSelectedAvailabilities);
+            //console.log(vueinst.filteredSelectedAvailabilities);
             const xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function(){
                 if (this.readyState==4 && this.status == 200){
-                    console.log("Successfully added filtered new availabilities");
+                    //console.log("Successfully added filtered new availabilities");
                 }
             };
             xhttp.open("POST", `/auth_submit_availability/${vueinst.eventDetail.event_id}`, true);
@@ -140,11 +140,11 @@ var vueinst = new Vue({
             xhttp.send(JSON.stringify({ timestamps :  vueinst.filteredSelectedAvailabilities }));
         },
         addAnonAvailability : () => {
-            console.log(vueinst.filteredSelectedAvailabilities);
+            //console.log(vueinst.filteredSelectedAvailabilities);
             const xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function(){
                 if (this.readyState==4 && this.status == 200){
-                    console.log("Successfully added filtered new availabilities");
+                    //console.log("Successfully added filtered new availabilities");
                 }
             };
             xhttp.open("POST", `/anon_submit_availability/${vueinst.eventDetail.event_id}`, true);
@@ -152,12 +152,12 @@ var vueinst = new Vue({
             xhttp.send(JSON.stringify({ timestamps :  vueinst.filteredSelectedAvailabilities }));
         },
         reInsertAvailability : () => {
-            console.log(vueinst.filteredExistingAvailabilities);
+            //console.log(vueinst.filteredExistingAvailabilities);
             if (vueinst.filteredExistingAvailabilities.length===0) return;
             const xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function(){
                 if (this.readyState==4 && this.status == 200){
-                    console.log("Successfully added filtered existing availabilities");
+                    //console.log("Successfully added filtered existing availabilities");
                 }
             };
             xhttp.open("POST", `/reinsert_availability/${location.href.split("/event_invite/")[1]}`, true);
@@ -165,43 +165,43 @@ var vueinst = new Vue({
             xhttp.send(JSON.stringify({ nonDummy :  vueinst.filteredExistingAvailabilities}));
         },
         submitAnonForm : () => {
-            console.log("Anon form");
-            console.log(vueinst.selectedAvailabilities);
+            //console.log("Anon form");
+            //console.log(vueinst.selectedAvailabilities);
             if (vueinst.submitting) return;
             vueinst.submitting = true;
             vueinst.getExistingAvailabilities();
             const intersects = new Map();
             vueinst.addNumberOfResponses();
-            // console.log(vueinst.existingAvailabilities);
+            // //console.log(vueinst.existingAvailabilities);
             setTimeout(()=>{
-                console.log(vueinst.selectedAvailabilities);
-                console.log(vueinst.existingAvailabilities);
+                //console.log(vueinst.selectedAvailabilities);
+                //console.log(vueinst.existingAvailabilities);
                 for (const i of vueinst.selectedAvailabilities){
                     intersects.set(i, vueinst.existingAvailabilities.length===0 ? true : false);
                 }
                 for (let j of vueinst.existingAvailabilities){
                     let foundTime = j.startTime.split('T')[0] + " " + j.startTime.split('T')[1].split('.0')[0];
-                    // console.log(j.startTime.split('T')[0] + " " + j.startTime.split('T')[1].split('.0')[0]);
-                    // console.log(foundTime);
+                    // //console.log(j.startTime.split('T')[0] + " " + j.startTime.split('T')[1].split('.0')[0]);
+                    // //console.log(foundTime);
                     if (intersects.has(foundTime)){
-                        // console.log(j.user_id);
+                        // //console.log(j.user_id);
                         if (j.user_id!==0) vueinst.filteredExistingAvailabilities.push(j);
                         j.startTime = foundTime;
                         intersects.set(foundTime, true);
-                        // console.log(`${foundTime} : ${intersects.get(foundTime)}`);
+                        // //console.log(`${foundTime} : ${intersects.get(foundTime)}`);
                     }
                 }
                 for (const k of vueinst.selectedAvailabilities){
-                    // console.log(`${k} : ${intersects.get(k)}`);
+                    // //console.log(`${k} : ${intersects.get(k)}`);
                     if (intersects.get(k)===true){
                         vueinst.filteredSelectedAvailabilities.push(k);
                     }
                 }
-                // console.log(vueinst.filteredExistingAvailabilities);
+                // //console.log(vueinst.filteredExistingAvailabilities);
                 vueinst.deleteExistingAvailabilities();
                 vueinst.addAnonAvailability();
                 vueinst.reInsertAvailability();
-                // console.log(vueinst.filteredSelectedAvailabilities);
+                // //console.log(vueinst.filteredSelectedAvailabilities);
                 setTimeout(()=>{
                     vueinst.submitting = false;
                     vueinst.goToHome();
@@ -209,39 +209,39 @@ var vueinst = new Vue({
             }, 3000);
         },
         submitAuthForm : () => {
-            console.log("Auth form");
+            //console.log("Auth form");
             if (vueinst.submitting) return;
             vueinst.submitting = true;
             vueinst.getExistingAvailabilities();
             const intersects = new Map();
             vueinst.addNumberOfResponses();
-            // console.log(vueinst.existingAvailabilities);
+            // //console.log(vueinst.existingAvailabilities);
             setTimeout(()=>{
-                console.log(vueinst.selectedAvailabilities);
-                console.log(vueinst.existingAvailabilities);
+                //console.log(vueinst.selectedAvailabilities);
+                //console.log(vueinst.existingAvailabilities);
                 for (const i of vueinst.selectedAvailabilities){
                     intersects.set(i, vueinst.existingAvailabilities.length===0 ? true : false);
                 }
                 for (let j of vueinst.existingAvailabilities){
                     let foundTime = j.startTime.split('T')[0] + " " + j.startTime.split('T')[1].split('.0')[0];
                     if (intersects.has(foundTime)){
-                        //if (j.user_id!==0) 
+                        //if (j.user_id!==0)
                         vueinst.filteredExistingAvailabilities.push(j);
                         j.startTime = foundTime;
                         intersects.set(foundTime, true);
                     }
                 }
                 for (const k of vueinst.selectedAvailabilities){
-                    // console.log(`${k} : ${intersects.get(k)}`);
+                    // //console.log(`${k} : ${intersects.get(k)}`);
                     if (intersects.get(k)===true){
                         vueinst.filteredSelectedAvailabilities.push(k);
                     }
                 }
-                // console.log(vueinst.filteredExistingAvailabilities);
+                // //console.log(vueinst.filteredExistingAvailabilities);
                 vueinst.deleteExistingAvailabilities();
                 vueinst.addAuthAvailability();
                 vueinst.reInsertAvailability();
-                // console.log(vueinst.filteredSelectedAvailabilities);
+                // //console.log(vueinst.filteredSelectedAvailabilities);
                 setTimeout(()=>{
                     vueinst.submitting = false;
                     vueinst.goToHome();
@@ -289,7 +289,7 @@ function init() {
             // Request scopes in addition to 'profile' and 'email'
             scope: 'profile email'
           });
-        
+
         auth2.isSignedIn.listen(signinChanged);
     });
 }
@@ -316,7 +316,7 @@ function linkCalendar(){
     googleUser = auth2.currentUser.get();
     googleUser.grant(option).then(
     function(success){
-      //console.log(JSON.stringify({message: "success", value: success}));
+      ////console.log(JSON.stringify({message: "success", value: success}));
       accessToken = success.access_token;
       GcalendarLinked = true;
     },
@@ -349,7 +349,7 @@ function checkAvailability(details){
         }).then(function() {
             return gapi.client.calendar.freebusy.query(calendarDetails);
           }).then(function(response) {
-            //console.log(response.result.calendars.primary.busy);
+            ////console.log(response.result.calendars.primary.busy);
             for(let resp of response.result.calendars.primary.busy){
                 vueinst.busyDateTime.push(resp);
             }

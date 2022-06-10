@@ -49,7 +49,7 @@
                             <h2>Possible times</h2>
                             <p v-if="!availabilities.length">No one has responded to your event yet!</p>
                             <div v-for="choice in availabilities">
-                                <input type="radio" v-bind:value="choice.raw" v-model="finalised_time">
+                                <input type="radio" id="html" v-bind:value="choice.raw" v-model="finalised_time">
                                 <label for="html">{{choice.display}}</label><br>
                             </div>
                         </div>

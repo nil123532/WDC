@@ -28,8 +28,8 @@
 
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 login-box">
                         <div class="sign-in-up">
-                            <div class="sign-in-form-text" v-bind:class="{ 'sign-in-form-text-selected' : !form }">Sign In</a></div>
-                            <div class="sign-in-form-text" v-bind:class="{ 'sign-up-form-text-selected' : form }">Sign Up</a></div>
+                            <div class="sign-in-form-text" v-bind:class="{ 'sign-in-form-text-selected' : !form }">Sign In</div>
+                            <div class="sign-in-form-text" v-bind:class="{ 'sign-up-form-text-selected' : form }">Sign Up</div>
                         </div>
                         <div v-if="!form">
                             <div class="login-form">
@@ -64,11 +64,11 @@
                                 </div>
                                 <div class="inputs">
                                     <div><img src="/images/user.png" alt="Default Profile Photo" class="login-img"></div>
-                                    <div class="input-inside-text"><input type="text" id="email-username" name="ID" placeholder="Email or Username" v-model="email"></div>
+                                    <div class="input-inside-text"><input type="text" id="mail-username" name="ID" placeholder="Email or Username" v-model="email"></div>
                                 </div>
                                 <div class="inputs">
                                     <div><img src="/images/password.png" alt="password" class="login-pass"></div>
-                                    <div class="input-inside-text"><input type="password" id="password" name="Password" placeholder="Password" v-model="password"></div>
+                                    <div class="input-inside-text"><input type="password" id="pass" name="Password" placeholder="Password" v-model="password"></div>
                                 </div>
                                 <!-- onclick="location.href='/home.html'" -->
                                 <button class="signin-button" v-on:click="admin_signup()">Sign Up Friends</button>
@@ -79,15 +79,14 @@
                        <!-- <div class="third-party-first-row">
                             <div class="google"><i class="fa-brands fa-google google-icon"></i>Google</div>
                            <div class="g-signin2" style="padding-right:2.5em" data-onsuccess="onSignIn"></div> -->
-                        </div>
                     </div>
                 </div>
             </div>
         </main>
+        </div>
         <footer>
             <span class="about"><a class="a-color" href="/about.html">About</a></span>
             <span class="terms"><a class="a-color" href="/terms.html">Terms and conditions</a></span>
         </footer>
-    </div>
 </body>
 </html>

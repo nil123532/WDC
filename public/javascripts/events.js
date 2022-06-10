@@ -9,7 +9,7 @@ var vueinst = new Vue({
         xhttp.onreadystatechange = function(){
             if (this.readyState==4 && this.status == 200){
                 for (const i of JSON.parse(this.responseText)){
-                    console.log(i);
+                   // console.log(i);
                     vueinst.events.push(i);
                 }
             }

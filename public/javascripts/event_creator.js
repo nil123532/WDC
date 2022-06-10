@@ -62,7 +62,7 @@ var vueinst = new Vue({
                         let xDateObject = sqlToJsDate(i.startTime);
                         let xDate = xDateObject.toDateString();
                         let displayDate = xDate + ", " + i.startTime.split('T')[1].split('.0')[0];
-                        let rawDate = i.startTime.split('T')[0] + " " + i.startTime.split('T')[1].split('.0')[0]
+                        let rawDate = i.startTime.split('T')[0] + " " + i.startTime.split('T')[1].split('.0')[0];
                         if (uniqueTimestamps.has(rawDate)) continue;
                         uniqueTimestamps.add(rawDate);
                         vueinst.availabilities.push({ display : displayDate, raw : rawDate});
@@ -106,7 +106,7 @@ var vueinst = new Vue({
             xhttp.send(JSON.stringify());
         },
         cancelEvent : () => {
-            console.log("works here");
+            //console.log("works here");
             if (vueinst.cancelling) return;
             vueinst.cancelling = true;
             vueinst.deleteDates();
@@ -155,10 +155,10 @@ function init() {
             // Request scopes in addition to 'profile' and 'email'
             scope: 'profile email'
           });
-        
+
         auth2.isSignedIn.listen(signinChanged);
       });
-    
+
 }
 
 var signinChanged = function (val) {
@@ -178,7 +178,7 @@ function linkCalendar(){
     googleUser = auth2.currentUser.get();
     googleUser.grant(option).then(
     function(success){
-      console.log(JSON.stringify({message: "success", value: success}));
+      //console.log(JSON.stringify({message: "success", value: success}));
       accessToken = success.access_token;
       vueinst.GcalendarLinked = true;
     },
@@ -202,7 +202,7 @@ function addEventToCalendar(eventdetails){
             },
             'end': {
                 'dateTime': dateEndTime,
-                
+
             },
         };
 
@@ -212,13 +212,13 @@ function addEventToCalendar(eventdetails){
         }).then(function() {
             return gapi.client.calendar.events.insert({
                 'calendarId': 'primary',
-                'resource': event    
+                'resource': event
             });
           }).then(function(response) {
-            console.log(response.result);
+            //console.log(response.result);
             vueinst.GeventAdded = true;
           }, function(reason) {
-            console.log('Error: ' + reason.result.error.message);
+            //console.log('Error: ' + reason.result.error.message);
         });
     });
 }

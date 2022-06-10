@@ -18,7 +18,7 @@ var login = new Vue
     },
     mounted:function()
     {
-        //console.log(this.email);
+        ////console.log(this.email);
         this.check_form();
         this.get_users();
         this.get_events();
@@ -40,7 +40,7 @@ var login = new Vue
                         }
                     }
                     login.events = response;
-                    // console.log(login.users);
+                    // //console.log(login.users);
                 }
             };
             xhttp.setRequestHeader("Content-type", "application/json");
@@ -105,7 +105,7 @@ var login = new Vue
             };
             xhttp.setRequestHeader("Content-type", "application/json");
             if(gtoken) {
-                console.log("gtoken found");
+                //console.log("gtoken found");
                 xhttp.send(JSON.stringify({ token : gtoken }));
             }
             else {
@@ -196,11 +196,11 @@ var login = new Vue
             },
         check_form:function()
         {
-           // console.log("hoho");
+           // //console.log("hoho");
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
                 if (xhttp.readyState == 4 && xhttp.status == 200) {
-                    //console.log("accessed");
+                    ////console.log("accessed");
                     login.form = true;
                    // globalVar = true;
                 }
@@ -239,7 +239,7 @@ var login = new Vue
                         }
                     }
                     login.users= response;
-                    // console.log(login.users);
+                    // //console.log(login.users);
                 }
             };
             xhttp.setRequestHeader("Content-type", "application/json");
@@ -267,10 +267,10 @@ var login = new Vue
 function onSignIn(googleUser) {
     var id_token = googleUser.getAuthResponse().id_token;
     var profile = googleUser.getBasicProfile();
-    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-    console.log('Name: ' + profile.getName());
-    console.log('Image URL: ' + profile.getImageUrl());
-    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    //console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+    //console.log('Name: ' + profile.getName());
+    //console.log('Image URL: ' + profile.getImageUrl());
+    //console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
     if(login.signup) {
         login.user_signup(id_token);
     }
