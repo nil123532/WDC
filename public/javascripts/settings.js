@@ -21,9 +21,9 @@ var settingsInst = new Vue
     methods:
     {
         passwordChange1:function(){
-        if (new_password.length< 8)
+        if (this.new_password.length < 8)
         {
-            this.PassError.true;
+            this.passError = true;
             this.passwordError = "Password must be longer than 8 characters";
             return;
         }
@@ -37,7 +37,7 @@ var settingsInst = new Vue
             this.passwordError = "Passwords do not match";
             return;
         }
-        else if(this.new_password == this.confirm_password && !(this.new_password == "" && this.confirm_password == "")){
+        else if(this.new_password == this.confirm_password && !(this.new_password == "" && this.confirm_password == "") && this.new_password.length >= 8){
             var xhttp = new XMLHttpRequest();
 
             xhttp.onreadystatechange = function() {
