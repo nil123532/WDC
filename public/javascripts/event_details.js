@@ -225,7 +225,8 @@ var vueinst = new Vue({
                 for (let j of vueinst.existingAvailabilities){
                     let foundTime = j.startTime.split('T')[0] + " " + j.startTime.split('T')[1].split('.0')[0];
                     if (intersects.has(foundTime)){
-                        if (j.user_id!==0) vueinst.filteredExistingAvailabilities.push(j);
+                        //if (j.user_id!==0) 
+                        vueinst.filteredExistingAvailabilities.push(j);
                         j.startTime = foundTime;
                         intersects.set(foundTime, true);
                     }
