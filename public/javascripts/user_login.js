@@ -98,6 +98,10 @@ var login = new Vue
                     else if (this.status == 409){
                         login.errorMessage = "This email is already in use.";
                     }
+                    else if(this.status==401)
+                    {
+                        login.errorMessage = "Password must be longer than 8 characters"
+                    }
                 }
                 else if (this.readyState == 4 && this.status == 200){
                     location.href = '/home';
@@ -185,6 +189,10 @@ var login = new Vue
                     }
                     else if (this.status == 409){
                         login.errorMessage = "This email is already in use.";
+                    }
+                    else if(this.status == 401)
+                    {
+                        login.errorMessage = "Password must be longer than 8 characters";
                     }
                 }
                 else if (this.readyState == 4 && this.status == 200){

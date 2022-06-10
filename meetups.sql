@@ -162,6 +162,7 @@ CREATE TABLE `User` (
 LOCK TABLES `User` WRITE;
 /*!40000 ALTER TABLE `User` DISABLE KEYS */;
 INSERT INTO `User` VALUES (0,'Anon','User',NULL,'$argon2i$v=19$m=4096,t=3,p=1$xHbbALAT4g9KyR3OyrkX5A$fo717dX/vxxvZuXwrfrsqBk8XQNymvdhnTLlqSCQFno','1',0);
+INSERT INTO `User` VALUES (1,'WDC','Project',NULL,'$argon2i$v=19$m=4096,t=3,p=1$pjDAIuFczJ5urnKOOfdHlQ$8sQV3t5ujJYdFyWHMLT6KJJwSg+jmK8mboMDscXx43U','wdcproj@gmail.com',1);
 /*!40000 ALTER TABLE `User` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

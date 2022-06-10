@@ -21,8 +21,13 @@ var settingsInst = new Vue
     methods:
     {
         passwordChange1:function(){
-
-        if(!(this.new_password == "") && this.confirm_password == ""){
+        if (new_password.length< 8)
+        {
+            this.PassError.true;
+            this.passwordError = "Password must be longer than 8 characters";
+            return;
+        }
+        else if(!(this.new_password == "") && this.confirm_password == ""){
             this.passError = true;
             this.passwordError = "Enter new password in confirm password";
             return;

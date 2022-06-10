@@ -378,47 +378,44 @@ router.post("/signup",function(req,res,next)
     }
     else if ("first_name" in val && "last_name" in val && "email" in val && "password" in val)
     {
-      req.pool.getConnection(async function(error,connection)
+      if (val.password.length < 8)
       {
-        if(error){
-          console.log(error);
-          res.sendStatus(500);
-        }
-
-        //check if email already exists in database
-        //if it does then throw error and do not allow user.
-        let query = "SELECT * FROM User WHERE email = ?";
-        connection.query(query,[val.email],async function(error,rows,fields)
+        res.sendStatus(401);
+        return;
+      }
+      else
+      {
+        req.pool.getConnection(async function(error,connection)
         {
-          //connection.release();
-          if(rows.length > 0)
-          {
-            connection.release();
-            console.log('email exists');
-            res.sendStatus(409);
-            return;
+          if(error){
+            console.log(error);
+            res.sendStatus(500);
           }
-            let hash= null;
-            try {
-              hash = await argon2.hash(val.password);
-            } catch (err) {
-              console.log("to err is human");
-              console.log(error);
-              res.sendStatus(500);
-              return;
-            }
-          let query = "INSERT INTO User(first_name,last_name,email,password,admin) VALUES(?,?,?,?,0);";
-          connection.query(query,[val.first_name,val.last_name,val.email,hash],async function(error,rows,fields)
+
+          //check if email already exists in database
+          //if it does then throw error and do not allow user.
+          let query = "SELECT * FROM User WHERE email = ?";
+          connection.query(query,[val.email],async function(error,rows,fields)
           {
             //connection.release();
-            if(error)
+            if(rows.length > 0)
             {
-              console.log(error);
-              res.sendStatus(403);
+              connection.release();
+              console.log('email exists');
+              res.sendStatus(409);
               return;
             }
-            let query = "SELECT user_id,first_name,last_name,email,password FROM User WHERE user_id=LAST_INSERT_ID();";
-            connection.query(query,async function(error,rows,fields)
+              let hash= null;
+              try {
+                hash = await argon2.hash(val.password);
+              } catch (err) {
+                console.log("to err is human");
+                console.log(error);
+                res.sendStatus(500);
+                return;
+              }
+            let query = "INSERT INTO User(first_name,last_name,email,password,admin) VALUES(?,?,?,?,0);";
+            connection.query(query,[val.first_name,val.last_name,val.email,hash],async function(error,rows,fields)
             {
               //connection.release();
               if(error)
@@ -427,37 +424,48 @@ router.post("/signup",function(req,res,next)
                 res.sendStatus(403);
                 return;
               }
-              if (rows.length > 0)
+              let query = "SELECT user_id,first_name,last_name,email,password FROM User WHERE user_id=LAST_INSERT_ID();";
+              connection.query(query,async function(error,rows,fields)
               {
-                console.log("success");
-                req.session.user = rows[0].user_id; //session?
-                req.session.admin = rows[0].admin;
-
-                //Notifcation default settings set to 0, meaning they do not want notifications
-                let query = "INSERT INTO Notifications VALUES (0,0,0,?)";
-                connection.query(query,[rows[0].user_id],async function(error,rows,fields)
+                //connection.release();
+                if(error)
                 {
-                  connection.release();
-                  if(error)
-                  {
-                    console.log(error);
-                    res.sendStatus(403);
-                    return;
-                  }
-                });
-                ///
+                  console.log(error);
+                  res.sendStatus(403);
+                  return;
+                }
+                if (rows.length > 0)
+                {
+                  console.log("success");
+                  req.session.user = rows[0].user_id; //session?
+                  req.session.admin = rows[0].admin;
 
-                res.sendStatus(200);
-              }
-              else
-              {
-                console.log("bad login");
-                res.sendStatus(401);
-              }
+                  //Notifcation default settings set to 0, meaning they do not want notifications
+                  let query = "INSERT INTO Notifications VALUES (0,0,0,?)";
+                  connection.query(query,[rows[0].user_id],async function(error,rows,fields)
+                  {
+                    connection.release();
+                    if(error)
+                    {
+                      console.log(error);
+                      res.sendStatus(403);
+                      return;
+                    }
+                  });
+                  ///
+
+                  res.sendStatus(200);
+                }
+                else
+                {
+                  console.log("bad login");
+                  res.sendStatus(401);
+                }
+              });
             });
           });
         });
-      });
+      }
     }
     else
     {
@@ -1011,51 +1019,58 @@ router.post("/adminsignup",function(req,res,next)
     var val = req.body;
     if ("first_name" in val && "last_name" in val && "email" in val && "password" in val)
     {
-      req.pool.getConnection(async function(error,connection)
+      if (val.password.length >= 8)
       {
-        if(error){
-          console.log(error);
-          res.sendStatus(500);
-        }
-        //check if email already exists in database
-        //if it does then throw error and do not allow user.
-        let query = "SELECT * FROM User WHERE email = ?";
-        connection.query(query,[val.email],async function(error,rows,fields)
+        req.pool.getConnection(async function(error,connection)
         {
-          //connection.release();
-          if(rows.length > 0)
-          {
-            connection.release();
-            console.log('email exists');
-            res.sendStatus(409);
-            return;
+          if(error){
+            console.log(error);
+            res.sendStatus(500);
           }
-            let hash= null;
-            try {
-              hash = await argon2.hash(val.password);
-            } catch (err) {
-              console.log("to err is human");
-              console.log(error);
-              res.sendStatus(500);
-              return;
-            }
-          let query = "INSERT INTO User(first_name,last_name,email,password,admin) VALUES(?,?,?,?,1);";
-          connection.query(query,[val.first_name,val.last_name,val.email,hash],async function(error,rows,fields)
+          //check if email already exists in database
+          //if it does then throw error and do not allow user.
+          let query = "SELECT * FROM User WHERE email = ?";
+          connection.query(query,[val.email],async function(error,rows,fields)
           {
-            connection.release();
-            if(error)
+            //connection.release();
+            if(rows.length > 0)
             {
-              console.log(error);
-              res.sendStatus(403);
+              connection.release();
+              console.log('email exists');
+              res.sendStatus(409);
               return;
             }
-            else
+              let hash= null;
+              try {
+                hash = await argon2.hash(val.password);
+              } catch (err) {
+                console.log("to err is human");
+                console.log(error);
+                res.sendStatus(500);
+                return;
+              }
+            let query = "INSERT INTO User(first_name,last_name,email,password,admin) VALUES(?,?,?,?,1);";
+            connection.query(query,[val.first_name,val.last_name,val.email,hash],async function(error,rows,fields)
             {
-              res.sendStatus(200);
-            }
+              connection.release();
+              if(error)
+              {
+                console.log(error);
+                res.sendStatus(403);
+                return;
+              }
+              else
+              {
+                res.sendStatus(200);
+              }
+            });
           });
         });
-      });
+      }
+      else
+      {
+        res.sendStatus(401);
+      }
     }
     else
     {
