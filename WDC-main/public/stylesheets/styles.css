@@ -1,0 +1,911 @@
+#app {
+    height : 100vh;
+}
+
+header {
+    background-color : #B7B7B7;
+    padding : 1.5em 1.4em;
+}
+
+footer {
+    background-color : #B7B7B7;
+    padding : 1.5em 1.4em;
+}
+
+nav {
+    background-color : #5D5D5D;
+    color : white;
+    width : 100%;
+    padding : 1.5em 0;
+    text-align : center;
+}
+
+.about-terms {
+    background-color : #A1A1A1;
+    min-height : 78vh;
+    padding : 3em 1em 5em;
+}
+
+.creator-event-details {
+    display : flex;
+    flex-direction : column;
+    justify-content : space-between;
+    margin-bottom : 1em;
+}
+
+.creator-event-duration-guest {
+    display : flex;
+    justify-content : space-between;
+}
+
+.creator-event-image {
+    margin-right : 5em;
+    margin-bottom : 2em;
+}
+
+.event_box_link {
+    text-decoration : none;
+    color : black;
+}
+
+.creator-event-footer {
+    margin-top : 17em;
+    /* margin-left : auto;
+    margin-right: 0; */
+}
+
+.creator-event-buttons {
+    margin-left : 11em;
+}
+
+.viewer-event-header {
+    display : flex;
+}
+
+.viewer-event-barrier {
+    margin : 0 0.5em;
+}
+
+.event-attendee-details {
+    display : flex;
+    justify-content : space-between;
+}
+
+.event-attendee-status {
+    margin-bottom : 3em;
+}
+
+@media (max-width: 800px) {
+    .event-attendee-details {
+        flex-direction: column;
+    }
+}
+
+.event-attendee-footer {
+    display : flex;
+    justify-content : space-between;
+    margin-top : 20em;
+}
+
+.remove-event-button {
+    border-width: 0px;
+    border-radius : 10px;
+    background-color : #5D5D5D;
+    width : 12em;
+    height : 3em;
+
+    color : black;
+    margin-top : auto;
+}
+
+input[type="checkbox"] {
+    color : #C4C4C4;
+    margin-right : 0.4em;
+}
+
+.home-events {
+    background-color : #C4C4C4;
+    border : 1px solid black;
+    padding-left : 1em;
+}
+
+
+
+.event-linked-desc {
+    margin-bottom : 6em;
+}
+
+.event-linked-checkboxes {
+    display : flex;
+    width : 100%;
+    flex-wrap : wrap;
+    margin-bottom : 1em;
+}
+
+.event-linked-checkbox {
+    margin-right : 1em;
+    display : flex;
+    justify-content : center;
+    align-items : center;
+}
+
+.event-invite-footer {
+    text-align : center;
+    margin : auto;
+    /* padding-top : 20vh; */
+    width : 100%;
+}
+
+.anon-event-login, .anon-event-submit {
+    border-radius : 1em;
+    border-width : 0px;
+    height : 2.5em;
+    width : 10em;
+    text-align : center;
+    background-color : #C4C4C4;
+    padding : 0;
+}
+
+.pick-availability {
+    margin-bottom : 10em;
+}
+
+.anon-event-login {
+    margin-left : auto;
+    margin-right : 2em;
+}
+
+.anon-event-submit {
+    margin-right : auto;
+}
+
+.avatar {
+    vertical-align: middle;
+    border : 2px solid black;
+    width: 5em;
+    height: 5em;
+    border-radius: 50%;
+    margin : 4em auto 2em;
+}
+
+.profile-picture-header {
+    text-align : center;
+    width : 100%;
+}
+
+.user-details-header {
+    text-align : center;
+    width : 100%;
+    margin-bottom : 2em;
+}
+
+.event-item {
+    background-color : #C4C4C4;
+    padding : 1.5em;
+    border : 2px solid black;
+    margin-top : 1.5em;
+}
+
+.events-left-arrow {
+    margin-right : auto;
+    margin-left : 0;
+    display : inline-block;
+}
+
+.events-right-arrow {
+    margin-right : 0;
+    margin-left : auto;
+    display : inline-block;
+}
+
+.pagination {
+    margin-top : 1em;
+}
+
+.event-item-name {
+    margin-right : 3em;
+}
+
+.event-item-time {
+    margin-left : 8em;
+}
+
+.event-item-description {
+    margin-top : 1.5em;
+}
+
+.people-icon {
+    margin-right : 0.5em;
+}
+
+.event-item-people {
+    margin-top : 4.6em;
+}
+
+.event-item-image {
+    width : 11em;
+    height : 5em;
+}
+
+.user-details {
+    margin : 0 auto;
+    width : 20em;
+}
+
+pre {
+    display : inline;
+}
+
+.events-button {
+    border-radius : 1em;
+    border-width : 0px;
+    height : 2.5em;
+    width : 12em;
+    text-align : center;
+    background-color : #C4C4C4;
+    padding : 0;
+    margin-left : auto;
+}
+
+.plus-icon {
+    margin : auto 0;
+}
+
+.row>* {
+    padding : 0;
+}
+
+.navbar-logo {
+    margin-top : 0.6em;
+    margin-bottom : 5em;
+}
+
+.navbar-item {
+    width : 100%;
+    text-align : center;
+    height : 4em;
+    padding : 1em;
+}
+
+.navbar-hyperlink {
+    color : white;
+    text-decoration : none;
+}
+
+.navbar-selected {
+    background-color : #A1A1A1;
+    color : black;
+}
+
+.main-page {
+    background-color : #A1A1A1;
+    padding : 2em 3em;
+    min-height : 100vh;
+}
+
+.create-new-event {
+    margin-bottom : 1.5em;
+}
+
+.create-event-img {
+    width : 16em;
+    height : 10em;
+}
+
+.create-event-images {
+    width : 1em;
+    height : 1em;
+    margin : auto 0.5em auto 0.5em;
+}
+
+.date-picker-header {
+    display: inline-block;
+    text-align: center;
+    padding-top: 10px;
+    height: 40px;
+    width: 49px;
+    margin: 5px 3px;
+}
+
+.date-picker-row {
+    clear: both;
+    padding: 5px 0px;
+}
+
+.date-picker-date {
+    display: inline-block;
+    text-align: center;
+    padding: 10px;
+    height: 45px;
+    width: 45px;
+    margin: 3px 5px;
+    border-style: none;
+    border-radius : 50px;
+    background-color: #A1A1A1;
+}
+
+.date-picker-date-selected {
+    display: inline-block;
+    text-align: center;
+    padding: 10px;
+    height: 45px;
+    width: 45px;
+    margin: 3px 5px;
+    border-style: none;
+    border-radius : 50px;
+    background-color: #C4C4C4;
+}
+
+.date-picker-date-empty {
+    display: inline-block;
+    text-align: center;
+    padding: 0px 10px;
+    height: 20px;
+    width: 44px;
+    margin: 3px 5px;
+}
+
+.back-arrow {
+    width : 2em;
+    height : 2em;
+    margin : auto 0;
+}
+
+.back-arrow-x {
+    margin-right : auto;
+}
+
+.date-selection {
+    margin-bottom : 5.9em;
+}
+
+.create-event-button {
+    border-width: 0px;
+    border-radius : 10px;
+    background-color : #C4C4C4;
+    width : 12em;
+    height : 3em;
+    color : black;
+    margin-right : 1em;
+    margin-bottom : 1em;
+}
+
+.paintbrush-img {
+    width : 1em;
+    height : 1em;
+    margin : 0.6em 0.5em 0;
+}
+
+.col-seperator {
+    margin-right : 4em;
+}
+
+.date-input-box {
+    border-radius : 10px;
+    background-color:#C4C4C4;
+    height:6em;
+}
+
+.event-form {
+    margin-bottom : 3em;
+    width : 25em;
+}
+
+.upload-image {
+    margin-bottom : 2em;
+    margin-right : 3em;
+}
+
+.upload-image-prompt {
+    font-size : 0.7em;
+    margin-right : auto;
+}
+
+.upload-image-instructions {
+    margin-top : 0.5em;
+}
+
+.upload-image-button {
+    padding : 0.1em 0.3em;
+    font-size : 0.7em;
+    border : 1px solid black;
+    margin-left : auto;
+}
+
+.user-type-page {
+    background-color : grey;
+    text-align: center;
+    position : relative;
+    padding : 2em 3em 6.1em;
+}
+
+textarea {
+    background-color:#C4C4C4;
+    border-width:0px;
+    border-radius : 10px;
+    max-width: 100%;
+}
+
+.user-types {
+    width : 20em;
+}
+
+.user-type-selection {
+    background-color : #B7B7B7;
+    border-radius : 2em;
+    height : 19em;
+    width : 7.5em;
+    padding : 2.5em 0;
+    margin : 1em;
+}
+
+.user-choice {
+    border : 2px solid #33F8FF;
+}
+
+.system-manager-choice {
+    border : 2px solid #3433FF
+}
+
+.user-type-image {
+    border-radius: 50%;
+    width : 6.5em;
+    border: 2px solid black;
+}
+
+.user-type-text {
+    font-size : 1.5em;
+}
+
+.welcome-text {
+    font-size : 2em;
+    margin-bottom : 2em;
+}
+
+.error-text {
+    color: red;
+}
+
+.logo {
+    font-weight : bold;
+}
+
+.about {
+    font-size : 1.2em;
+}
+
+.terms {
+    font-size : 1.2em;
+    position: absolute;
+    right : 1.2em;
+}
+.login-box{
+    background-color : #B7B7B7;
+    border-radius : 2em;
+    border : 2px solid #000000;
+    height : 40em;
+    width : 28em;
+    margin : auto;
+}
+
+.login-width {
+    /* width : 30em; */
+    margin : auto;
+}
+
+.sign-in-form-text
+{
+    text-align:center;
+    width:15em;
+    padding-top:1em;
+    padding-bottom:0.5em;
+    font-weight:bold;
+    font-size:1.5em;
+}
+
+.sign-in-form-text-selected
+{
+    border-top-left-radius : 1em;
+    border-right: 2px solid #000000;
+    border-bottom: 2px solid #000000;
+}
+
+.sign-up-form-text-selected
+{
+    border-top-right-radius : 1em;
+    border-left: 2px solid #000000;
+    border-bottom: 2px solid #000000;
+}
+
+.user-login {
+    background-color : grey;
+    padding : 2em 3em 6.1em;
+}
+.sign-up-text
+{
+    text-align:center;
+    width:15em;
+    padding-top:1em;
+    padding-bottom:0.5em;
+    font-weight:bold;
+    font-size:1.5em;
+}
+.sign-in-up
+{
+    border-top-left-radius:1.8em;
+    border-top-right-radius:1.8em;
+    display:flex;
+    flex-direction:row;
+    margin-bottom:3em;
+}
+.login-form
+{
+    padding : 0 2em;
+    width:100%;
+}
+.inputs
+{
+    display:flex;
+    flex-direction:row;
+    border-radius:2em;
+    background-color:#C4C4C4;
+    height:2em;
+    margin-bottom:0.8em;
+}
+
+.inputs-left
+{
+    margin-left:2em;
+}
+
+.inputs-textarea{
+    border-radius:10px;
+    background-color:#C4C4C4;
+    height:6.5em;
+    margin-bottom:0.8em;
+}
+.login-img
+{
+    border-radius: 50%;
+    width : 2em;
+    border: 2px solid black;
+    margin-right:1em;
+}
+input
+{
+    background-color:#C4C4C4;
+    border-width:0px;
+}
+.input-inside-text
+{
+    padding-top:0.1em;
+}
+::placeholder
+{
+    text-shadow: 0.4px 0.4px #000000;
+}
+.login-pass
+{
+    border-radius: 50%;
+    width : 2em;
+    height: 2em;
+    border: 2px solid black;
+    margin-right:1em;
+}
+.below-sign-in
+{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    margin-bottom:2em;
+}
+.below-sign
+{
+    font-size:0.5em;
+}
+input.remember-me
+{
+    height:10px;
+}
+.admin-edit-user-toprow {
+    display : flex;
+    justify-items : center;
+    align-items : center;
+    margin-bottom : 2em;
+}
+.admin-edit-user-toprow-first {
+    margin-right : auto;
+    display : flex;
+    justify-items : center;
+    align-items : center;
+}
+.admin-edit-user-back {
+    margin-right : 1em;
+}
+.edit-users{
+    margin-right : auto;
+    text-align : left;
+    display : inline-block;
+}
+.login
+{
+    background-color:#000000;
+    opacity:0.6;
+    border-radius:0.5em;
+    font-size:2em;
+    font-weight:bold;
+    margin-bottom:2em;
+    margin-top:1.1em;
+    height:1.5em;
+}
+pre
+{
+    padding-top:0.1em;
+}
+.line{
+    overflow: hidden;
+    text-align: center;
+}
+
+.line:before,.line:after{
+    background-color: #000;
+    content: "";
+    display: inline-block;
+    height: 1px;
+    position: relative;
+    vertical-align: middle;
+    width: 45%;
+}
+
+.line:before{
+    right: 0.5em;
+    margin-left: -50%;
+}
+
+.line:after{
+    left: 0.5em;
+    margin-right: -50%;
+}
+
+.third-party-first-row
+{
+    margin-top:2.5em;
+    padding-left:2em;
+    width:100%;
+    display:flex;
+    justify-content:center;
+}
+.google
+{
+    width:10em;
+    text-align:left;
+    border-radius:0.4em;
+    background-color:#EE0808;
+    margin-right:3.1em;
+    margin-left:1em;
+    padding-left : 0.4em;
+    border:3px;
+}
+.google-icon {
+    margin-right : 0.5em;
+}
+.signin-button, .signup-button
+{
+    border-width:0px;
+    background-color:#000000;
+    color:white;
+    height:3em;
+    width:72.5%;
+    border-radius:1em;
+}
+.google-img
+{
+    border-radius: 50%;
+    width : 2em;
+    margin-right:0.5em;
+}
+.fbk-img
+{
+    border-radius: 50%;
+    width : 2.2em;
+    height:2em;
+    margin-right:0.5em;
+}
+.linkedin-img
+{
+    border-radius: 50%;
+    width : 2.2em;
+    height:2em;
+    margin-right:0.5em;
+}
+.git-img
+{
+    border-radius: 50%;
+    width : 2.2em;
+    height:2em;
+    margin-right:0.5em;
+}
+
+.error-text {
+    color: red;
+}
+
+.sign-up
+{
+    background-color:#000000;
+    opacity:0.6;
+    border-radius:0.5em;
+    font-size:2em;
+    font-weight:bold;
+    height:1.5em;
+    margin-bottom:0.4em;
+}
+.sign-up-box{
+    background-color : #B7B7B7;
+    border-radius : 2em;
+    border : 2px solid #000000;
+    height : 45em;
+    width : 28em;
+    margin : 1em;
+}
+.settings-page-outside{
+    background-color: rgb(183, 183, 183);
+    height: 100%;
+    width: 40em;
+    padding: 5em;
+
+}
+
+.profile-picture-settings img{
+    width: 10em;
+    height: 10em;
+    border-radius: 50%;
+    background-color: white;
+    margin: 2em;
+}
+
+.a-color
+{
+    color:#000000;
+    text-decoration:none;
+    height:1em;
+}
+.a-color-button
+{
+    color:#FFFFFF;
+    opacity:0.4;
+    text-decoration:none;
+    height:1.5em;
+    width:2em;
+}
+
+.header
+{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    margin-bottom:2.1em;
+}
+.event-name-date-create-time
+{
+    width:16em;
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+}
+.event-box-name {
+    margin-left : 0.8em;
+    margin-bottom : 2em;
+}
+.event-date-time {
+    display:flex;
+    flex-direction:column;
+    width:16em;
+    margin-left : 0.8em;
+    margin-bottom : 2em;
+}
+.admin-buttons
+{
+    border-width: 0px;
+    border-radius : 2em;
+    background-color : #C4C4C4;
+    width : 12em;
+    height : 3em;
+    padding-top:0.2em;
+    color : black;
+    margin-bottom:1.5em;
+}
+.authentication-page {
+    background-color : grey;
+    position : relative;
+    padding : 2em 3em 6.1em;
+    text-align : center;
+    display : flex;
+    justify-content : center;
+    align-items : center;
+}
+.arrow{
+    text-align:left;
+}
+.search
+{
+     border-radius:2em;
+     width:15em;
+     height:2em;
+     margin-left:42em;
+     margin-top:0.2em;
+     background-color:#E1E1E1;
+}
+.list-of-users
+{
+    /* width:75%; */
+    /* margin-left:8em; */
+    display:flex;
+    flex-direction:column;
+    border: 1px solid black;
+    margin-bottom:16em;
+}
+.name-div
+{
+    background-color:#5D5D5D;
+    color:white;
+    text-align:left;
+    padding-left:1em;
+    padding-top:0.2em;
+    padding-bottom:0.5em;
+    border: 1px solid black;
+}
+.edit-user
+{
+    border-width: 0px;
+    border-radius : 2em;
+    background-color : #A1A1A1;
+    padding-bottom:0.2em;
+    width : 12em;
+    height : 2em;
+    color : black;
+    margin-top:0.5em;
+    margin-bottom:0.5em;
+}
+.users
+{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    background-color:#C4C4C4;
+    border: 1px solid black;
+    position:relative;
+}
+.one-user
+{
+    padding-left:1em;
+    margin-top:0.8em;
+    margin-bottom:0.5em;
+
+}
+.save-settings
+{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+}
+.link-calendar
+{
+    background-color:black;
+    color:white;
+    width:25%;
+    height:3em;
+    border-radius:2em;
+}
+.top
+{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-around;
+}
+.top-left
+{
+    display:flex;
+    flex-direction:row;
+    justify-content:left;
+}

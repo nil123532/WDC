@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Patrick Sumarli, Nilesh Ramgolam, Ti Wei Lu, Muhammad Sharjeel Nawaz">
+    <title>MeetUps</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script src="https://kit.fontawesome.com/f7293efbb8.js" crossorigin="anonymous"></script>
+    <script src="/javascripts/userEvents.js" defer></script>
+</head>
+<body>
+    <div id="app">
+        <div class="container-fluid">
+            <div class="row">
+                <nav class="col-lg-2 col-sm-3 col-xs-3">
+                    <h1 class="logo navbar-logo">MeetUps</h1>
+                    <div v-for="(page, i) in pages" v-bind:class="{ 'navbar-selected' : i===0 }" class="navbar-item"><a class="navbar-hyperlink" v-bind:class="{ 'navbar-selected' : i===0 }" v-bind:href="page.link">{{ page.name }}</a></div>
+                </nav>
+                <main class="col-lg-10 col-sm-9 col-xs-9 main-page">
+                    <div class="header">
+                        <h2>Upcoming Events:</h2>
+                        <button onclick="location.href='/create_event'" class="col-2 events-button"><i class="fa-solid fa-plus plus-icon"></i>   Create an event</button>
+                    </div>
+                    <a v-for="event in attendingEvents" class="event_box_link" v-bind:href="`/event_view?eventid=${event.event_id}&userid=${event.creator_id}`">
+                        <div class="row event-item">
+                            <div class="col-9">
+                                <div class="row">
+                                    <div class="col-3 event-box-name">
+                                        <span>{{ event.name }}</span>
+                                    </div>
+                                    <div class="event-date-time col-4">
+                                        <span class="" v-bind:style="{ 'margin-right' : event.finalised_time ? '0' : '0' }">Date : {{ event.finalised_time ? event.finalised_time.split('T')[0] : "-" }}</span>
+                                        <span>Time : {{ event.finalised_time ? event.finalised_time.split('T')[1].split('.0')[0] : "-"}}</span>
+                                    </div>
+                                </div>
+                                <p>{{ event.description }}</p>
+                                <div class="event-item-people"><i class="fa-solid fa-people-group people-icon"></i>{{ event.responses }}</div>
+                            </div>
+                            <div class="col-3"><p style="font-weight:bold">{{event.address_street_number + " " + event.address_street_name + ", " + event.address_city + " "  + event.address_postcode + ", " + event.address_city + ", " + event.address_country}}</p></div>
+                        </div>
+                    </a>
+                    <p v-if="attendingEvents.length === 0" style="width:100%;text-align:center">No upcoming events. Finalized events will show up here.</p>
+                </main>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
